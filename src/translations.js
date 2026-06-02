@@ -200,7 +200,7 @@ export const translations = {
       more: "Explore More",
     },
     work: {
-      title: "Our Works",
+      title: "Our Portfolio",
       subtitle: "We believe that every line of code is a piece of art. Explore a range of our technical projects that combine engineering efficiency with innovative modern design.",
       viewAll: "View All",
       projects: {

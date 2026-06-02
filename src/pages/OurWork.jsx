@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useAppContext } from '../context/AppContext';
+import { Link } from 'react-router-dom';
 
 export default function OurWork() {
   const { t, language } = useAppContext();
@@ -25,17 +26,25 @@ export default function OurWork() {
           <div className="absolute bottom-[20%] left-[5%] w-64 h-64 bg-secondary/5 blur-[100px] rounded-full floating" style={{ animationDelay: '2s' }}></div>
         </div>
 
-        {/* Hero Section - Centered in English, End-aligned in Arabic */}
-        <section className={`px-lg max-w-container-max mx-auto mb-16 md:mb-20 relative z-10 ${language === 'en' ? 'text-center' : 'text-start'}`}>
-          <h1 className="font-display-lg text-[32px] md:text-[48px] cyber-gradient-text leading-tight mb-4">{t('work.title')}</h1>
-          <p className={`font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed ${language === 'en' ? 'mx-auto' : 'ms-auto'}`}>
+        {/* Hero Section - Always Centered for both languages */}
+        <section className="px-lg max-w-container-max mx-auto mb-16 md:mb-20 relative z-10 text-center">
+          <h1 className="font-display-lg text-[32px] md:text-[48px] cyber-gradient-text leading-tight mb-4">
+            {t('work.title')}
+          </h1>
+          <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
             {t('work.subtitle')}
           </p>
+          {/* View All Button on a separate line below the text, centered */}
+          <div className="mt-10">
+            <Link to="/work" className="secondary-btn-border px-8 py-2.5 rounded-full font-title-md text-secondary hover:bg-secondary/10 active:scale-95 transition-all inline-block">
+              {t('work.viewAll')}
+            </Link>
+          </div>
         </section>
 
         {/* Filter System - respecting document direction */}
         <section className="px-lg max-w-container-max mx-auto mb-10 md:mb-12 relative z-10">
-          <div className="flex flex-wrap gap-3 md:gap-4 border-b border-white/10 pb-6">
+          <div className="flex flex-wrap flex-row-reverse justify-center gap-3 md:gap-4 border-b border-white/10 pb-6">
             <button onClick={() => setFilter('all')} className={`px-5 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all ${filter === 'all' ? 'bg-secondary/10 border-secondary text-secondary border' : 'bg-white/5 text-on-surface-variant hover:text-secondary'}`}>{t('work.filters.all')}</button>
             <button onClick={() => setFilter('web')} className={`px-5 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all ${filter === 'web' ? 'bg-secondary/10 border-secondary text-secondary border' : 'bg-white/5 text-on-surface-variant hover:text-secondary'}`}>{t('work.filters.web')}</button>
             <button onClick={() => setFilter('ecommerce')} className={`px-5 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all ${filter === 'ecommerce' ? 'bg-secondary/10 border-secondary text-secondary border' : 'bg-white/5 text-on-surface-variant hover:text-secondary'}`}>{t('work.filters.ecommerce')}</button>
