@@ -1,11 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useAppContext } from '../context/AppContext';
 
 export default function About() {
-  const { t } = useAppContext();
+  const { t, language } = useAppContext();
 
   React.useEffect(() => {
     const handleMouseMove = (e) => {
@@ -44,14 +43,14 @@ export default function About() {
             {t('about.heroDesc')}
           </p>
           <div className="flex flex-wrap justify-center gap-md">
-            <Link to="/work" className="primary-btn-gradient px-lg py-2.5 rounded-xl font-title-md text-white active:scale-95 duration-200">{t('nav.work')}</Link>
-            <Link to="/contact" className="secondary-btn-border px-lg py-2.5 rounded-xl font-title-md text-secondary active:scale-95 duration-200">{t('nav.contact')}</Link>
+            <button className="primary-btn-gradient px-lg py-2.5 rounded-xl font-title-md text-white active:scale-95 duration-200">{t('nav.work')}</button>
+            <button className="secondary-btn-border px-lg py-2.5 rounded-xl font-title-md text-secondary active:scale-95 duration-200">{t('nav.contact')}</button>
           </div>
         </div>
       </header>
 
       {/* Story Section */}
-      <section className="py-16 md:py-20 bg-surface-container-low relative text-right">
+      <section className="py-16 md:py-20 bg-surface-container-low relative text-start">
         <div className="max-w-container-max mx-auto px-lg grid md:grid-cols-2 gap-12 md:gap-16 items-center">
           <div className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary opacity-20 blur group-hover:opacity-30 transition duration-1000"></div>
@@ -69,13 +68,13 @@ export default function About() {
             <div className="space-y-4 md:space-y-6 text-on-surface-variant font-body-lg text-body-lg leading-relaxed">
               <p>{t('about.storyP1')}</p>
               <p>{t('about.storyP2')}</p>
-              <div className="flex flex-row-reverse items-center justify-start gap-6 pt-2">
-                <div className="flex flex-col items-end">
+              <div className="flex flex-row items-center justify-start gap-6 pt-2">
+                <div className="flex flex-col items-start">
                   <span className="text-primary font-headline-lg font-bold tracking-tight">+١٥٠</span>
                   <span className="text-code-label text-on-surface-variant">{t('about.successProjects')}</span>
                 </div>
                 <div className="w-px h-10 bg-outline-variant/30"></div>
-                <div className="flex flex-col items-end">
+                <div className="flex flex-col items-start">
                   <span className="text-secondary font-headline-lg font-bold tracking-tight">+٥٠</span>
                   <span className="text-code-label text-on-surface-variant">{t('about.happyClients')}</span>
                 </div>
@@ -87,29 +86,29 @@ export default function About() {
 
       {/* Values Section */}
       <section className="py-16 md:py-20 bg-surface-container-lowest">
-        <div className="max-w-container-max mx-auto px-lg">
-          <div className="text-center mb-12 md:mb-16">
+        <div className="max-w-container-max mx-auto px-lg text-center">
+          <div className="mb-12 md:mb-16">
             <h2 className="font-headline-lg text-headline-lg text-on-surface mb-4">{t('about.valuesTitle')}</h2>
             <div className="w-20 h-1 bg-secondary mx-auto rounded-full mb-4"></div>
             <p className="text-on-surface-variant font-body-md text-body-md">{t('about.valuesSubtitle')}</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-lg text-right">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-lg text-start">
             <div className="glass-panel p-lg md:p-xl rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group">
-              <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-lg group-hover:bg-primary/20 transition-colors shadow-[0_0_15px_rgba(207,189,255,0.1)] ml-auto">
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-lg group-hover:bg-primary/20 transition-colors shadow-[0_0_15px_rgba(207,189,255,0.1)]">
                 <span className="material-symbols-outlined text-3xl md:text-4xl text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>lightbulb</span>
               </div>
               <h3 className="font-title-md text-title-md text-on-surface mb-md">{t('about.v1Title')}</h3>
               <p className="text-on-surface-variant font-body-sm text-body-sm leading-relaxed">{t('about.v1Desc')}</p>
             </div>
             <div className="glass-panel p-lg md:p-xl rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group border-t-2 border-t-secondary/30">
-              <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-secondary/10 flex items-center justify-center mb-lg group-hover:bg-secondary/20 transition-colors shadow-[0_0_15px_rgba(70,245,224,0.1)] ml-auto">
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-secondary/10 flex items-center justify-center mb-lg group-hover:bg-secondary/20 transition-colors shadow-[0_0_15px_rgba(70,245,224,0.1)]">
                 <span className="material-symbols-outlined text-3xl md:text-4xl text-secondary" style={{ fontVariationSettings: "'FILL' 1" }}>architecture</span>
               </div>
               <h3 className="font-title-md text-title-md text-on-surface mb-md">{t('about.v2Title')}</h3>
               <p className="text-on-surface-variant font-body-sm text-body-sm leading-relaxed">{t('about.v2Desc')}</p>
             </div>
             <div className="glass-panel p-lg md:p-xl rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group">
-              <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-tertiary/10 flex items-center justify-center mb-lg group-hover:bg-tertiary/20 transition-colors shadow-[0_0_15px_rgba(255,177,196,0.1)] ml-auto">
+              <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-tertiary/10 flex items-center justify-center mb-lg group-hover:bg-tertiary/20 transition-colors shadow-[0_0_15px_rgba(255,177,196,0.1)]">
                 <span className="material-symbols-outlined text-3xl md:text-4xl text-tertiary" style={{ fontVariationSettings: "'FILL' 1" }}>support_agent</span>
               </div>
               <h3 className="font-title-md text-title-md text-on-surface mb-md">{t('about.v3Title')}</h3>
@@ -120,9 +119,9 @@ export default function About() {
       </section>
 
       {/* Team Section */}
-      <section className="py-16 md:py-20">
+      <section className="py-16 md:py-20 text-center">
         <div className="max-w-container-max mx-auto px-lg">
-          <div className="text-center mb-12 md:mb-16">
+          <div className="mb-12 md:mb-16">
             <h2 className="font-headline-lg text-headline-lg text-on-surface mb-4">{t('about.teamTitle')}</h2>
             <div className="w-20 h-1 bg-primary mx-auto rounded-full mb-4"></div>
             <p className="text-on-surface-variant font-body-md text-body-md">{t('about.teamSubtitle')}</p>

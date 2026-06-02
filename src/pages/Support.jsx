@@ -22,17 +22,17 @@ export default function Support() {
       <Header />
       
       <main className="pt-24 pb-16 md:pb-24 px-lg max-w-container-max mx-auto">
-        <section className="mb-12 md:mb-16 text-center md:text-right relative">
+        <section className={`mb-12 md:mb-16 relative ${language === 'en' ? 'text-center' : 'text-start'}`}>
           <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/10 blur-[100px] rounded-full -z-10"></div>
           <h1 className="font-display-lg text-[32px] md:text-[48px] mb-4 cyber-gradient-text leading-tight">{t('support.title')}</h1>
-          <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl ml-auto">
+          <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
             {t('support.subtitle')}
           </p>
         </section>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-lg">
           {/* Ticket Form */}
-          <div className="lg:col-span-2 glass-panel p-8 rounded-2xl border border-white/5 text-right">
+          <div className="lg:col-span-2 glass-panel p-8 rounded-2xl border border-white/5 text-start">
             <div className="mb-8">
               <h2 className="font-headline-lg text-headline-lg text-on-surface">{t('support.ticketTitle')}</h2>
               <p className="text-on-surface-variant mt-2">{t('support.ticketDesc')}</p>
@@ -67,8 +67,8 @@ export default function Support() {
 
           {/* Quick Help Channels */}
           <div className="space-y-lg">
-            <div className="glass-panel p-8 rounded-2xl border border-white/5 text-right">
-              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6 ml-auto">
+            <div className="glass-panel p-8 rounded-2xl border border-white/5 text-start">
+              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6">
                 <span className="material-symbols-outlined text-3xl">headset_mic</span>
               </div>
               <h3 className="font-title-md text-white mb-2">{t('support.callTitle')}</h3>
@@ -79,8 +79,8 @@ export default function Support() {
               </span>
             </div>
 
-            <div className="glass-panel p-8 rounded-2xl border border-white/5 text-right">
-              <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary mb-6 ml-auto">
+            <div className="glass-panel p-8 rounded-2xl border border-white/5 text-start">
+              <div className="w-14 h-14 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary mb-6">
                 <span className="material-symbols-outlined text-3xl">chat_bubble</span>
               </div>
               <h3 className="font-title-md text-white mb-2">{t('support.chatTitle')}</h3>

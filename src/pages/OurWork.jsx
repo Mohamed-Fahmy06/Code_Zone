@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import { useAppContext } from '../context/AppContext';
 
 export default function OurWork() {
-  const { t } = useAppContext();
+  const { t, language } = useAppContext();
   const [filter, setFilter] = useState('all');
 
   const projects = [
@@ -25,26 +25,28 @@ export default function OurWork() {
           <div className="absolute bottom-[20%] left-[5%] w-64 h-64 bg-secondary/5 blur-[100px] rounded-full floating" style={{ animationDelay: '2s' }}></div>
         </div>
 
-        <section className="px-lg max-w-container-max mx-auto mb-16 md:mb-20 relative z-10 text-right">
+        {/* Hero Section - Centered in English, End-aligned in Arabic */}
+        <section className={`px-lg max-w-container-max mx-auto mb-16 md:mb-20 relative z-10 ${language === 'en' ? 'text-center' : 'text-start'}`}>
           <h1 className="font-display-lg text-[32px] md:text-[48px] cyber-gradient-text leading-tight mb-4">{t('work.title')}</h1>
-          <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl ml-auto leading-relaxed">
+          <p className={`font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed ${language === 'en' ? 'mx-auto' : 'ms-auto'}`}>
             {t('work.subtitle')}
           </p>
         </section>
 
+        {/* Filter System - respecting document direction */}
         <section className="px-lg max-w-container-max mx-auto mb-10 md:mb-12 relative z-10">
-          <div className="flex flex-wrap flex-row-reverse gap-3 md:gap-4 border-b border-white/10 pb-6">
-            <button onClick={() => setFilter('all')} className={`px-5 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all ${filter === 'all' ? 'bg-secondary/10 border-secondary text-secondary border' : 'bg-white/5 text-on-surface-variant hover:text-secondary'}`}>الكل</button>
-            <button onClick={() => setFilter('web')} className={`px-5 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all ${filter === 'web' ? 'bg-secondary/10 border-secondary text-secondary border' : 'bg-white/5 text-on-surface-variant hover:text-secondary'}`}>تطبيقات الويب</button>
-            <button onClick={() => setFilter('ecommerce')} className={`px-5 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all ${filter === 'ecommerce' ? 'bg-secondary/10 border-secondary text-secondary border' : 'bg-white/5 text-on-surface-variant hover:text-secondary'}`}>المتاجر الإلكترونية</button>
-            <button onClick={() => setFilter('systems')} className={`px-5 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all ${filter === 'systems' ? 'bg-secondary/10 border-secondary text-secondary border' : 'bg-white/5 text-on-surface-variant hover:text-secondary'}`}>أنظمة الإدارة</button>
+          <div className="flex flex-wrap gap-3 md:gap-4 border-b border-white/10 pb-6">
+            <button onClick={() => setFilter('all')} className={`px-5 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all ${filter === 'all' ? 'bg-secondary/10 border-secondary text-secondary border' : 'bg-white/5 text-on-surface-variant hover:text-secondary'}`}>{t('work.filters.all')}</button>
+            <button onClick={() => setFilter('web')} className={`px-5 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all ${filter === 'web' ? 'bg-secondary/10 border-secondary text-secondary border' : 'bg-white/5 text-on-surface-variant hover:text-secondary'}`}>{t('work.filters.web')}</button>
+            <button onClick={() => setFilter('ecommerce')} className={`px-5 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all ${filter === 'ecommerce' ? 'bg-secondary/10 border-secondary text-secondary border' : 'bg-white/5 text-on-surface-variant hover:text-secondary'}`}>{t('work.filters.ecommerce')}</button>
+            <button onClick={() => setFilter('systems')} className={`px-5 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all ${filter === 'systems' ? 'bg-secondary/10 border-secondary text-secondary border' : 'bg-white/5 text-on-surface-variant hover:text-secondary'}`}>{t('work.filters.systems')}</button>
           </div>
         </section>
 
         <section className="px-lg max-w-container-max mx-auto relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {filteredProjects.map((project) => (
-              <article key={project.id} className="glass-card rounded-2xl overflow-hidden group text-right">
+              <article key={project.id} className="glass-card rounded-2xl overflow-hidden group text-start">
                 <div className="flex items-center gap-1.5 px-4 py-2.5 bg-white/5 border-b border-white/5">
                   <div className="w-2 h-2 rounded-full bg-[#ff5f56]"></div>
                   <div className="w-2 h-2 rounded-full bg-[#ffbd2e]"></div>

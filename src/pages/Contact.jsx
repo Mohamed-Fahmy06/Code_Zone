@@ -23,7 +23,7 @@ export default function Contact() {
       
       <main className="pt-24 pb-16 md:pb-24 px-lg max-w-container-max mx-auto">
         {/* Hero Section */}
-        <section className="mb-12 md:mb-16 text-center md:text-right relative">
+        <section className="mb-12 md:mb-16 text-center md:text-start relative">
           <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/10 blur-[100px] rounded-full -z-10"></div>
           <h1 className="font-display-lg text-[32px] md:text-[48px] mb-4 cyber-gradient-text leading-tight">
             {language === 'ar' ? 'تواصل معنا' : 'Contact Us'}
@@ -36,20 +36,20 @@ export default function Contact() {
         {/* Bento Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-lg">
           {/* Contact Form Card */}
-          <div className="lg:col-span-7 glass-panel rounded-2xl overflow-hidden relative group p-lg border border-white/5 text-right">
-            <div className="mb-6 md:mb-8 text-right">
+          <div className="lg:col-span-7 glass-panel rounded-2xl overflow-hidden relative group p-lg border border-white/5 text-start">
+            <div className="mb-6 md:mb-8 text-start">
               <h2 className="font-headline-lg text-headline-lg text-on-surface">
                 {language === 'ar' ? 'أرسل لنا استفسارك' : 'Send Us Your Inquiry'}
               </h2>
-              <div className="w-12 h-1 bg-secondary mt-2 rounded-full ml-auto"></div>
+              <div className="w-12 h-1 bg-secondary mt-2 rounded-full"></div>
             </div>
-            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6 text-right">
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6 text-start">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <div className="space-y-2">
                   <label className="font-code-label text-[10px] md:text-code-label text-secondary uppercase block">
                     {language === 'ar' ? 'الاسم الكامل' : 'Full Name'}
                   </label>
-                  <input className="glow-input w-full bg-surface-container-low border border-white/10 focus:ring-0 rounded-xl p-3 md:p-4 text-on-surface outline-none transition-all text-right" placeholder={language === 'ar' ? 'أحمد محمد' : 'John Doe'} type="text" required />
+                  <input className="glow-input w-full bg-surface-container-low border border-white/10 focus:ring-0 rounded-xl p-3 md:p-4 text-on-surface outline-none transition-all text-start" placeholder={language === 'ar' ? 'أحمد محمد' : 'John Doe'} type="text" required />
                 </div>
                 <div className="space-y-2">
                   <label className="font-code-label text-[10px] md:text-code-label text-secondary uppercase block">
@@ -62,7 +62,7 @@ export default function Contact() {
                 <label className="font-code-label text-[10px] md:text-code-label text-secondary uppercase block">
                   {language === 'ar' ? 'نوع المشروع' : 'Project Type'}
                 </label>
-                <select className="glow-input w-full bg-surface-container-low border border-white/10 focus:ring-0 rounded-xl p-3 md:p-4 text-on-surface outline-none transition-all appearance-none cursor-pointer text-right">
+                <select className="glow-input w-full bg-surface-container-low border border-white/10 focus:ring-0 rounded-xl p-3 md:p-4 text-on-surface outline-none transition-all appearance-none cursor-pointer text-start">
                   <option>{language === 'ar' ? 'تطبيق جوال (iOS/Android)' : 'Mobile App (iOS/Android)'}</option>
                   <option>{language === 'ar' ? 'تطبيق ويب متكامل' : 'Web Application'}</option>
                   <option>{language === 'ar' ? 'حلول التجارة الإلكترونية' : 'E-commerce Solutions'}</option>
@@ -74,7 +74,7 @@ export default function Contact() {
                 <label className="font-code-label text-[10px] md:text-code-label text-secondary uppercase block">
                   {language === 'ar' ? 'رسالتك' : 'Your Message'}
                 </label>
-                <textarea className="glow-input w-full bg-surface-container-low border border-white/10 focus:ring-0 rounded-xl p-3 md:p-4 text-on-surface outline-none transition-all text-right" placeholder={language === 'ar' ? 'أخبرنا المزيد عن رؤيتك...' : 'Tell us more about your vision...'} rows="4" required></textarea>
+                <textarea className="glow-input w-full bg-surface-container-low border border-white/10 focus:ring-0 rounded-xl p-3 md:p-4 text-on-surface outline-none transition-all text-start" placeholder={language === 'ar' ? 'أخبرنا المزيد عن رؤيتك...' : 'Tell us more about your vision...'} rows="4" required></textarea>
               </div>
               <button 
                 className={`primary-btn-gradient w-full md:w-auto text-white font-title-md px-10 py-3 md:px-12 md:py-4 rounded-xl active:scale-95 transition-all shadow-lg shadow-primary/10 ${status === 'sending' ? 'opacity-70 cursor-not-allowed' : ''}`}
@@ -89,14 +89,14 @@ export default function Contact() {
           </div>
 
           {/* Contact Details Sidebar */}
-          <div className="lg:col-span-5 flex flex-col gap-8 md:gap-lg text-right">
+          <div className="lg:col-span-5 flex flex-col gap-8 md:gap-lg text-start">
             {/* Details Card */}
             <div className="glass-panel rounded-2xl p-lg relative overflow-hidden border border-white/5">
               <h3 className="font-headline-lg text-headline-lg text-on-surface mb-6 md:mb-8">
                 {language === 'ar' ? 'معلومات التواصل' : 'Contact Information'}
               </h3>
               <div className="space-y-6 md:space-y-8">
-                <div className="flex flex-row-reverse items-center gap-4 group">
+                <div className="flex items-center gap-4 group">
                   <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors">
                     <span className="material-symbols-outlined text-xl md:text-2xl">call</span>
                   </div>
@@ -105,7 +105,7 @@ export default function Contact() {
                     <p className="font-title-md text-base md:text-title-md text-on-surface" dir="ltr">+966 50 123 4567</p>
                   </div>
                 </div>
-                <div className="flex flex-row-reverse items-center gap-4 group">
+                <div className="flex items-center gap-4 group">
                   <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary group-hover:bg-secondary/20 transition-colors">
                     <span className="material-symbols-outlined text-xl md:text-2xl">mail</span>
                   </div>
@@ -114,7 +114,7 @@ export default function Contact() {
                     <p className="font-title-md text-base md:text-title-md text-on-surface" dir="ltr">hello@codezone.sa</p>
                   </div>
                 </div>
-                <div className="flex flex-row-reverse items-center gap-4 group">
+                <div className="flex items-center gap-4 group">
                   <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-tertiary/10 flex items-center justify-center text-tertiary group-hover:bg-tertiary/20 transition-colors">
                     <span className="material-symbols-outlined text-xl md:text-2xl">location_on</span>
                   </div>
@@ -126,7 +126,7 @@ export default function Contact() {
               </div>
               <div className="mt-8 md:mt-10 pt-6 md:pt-8 border-t border-white/10">
                 <p className="font-code-label text-[10px] md:text-code-label text-on-surface-variant mb-4">{t('footer.follow')}</p>
-                <div className="flex flex-row-reverse gap-4">
+                <div className="flex gap-4">
                   <a className="w-10 h-10 md:w-12 md:h-12 rounded-xl glass-panel flex items-center justify-center text-secondary hover:text-primary transition-all duration-300 border border-white/5" href="#">
                     <span className="material-symbols-outlined text-xl">alternate_email</span>
                   </a>
@@ -149,6 +149,25 @@ export default function Contact() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Terminal Social Proof */}
+        <div className="mt-16 md:mt-20 glass-panel rounded-2xl overflow-hidden border border-white/10">
+          <div className="bg-surface-container-highest px-4 py-2 flex items-center gap-2 border-b border-white/5">
+            <div className="flex gap-1.5">
+              <div className="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+              <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+              <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+            </div>
+            <span className="text-xs font-code-label text-on-surface-variant ml-4" dir="ltr">code_zone_v2.0.0 --contact</span>
+          </div>
+          <div className="p-5 md:p-6 font-code-label text-[10px] md:text-body-sm space-y-2 opacity-80" dir="ltr">
+            <p><span className="text-secondary">$</span> codezone contact --init</p>
+            <p className="text-primary-fixed-dim">&gt;&gt; Connecting to global innovation network...</p>
+            <p className="text-primary-fixed-dim">&gt;&gt; Encryption: AES-256 Active</p>
+            <p className="text-secondary">&gt;&gt; Status: Connection Established. Ready for transmission.</p>
+            <p><span className="text-secondary">$</span> <span className="animate-pulse">_</span></p>
           </div>
         </div>
       </main>

@@ -3,12 +3,12 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useAppContext } from '../context/AppContext';
 
-const AccordionItem = ({ question, answer, isOpen, onClick }) => {
+const AccordionItem = ({ question, answer, isOpen, onClick, language }) => {
   return (
     <div className="glass-card rounded-xl overflow-hidden mb-4 transition-all">
       <button 
         onClick={onClick}
-        className="w-full px-6 py-4 flex justify-between items-center text-right hover:bg-white/5 transition-colors"
+        className="w-full px-6 py-4 flex justify-between items-center text-start hover:bg-white/5 transition-colors"
       >
         <span className={`material-symbols-outlined transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
           expand_more
@@ -16,7 +16,7 @@ const AccordionItem = ({ question, answer, isOpen, onClick }) => {
         <span className="font-title-md text-base md:text-title-md text-white">{question}</span>
       </button>
       <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-        <div className="px-6 pb-4 pt-2 text-on-surface-variant font-body-md text-sm md:text-base leading-relaxed text-right border-t border-white/5">
+        <div className="px-6 pb-4 pt-2 text-on-surface-variant font-body-md text-sm md:text-base leading-relaxed text-start border-t border-white/5">
           {answer}
         </div>
       </div>
@@ -25,7 +25,7 @@ const AccordionItem = ({ question, answer, isOpen, onClick }) => {
 };
 
 export default function FAQ() {
-  const { t } = useAppContext();
+  const { t, language } = useAppContext();
   const [openIndex, setOpenIndex] = useState(0);
 
   const faqs = [
@@ -40,7 +40,7 @@ export default function FAQ() {
       <Header />
       
       <main className="pt-24 pb-16 md:pb-24 px-lg max-w-4xl mx-auto">
-        <section className="mb-12 md:mb-16 text-center md:text-right relative">
+        <section className={`mb-12 md:mb-16 relative ${language === 'en' ? 'text-center' : 'text-start'}`}>
           <div className="absolute -top-10 -right-20 w-64 h-64 bg-primary/10 blur-[100px] rounded-full -z-10"></div>
           <h1 className="font-display-lg text-[32px] md:text-[48px] mb-4 cyber-gradient-text leading-tight">{t('faq.title')}</h1>
           <p className="font-body-lg text-body-lg text-on-surface-variant">
@@ -56,6 +56,7 @@ export default function FAQ() {
               answer={faq.a}
               isOpen={openIndex === index}
               onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
+              language={language}
             />
           ))}
         </section>

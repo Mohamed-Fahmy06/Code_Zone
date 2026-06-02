@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import { useAppContext } from '../context/AppContext';
 
 export default function Home() {
-  const { t } = useAppContext();
+  const { t, language } = useAppContext();
 
   React.useEffect(() => {
     const handleMouseMove = (e) => {
@@ -32,7 +32,7 @@ export default function Home() {
             <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 blur-[120px] rounded-full"></div>
           </div>
           <div className="max-w-container-max mx-auto w-full grid md:grid-cols-2 gap-lg md:gap-xl items-center relative z-10">
-            <div className="text-right space-y-md md:space-y-lg">
+            <div className={`space-y-md md:space-y-lg ${language === 'en' ? 'text-start' : 'text-start'}`}>
               <div className="inline-flex items-center gap-xs px-md py-xs rounded-full bg-primary/10 border border-primary/20 text-primary font-code-label text-code-label">
                 <span className="pulse-animation w-2 h-2 rounded-full bg-primary"></span>
                 {t('hero.badge')}
@@ -43,7 +43,7 @@ export default function Home() {
               <p className="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
                 {t('hero.desc')}
               </p>
-              <div className="flex flex-row-reverse items-center justify-start gap-md pt-md">
+              <div className="flex items-center justify-start gap-md pt-md">
                 <Link to="/contact" className="primary-btn-gradient px-lg py-3 rounded-xl font-title-md text-white active:scale-95 duration-200">
                   {t('hero.startBtn')}
                 </Link>
@@ -62,7 +62,7 @@ export default function Home() {
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO4XSXyoaIM_HS1GuyAQ58fztR5-NogblnSHpnfAqBNMu5TLhouvh4b1mk1JmUeMfC0lVGfPS9zrc7UfY_LejbS1hvQlrjEp4kDEmj4afUWMynOVHmiVg-7eRPsTurTD9gb8IVK3gLFtZqxl2WJlfMAdHBB-BY4ycL2SqEruujxoQfYK55ls64h0uvQHfygLCoW7nlpPgvcDi4dftOjsHDl4nZwMPf__MzX9vuOAf-XuDP7DtCLS2KNkPMIYJxGLPTmL0ig0uTFtor"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
-                  <div className="absolute bottom-md right-md text-left font-code-label text-primary/80">
+                  <div className="absolute bottom-md right-md text-left font-code-label text-primary/80" dir="ltr">
                     <div className="text-xs">SYSTEM_STATUS: ACTIVE</div>
                     <div className="text-xs">PROTOCOL: CYBER_01</div>
                   </div>
@@ -81,47 +81,47 @@ export default function Home() {
             </div>
             <div className="grid md:grid-cols-3 gap-lg">
               {/* Service 1 */}
-              <div className="glass-panel p-lg md:p-xl rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group">
-                <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-lg group-hover:bg-primary/20 transition-colors shadow-[0_0_15px_rgba(207,189,255,0.1)] ml-auto">
+              <div className="glass-panel p-lg md:p-xl rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group text-start">
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-lg group-hover:bg-primary/20 transition-colors shadow-[0_0_15px_rgba(207,189,255,0.1)]">
                   <span className="material-symbols-outlined text-primary text-3xl md:text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>language</span>
                 </div>
-                <h3 className="font-title-md text-title-md text-on-surface mb-md text-right">{t('services.web.title')}</h3>
-                <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed text-right">
+                <h3 className="font-title-md text-title-md text-on-surface mb-md">{t('services.web.title')}</h3>
+                <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
                   {t('services.web.desc')}
                 </p>
-                <div className="mt-lg border-t border-white/5 pt-md text-right">
-                  <Link to="/work" className="font-code-label text-code-label text-secondary flex items-center justify-end gap-xs cursor-pointer">
-                    {t('services.more')} <span className="material-symbols-outlined text-sm">arrow_back</span>
+                <div className="mt-lg border-t border-white/5 pt-md">
+                  <Link to="/work" className="font-code-label text-code-label text-secondary flex items-center gap-xs cursor-pointer">
+                    {t('services.more')} <span className={`material-symbols-outlined text-sm ${language === 'ar' ? '' : 'rotate-180'}`}>arrow_back</span>
                   </Link>
                 </div>
               </div>
               {/* Service 2 */}
-              <div className="glass-panel p-lg md:p-xl rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group border-t-2 border-t-secondary/30">
-                <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-secondary/10 flex items-center justify-center mb-lg group-hover:bg-secondary/20 transition-colors shadow-[0_0_15px_rgba(70,245,224,0.1)] ml-auto">
+              <div className="glass-panel p-lg md:p-xl rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group border-t-2 border-t-secondary/30 text-start">
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-secondary/10 flex items-center justify-center mb-lg group-hover:bg-secondary/20 transition-colors shadow-[0_0_15px_rgba(70,245,224,0.1)]">
                   <span className="material-symbols-outlined text-secondary text-3xl md:text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>settings_suggest</span>
                 </div>
-                <h3 className="font-title-md text-title-md text-on-surface mb-md text-right">{t('services.systems.title')}</h3>
-                <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed text-right">
+                <h3 className="font-title-md text-title-md text-on-surface mb-md">{t('services.systems.title')}</h3>
+                <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
                   {t('services.systems.desc')}
                 </p>
-                <div className="mt-lg border-t border-white/5 pt-md text-right">
-                  <Link to="/work" className="font-code-label text-code-label text-secondary flex items-center justify-end gap-xs cursor-pointer">
-                    {t('services.more')} <span className="material-symbols-outlined text-sm">arrow_back</span>
+                <div className="mt-lg border-t border-white/5 pt-md">
+                  <Link to="/work" className="font-code-label text-code-label text-secondary flex items-center gap-xs cursor-pointer">
+                    {t('services.more')} <span className={`material-symbols-outlined text-sm ${language === 'ar' ? '' : 'rotate-180'}`}>arrow_back</span>
                   </Link>
                 </div>
               </div>
               {/* Service 3 */}
-              <div className="glass-panel p-lg md:p-xl rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group">
-                <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-tertiary/10 flex items-center justify-center mb-lg group-hover:bg-tertiary/20 transition-colors shadow-[0_0_15px_rgba(255,177,196,0.1)] ml-auto">
+              <div className="glass-panel p-lg md:p-xl rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group text-start">
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-tertiary/10 flex items-center justify-center mb-lg group-hover:bg-tertiary/20 transition-colors shadow-[0_0_15px_rgba(255,177,196,0.1)]">
                   <span className="material-symbols-outlined text-tertiary text-3xl md:text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>draw</span>
                 </div>
-                <h3 className="font-title-md text-title-md text-on-surface mb-md text-right">{t('services.ux.title')}</h3>
-                <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed text-right">
+                <h3 className="font-title-md text-title-md text-on-surface mb-md">{t('services.ux.title')}</h3>
+                <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
                   {t('services.ux.desc')}
                 </p>
-                <div className="mt-lg border-t border-white/5 pt-md text-right">
-                  <Link to="/work" className="font-code-label text-code-label text-secondary flex items-center justify-end gap-xs cursor-pointer">
-                    {t('services.more')} <span className="material-symbols-outlined text-sm">arrow_back</span>
+                <div className="mt-lg border-t border-white/5 pt-md">
+                  <Link to="/work" className="font-code-label text-code-label text-secondary flex items-center gap-xs cursor-pointer">
+                    {t('services.more')} <span className={`material-symbols-outlined text-sm ${language === 'ar' ? '' : 'rotate-180'}`}>arrow_back</span>
                   </Link>
                 </div>
               </div>
@@ -132,10 +132,10 @@ export default function Home() {
         {/* Portfolio Showcase */}
         <section className="py-16 md:py-20 px-lg">
           <div className="max-w-container-max mx-auto">
-            <div className="flex flex-row-reverse justify-between items-end mb-12">
-              <div className="text-right">
-                <h2 className="font-headline-lg text-headline-lg text-on-surface mb-sm text-right">{t('work.title')}</h2>
-                <p className="font-body-sm text-body-sm text-on-surface-variant text-right">{t('work.subtitle')}</p>
+            <div className="flex flex-row justify-between items-end mb-12">
+              <div className="text-start">
+                <h2 className="font-headline-lg text-headline-lg text-on-surface mb-sm">{t('work.title')}</h2>
+                <p className="font-body-sm text-body-sm text-on-surface-variant">{t('work.subtitle')}</p>
               </div>
               <Link to="/work" className="text-secondary font-code-label hover:underline">{t('work.viewAll')}</Link>
             </div>
@@ -148,7 +148,7 @@ export default function Home() {
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlh6h6UiQYR6Lm5jIZx2ZMwroZ584AYNodeyetgubKeTCxNQKRaOGWzRfSLfIlSvyY9rcP0YnHHB2YsJDQfCJTYv3xjwY3UGMDdeLsL8o6_Zwkg96nsRwROixtmuwZWyJkv5p8RqsjLMRigGQcKVqVkoTFXeoNNFfgbkQwo4bc3rTF8PcoCjxk6iZJhc30Ge6cXVgMSx4UaZn6tS60Ibsx_U0GKzOISX-Eg2N4qhoOkPJBEPGjTlzKIsMmYM6GeDzhrnSXpIs79bDP"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-lg translate-y-4 group-hover:translate-y-0 transition-transform text-right">
+                <div className="absolute bottom-0 left-0 right-0 p-lg translate-y-4 group-hover:translate-y-0 transition-transform text-start">
                   <span className="text-secondary font-code-label text-xs uppercase tracking-widest mb-2 block">FinTech Solution</span>
                   <h4 className="font-title-md text-title-md text-white">{t('work.projects.sadeem')}</h4>
                 </div>
@@ -161,7 +161,7 @@ export default function Home() {
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCukkHQmNJBwWrCLMrXyoZWmza_xCanFERnX3YyZ8JueT3apa6cP4vg30i-e6-rXulpaf5gGFaWN3rxGS0g9ADeRTcK_iQmstkTg0GRrvjRGQOs8zJRd_cvZJr3E2gD9b_dIHjA4e3MSgozzebvwOsG0vI9y61JCZ7h_id7j5tEU337k9WiwMxEXwrsWElL0M63HWnPrayv1YL7V5yuOVy799B31Q_8EYVJRPDqS78_lUOrInKaFYZdODIyImKee-Nna61SQ8LpWntM"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-lg translate-y-4 group-hover:translate-y-0 transition-transform text-right">
+                <div className="absolute bottom-0 left-0 right-0 p-lg translate-y-4 group-hover:translate-y-0 transition-transform text-start">
                   <span className="text-secondary font-code-label text-xs uppercase tracking-widest mb-2 block">Logistics App</span>
                   <h4 className="font-title-md text-title-md text-white">{t('work.projects.masar')}</h4>
                 </div>
@@ -174,7 +174,7 @@ export default function Home() {
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuAI-XgGUIeLfK7JdT_IgZGrf1jb2i4V9_Q30pBv34rQlmVE-3XX_S05ywUudaPl9vFNpmsvdtdC7L6jtkmbhFETfjKYPseTvS0QIYlosQYbrMuSfFTof7MHTzlrApIBjtfu618EX1FxbwmrYAZeBvoEZz3XCgXe8TWTRtuJk4TsJr5sGmXVf3AbW-RqsOqK16fsdWvquYXuhAqBvN0kKXqaUvul5WlUUjBE27f-nCXfX97I1VUA3dqIeEjgulB9yVDBgxDQDWZpgr-G"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-lg translate-y-4 group-hover:translate-y-0 transition-transform text-right">
+                <div className="absolute bottom-0 left-0 right-0 p-lg translate-y-4 group-hover:translate-y-0 transition-transform text-start">
                   <span className="text-secondary font-code-label text-xs uppercase tracking-widest mb-2 block">E-commerce</span>
                   <h4 className="font-title-md text-title-md text-white">{t('work.projects.ofoq')}</h4>
                 </div>
@@ -184,7 +184,7 @@ export default function Home() {
         </section>
 
         {/* Testimonials */}
-        <section className="py-16 md:py-20 bg-surface-container-lowest text-right">
+        <section className="py-16 md:py-20 bg-surface-container-lowest text-start">
           <div className="max-w-container-max mx-auto">
             <div className="text-center mb-12 md:mb-16">
               <h2 className="font-headline-lg text-headline-lg text-on-surface mb-sm">{t('testimonials.title')}</h2>
@@ -197,11 +197,11 @@ export default function Home() {
                 <p className="font-body-lg text-body-lg text-on-surface mb-8 md:mb-xl relative z-10 italic">
                   "{t('testimonials.q1.text')}"
                 </p>
-                <div className="flex flex-row-reverse items-center justify-start gap-md">
+                <div className="flex flex-row items-center justify-start gap-md">
                   <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-surface-container-high border border-primary/30 flex items-center justify-center overflow-hidden">
                     <span className="material-symbols-outlined text-primary">person</span>
                   </div>
-                  <div className="text-right">
+                  <div className="text-start">
                     <div className="font-title-md text-white">{t('testimonials.q1.author')}</div>
                     <div className="font-code-label text-xs text-secondary">{t('testimonials.q1.role')}</div>
                   </div>
@@ -213,11 +213,11 @@ export default function Home() {
                 <p className="font-body-lg text-body-lg text-on-surface mb-8 md:mb-xl relative z-10 italic">
                   "{t('testimonials.q2.text')}"
                 </p>
-                <div className="flex flex-row-reverse items-center justify-start gap-md">
+                <div className="flex flex-row items-center justify-start gap-md">
                   <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-surface-container-high border border-secondary/30 flex items-center justify-center overflow-hidden">
                     <span className="material-symbols-outlined text-secondary">person</span>
                   </div>
-                  <div className="text-right">
+                  <div className="text-start">
                     <div className="font-title-md text-white">{t('testimonials.q2.author')}</div>
                     <div className="font-code-label text-xs text-secondary">{t('testimonials.q2.role')}</div>
                   </div>
