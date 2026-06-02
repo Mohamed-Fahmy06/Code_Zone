@@ -7,9 +7,45 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --surface: #ffffff;
+    --on-surface: #10131a;
+    --on-surface-variant: #494456;
+    --surface-dim: #f5f7fa;
+    --surface-container-lowest: #ffffff;
+    --surface-container-low: #f0f2f5;
+    --surface-container: #e8ebf0;
+    --surface-container-high: #dfe3e8;
+    --surface-container-highest: #d6dae0;
+    --surface-variant: #e1e2eb;
+    --surface-bright: #ffffff;
+  }
+
+  .dark {
+    --surface: #10131a;
+    --on-surface: #e1e2eb;
+    --on-surface-variant: #cbc3d9;
+    --surface-dim: #0b0e14;
+    --surface-container-lowest: #0b0e14;
+    --surface-container-low: #191c22;
+    --surface-container: #1d2026;
+    --surface-container-high: #272a31;
+    --surface-container-highest: #32353c;
+    --surface-variant: #32353c;
+    --surface-bright: #363940;
+  }
+
+  * {
+    cursor: default;
+    caret-color: transparent;
+  }
+
+  a, button, input, select, textarea, .cursor-pointer, [role="button"] {
+    cursor: pointer !important;
+  }
+
   body {
-    background-color: #0b0e14;
-    color: #e1e2eb;
+    @apply bg-surface text-on-surface transition-colors duration-300;
     scroll-behavior: smooth;
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
@@ -19,54 +55,67 @@
     width: 8px;
   }
   ::-webkit-scrollbar-track {
-    background: #0b0e14;
+    @apply bg-surface;
   }
   ::-webkit-scrollbar-thumb {
-    background: #32353c;
-    border-radius: 4px;
+    @apply bg-surface-container-highest rounded-full;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #6200ee;
+    @apply bg-primary-container;
   }
 }
 
 @layer components {
   .glass-panel {
+    @apply backdrop-blur-[20px] border transition-colors duration-300;
     background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.05);
   }
   
-  .glass-card {
+  .dark .glass-panel {
     background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+
+  /* For light mode, we might want a different glass effect */
+  :root:not(.dark) .glass-panel {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .glass-card {
+    @apply backdrop-blur-[20px] border transition-all duration-500;
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+
+  :root:not(.dark) .glass-card {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.05);
   }
 
   .cyber-gradient-text {
-    background: linear-gradient(135deg, #cfbdff 0%, #46f5e0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #cfbdff 0%, #46f5e0 100%);
   }
 
   .primary-btn-gradient {
+    @apply transition-all duration-300;
     background: linear-gradient(135deg, #6200ee 0%, #cfbdff 100%);
-    transition: all 0.3s ease;
+    color: white;
   }
 
   .primary-btn-gradient:hover {
     box-shadow: 0 0 25px rgba(207, 189, 255, 0.4);
-    transform: translateY(-2px);
+    @apply -translate-y-0.5;
   }
 
   .secondary-btn-border {
-    border: 1px solid #46f5e0;
-    transition: all 0.3s ease;
+    @apply border border-secondary transition-all duration-300;
   }
 
   .secondary-btn-border:hover {
-    background: rgba(70, 245, 224, 0.1);
+    @apply bg-secondary/10;
     box-shadow: 0 0 15px rgba(70, 245, 224, 0.3);
   }
 
@@ -94,7 +143,7 @@
   }
   
   .glow-input:focus {
+    @apply ring-0 border-secondary;
     box-shadow: 0 0 15px rgba(70, 245, 224, 0.2);
-    border-color: #46f5e0;
   }
 }

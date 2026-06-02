@@ -1,8 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useAppContext } from '../context/AppContext';
 
 export default function About() {
+  const { t } = useAppContext();
+
   React.useEffect(() => {
     const handleMouseMove = (e) => {
       const x = e.clientX;
@@ -33,15 +37,15 @@ export default function About() {
         <div className="max-w-container-max mx-auto px-lg relative z-10 text-center">
           <div className="inline-flex items-center gap-xs px-md py-xs rounded-full bg-primary/10 border border-primary/20 text-primary font-code-label text-code-label mb-6">
             <span className="pulse-animation w-2 h-2 rounded-full bg-primary"></span>
-            <span>نحن نصنع المستقبل الرقمي</span>
+            <span>{t('about.heroBadge')}</span>
           </div>
-          <h1 className="font-display-lg text-[32px] md:text-[48px] cyber-gradient-text leading-tight mb-4">من نحن - خبراء الحلول الرقمية</h1>
+          <h1 className="font-display-lg text-[32px] md:text-[48px] cyber-gradient-text leading-tight mb-4">{t('about.heroTitle')}</h1>
           <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-8">
-            نحن وكالة تقنية متخصصة في هندسة البرمجيات وبناء التجارب الرقمية التي تدفع الشركات نحو النمو والابتكار.
+            {t('about.heroDesc')}
           </p>
           <div className="flex flex-wrap justify-center gap-md">
-            <button className="primary-btn-gradient px-lg py-2.5 rounded-xl font-title-md text-white active:scale-95 duration-200">اكتشف خدماتنا</button>
-            <button className="secondary-btn-border px-lg py-2.5 rounded-xl font-title-md text-secondary active:scale-95 duration-200">تواصل معنا</button>
+            <Link to="/work" className="primary-btn-gradient px-lg py-2.5 rounded-xl font-title-md text-white active:scale-95 duration-200">{t('nav.work')}</Link>
+            <Link to="/contact" className="secondary-btn-border px-lg py-2.5 rounded-xl font-title-md text-secondary active:scale-95 duration-200">{t('nav.contact')}</Link>
           </div>
         </div>
       </header>
@@ -61,23 +65,19 @@ export default function About() {
             </div>
           </div>
           <div>
-            <h2 className="font-headline-lg text-headline-lg text-on-surface mb-6">قصتنا في تمكين الأعمال</h2>
+            <h2 className="font-headline-lg text-headline-lg text-on-surface mb-6">{t('about.storyTitle')}</h2>
             <div className="space-y-4 md:space-y-6 text-on-surface-variant font-body-lg text-body-lg leading-relaxed">
-              <p>
-                بدأت "كود زون" كفكرة بسيطة: كيف يمكننا تحويل التعقيد البرمجي إلى أدوات نمو بسيطة وفعالة؟ اليوم، نحن نفتخر بكوننا الشريك التقني المفضل للعديد من الشركات الرائدة.
-              </p>
-              <p>
-                نحن لا نقوم فقط بكتابة الأكواد؛ بل نقوم بدراسة استراتيجية عملك، وتحديد الفجوات التقنية، وبناء حلول مخصصة تضمن لك ميزة تنافسية في السوق الرقمي المتسارع.
-              </p>
+              <p>{t('about.storyP1')}</p>
+              <p>{t('about.storyP2')}</p>
               <div className="flex flex-row-reverse items-center justify-start gap-6 pt-2">
                 <div className="flex flex-col items-end">
                   <span className="text-primary font-headline-lg font-bold tracking-tight">+١٥٠</span>
-                  <span className="text-code-label text-on-surface-variant">مشروع ناجح</span>
+                  <span className="text-code-label text-on-surface-variant">{t('about.successProjects')}</span>
                 </div>
                 <div className="w-px h-10 bg-outline-variant/30"></div>
                 <div className="flex flex-col items-end">
                   <span className="text-secondary font-headline-lg font-bold tracking-tight">+٥٠</span>
-                  <span className="text-code-label text-on-surface-variant">عميل سعيد</span>
+                  <span className="text-code-label text-on-surface-variant">{t('about.happyClients')}</span>
                 </div>
               </div>
             </div>
@@ -89,40 +89,31 @@ export default function About() {
       <section className="py-16 md:py-20 bg-surface-container-lowest">
         <div className="max-w-container-max mx-auto px-lg">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="font-headline-lg text-headline-lg text-on-surface mb-4">قيمنا الجوهرية</h2>
+            <h2 className="font-headline-lg text-headline-lg text-on-surface mb-4">{t('about.valuesTitle')}</h2>
             <div className="w-20 h-1 bg-secondary mx-auto rounded-full mb-4"></div>
-            <p className="text-on-surface-variant font-body-md text-body-md">الأسس التي نبني عليها كل سطر برمجي</p>
+            <p className="text-on-surface-variant font-body-md text-body-md">{t('about.valuesSubtitle')}</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-lg text-right">
-            {/* Value 1 */}
             <div className="glass-panel p-lg md:p-xl rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group">
               <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-lg group-hover:bg-primary/20 transition-colors shadow-[0_0_15px_rgba(207,189,255,0.1)] ml-auto">
                 <span className="material-symbols-outlined text-3xl md:text-4xl text-primary" style={{ fontVariationSettings: "'FILL' 1" }}>lightbulb</span>
               </div>
-              <h3 className="font-title-md text-title-md text-on-surface mb-md">الابتكار</h3>
-              <p className="text-on-surface-variant font-body-sm text-body-sm leading-relaxed">
-                لا نكتفي بالحلول التقليدية، بل نسعى دائماً لتبني أحدث التقنيات وابتكار أساليب برمجية تسبق عصرها.
-              </p>
+              <h3 className="font-title-md text-title-md text-on-surface mb-md">{t('about.v1Title')}</h3>
+              <p className="text-on-surface-variant font-body-sm text-body-sm leading-relaxed">{t('about.v1Desc')}</p>
             </div>
-            {/* Value 2 */}
             <div className="glass-panel p-lg md:p-xl rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group border-t-2 border-t-secondary/30">
               <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-secondary/10 flex items-center justify-center mb-lg group-hover:bg-secondary/20 transition-colors shadow-[0_0_15px_rgba(70,245,224,0.1)] ml-auto">
                 <span className="material-symbols-outlined text-3xl md:text-4xl text-secondary" style={{ fontVariationSettings: "'FILL' 1" }}>architecture</span>
               </div>
-              <h3 className="font-title-md text-title-md text-on-surface mb-md">الدقة</h3>
-              <p className="text-on-surface-variant font-body-sm text-body-sm leading-relaxed">
-                نؤمن بأن التفاصيل الصغيرة هي ما يصنع الفرق الكبير، لذا نلتزم بأعلى معايير الجودة في هندسة الأنظمة.
-              </p>
+              <h3 className="font-title-md text-title-md text-on-surface mb-md">{t('about.v2Title')}</h3>
+              <p className="text-on-surface-variant font-body-sm text-body-sm leading-relaxed">{t('about.v2Desc')}</p>
             </div>
-            {/* Value 3 */}
             <div className="glass-panel p-lg md:p-xl rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group">
               <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-tertiary/10 flex items-center justify-center mb-lg group-hover:bg-tertiary/20 transition-colors shadow-[0_0_15px_rgba(255,177,196,0.1)] ml-auto">
                 <span className="material-symbols-outlined text-3xl md:text-4xl text-tertiary" style={{ fontVariationSettings: "'FILL' 1" }}>support_agent</span>
               </div>
-              <h3 className="font-title-md text-title-md text-on-surface mb-md">الدعم المستمر</h3>
-              <p className="text-on-surface-variant font-body-sm text-body-sm leading-relaxed">
-                شراكتنا لا تنتهي بإطلاق المشروع؛ نحن معك خطوة بخطوة لضمان استقرار ونمو أعمالك الرقمية.
-              </p>
+              <h3 className="font-title-md text-title-md text-on-surface mb-md">{t('about.v3Title')}</h3>
+              <p className="text-on-surface-variant font-body-sm text-body-sm leading-relaxed">{t('about.v3Desc')}</p>
             </div>
           </div>
         </div>
@@ -132,16 +123,16 @@ export default function About() {
       <section className="py-16 md:py-20">
         <div className="max-w-container-max mx-auto px-lg">
           <div className="text-center mb-12 md:mb-16">
-            <h2 className="font-headline-lg text-headline-lg text-on-surface mb-4">فريق الخبراء</h2>
+            <h2 className="font-headline-lg text-headline-lg text-on-surface mb-4">{t('about.teamTitle')}</h2>
             <div className="w-20 h-1 bg-primary mx-auto rounded-full mb-4"></div>
-            <p className="text-on-surface-variant font-body-md text-body-md">العقول المبدعة خلف حلولنا الرقمية</p>
+            <p className="text-on-surface-variant font-body-md text-body-md">{t('about.teamSubtitle')}</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-lg">
             {[
-              { name: "أحمد محمد", role: "كبير المهندسين التقنيين", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBIojCTgtEfx9xFhAIciItXMA2c74WOEXF83pjrTwfAdhmihTv6G4TjMKBiPCkzAo5-8iUBwxUVOr1myLcW5GJyoUwqezjbDskj_rAXQD7Ydio2y6RNUb_wWP2hn-K82c-dYMvwnDoCZ4aRRkhLxLJwYfAkUk3VlCE8R9o8GNgXfZq_odhR6gs9a5hrkw9tswwes1_aQITF8cLX_TDa9hPy22DidMZOvQRtruX6Uz-fR3U8bdhvx3koILlntFjp1l7hg5M25K4Dw4Eg" },
-              { name: "سارة خالد", role: "مديرة التصميم الرقمي", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDwq70Z_BFwZC4LK82KVAjVVagEd7mBDW60kSTVC9EVjjWOQpJ-m3UHTcGi1q__p_zwvi8jFg7_5OwxQ0WhYMOAG8ZqR5RajDFEIGkROy4-gKalh9kFTHC_3UJ-n8erkSWu48h-jQXrtTTvrLQ53fZYwX4mlqs8f4inoDxiEph8P4TQ03bbpKUHppLEJyxfftZCHm8v-AlsGov8dvUL3kfVh4WDWvOmEMmqdKZ7UgcfsXaX7PVOfJNAhjrFgw3LCwObmBQgJ3QyKhd8" },
-              { name: "ياسين علي", role: "مطور تطبيقات سحابية", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDjHNi_A9fwVjp2nYzNUexV3AKXwXyPWBkMcZosELmYSjnNTEOHqcxo7uYVyGX2sdjrIP0v2acGnsPbCPhGuyil8-UKS6hpHdxwEY0LogmLa7Hv7iuvmPDFzsLThvMCRerHoSzCOjDt2WELfxBnlAfqOGirSjO6QmsdBgqV19qmUHKz8o820zqSxSvs3P2fR6SHWZrpaUy7b3Jh54UVYQekvaB7UlVrRRj6pxeDadn11T4IrKTwA-U-Xfv6GNqobZU-nwd7lwanwKMT" },
-              { name: "ليلى حسن", role: "استشارية استراتيجية تقنية", img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDNwqEwuUNTpe0o99Kb5Ufcw2AbXhTkVIcCrajZS6CSCqDPysIS_fhsxivytsLkVjGqvH3aBjQzulIqp5EHWcOHbUBH73fqr7LhipWTOWtpaXliBGWwwcioMCMkS-9ak6mk-CZ8J4gOfRzX7zICFwuwXQDYYCvVqL0S7Q0mymQD_kCvQkIqtgPTdvCS7a8M4bbt-zmOHT0liDCmo2PFQKIUS7vWN9ZjaQBFbSq05UGyoR-CpPuSvznntYq6LjYuyWXbVbZJWixx0YD6" }
+              { name: "أحمد محمد", role: t('about.roles.engineer'), img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBIojCTgtEfx9xFhAIciItXMA2c74WOEXF83pjrTwfAdhmihTv6G4TjMKBiPCkzAo5-8iUBwxUVOr1myLcW5GJyoUwqezjbDskj_rAXQD7Ydio2y6RNUb_wWP2hn-K82c-dYMvwnDoCZ4aRRkhLxLJwYfAkUk3VlCE8R9o8GNgXfZq_odhR6gs9a5hrkw9tswwes1_aQITF8cLX_TDa9hPy22DidMZOvQRtruX6Uz-fR3U8bdhvx3koILlntFjp1l7hg5M25K4Dw4Eg" },
+              { name: "سارة خالد", role: t('about.roles.designer'), img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDwq70Z_BFwZC4LK82KVAjVVagEd7mBDW60kSTVC9EVjjWOQpJ-m3UHTcGi1q__p_zwvi8jFg7_5OwxQ0WhYMOAG8ZqR5RajDFEIGkROy4-gKalh9kFTHC_3UJ-n8erkSWu48h-jQXrtTTvrLQ53fZYwX4mlqs8f4inoDxiEph8P4TQ03bbpKUHppLEJyxfftZCHm8v-AlsGov8dvUL3kfVh4WDWvOmEMmqdKZ7UgcfsXaX7PVOfJNAhjrFgw3LCwObmBQgJ3QyKhd8" },
+              { name: "ياسين علي", role: t('about.roles.cloud'), img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDjHNi_A9fwVjp2nYzNUexV3AKXwXyPWBkMcZosELmYSjnNTEOHqcxo7uYVyGX2sdjrIP0v2acGnsPbCPhGuyil8-UKS6hpHdxwEY0LogmLa7Hv7iuvmPDFzsLThvMCRerHoSzCOjDt2WELfxBnlAfqOGirSjO6QmsdBgqV19qmUHKz8o820zqSxSvs3P2fR6SHWZrpaUy7b3Jh54UVYQekvaB7UlVrRRj6pxeDadn11T4IrKTwA-U-Xfv6GNqobZU-nwd7lwanwKMT" },
+              { name: "ليلى حسن", role: t('about.roles.consultant'), img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDNwqEwuUNTpe0o99Kb5Ufcw2AbXhTkVIcCrajZS6CSCqDPysIS_fhsxivytsLkVjGqvH3aBjQzulIqp5EHWcOHbUBH73fqr7LhipWTOWtpaXliBGWwwcioMCMkS-9ak6mk-CZ8J4gOfRzX7zICFwuwXQDYYCvVqL0S7Q0mymQD_kCvQkIqtgPTdvCS7a8M4bbt-zmOHT0liDCmo2PFQKIUS7vWN9ZjaQBFbSq05UGyoR-CpPuSvznntYq6LjYuyWXbVbZJWixx0YD6" }
             ].map((member, i) => (
               <div key={i} className="glass-panel p-md rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group text-center">
                 <div className="relative mb-4 md:mb-6 rounded-xl overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500 border border-white/5">

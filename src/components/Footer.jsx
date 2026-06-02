@@ -1,55 +1,60 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAppContext } from '../context/AppContext';
 
 export default function Footer() {
+  const { t, language } = useAppContext();
+
   return (
-    <footer className="w-full border-t border-white/5 bg-surface-container-lowest py-xl px-lg">
-      <div className="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-4 gap-xl">
+    <footer className="w-full border-t border-white/5 bg-surface-container-lowest py-10 md:py-12 px-lg">
+      <div className="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-xl">
         <div className="space-y-md">
           <div className="flex items-center gap-sm">
-            <span className="material-symbols-outlined text-primary text-3xl">terminal</span>
-            <span className="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">كود زون</span>
+            <span className="material-symbols-outlined text-primary text-2xl md:text-3xl">terminal</span>
+            <span className="font-headline-lg-mobile text-xl md:text-2xl font-bold text-primary">
+              {language === 'ar' ? 'كود زون' : 'Code Zone'}
+            </span>
           </div>
-          <p className="font-body-sm text-body-sm text-on-surface-variant">
-            مركز متكامل للحلول البرمجية والتحول الرقمي، نبني المستقبل سطر تلو الآخر.
+          <p className="font-body-sm text-sm text-on-surface-variant leading-relaxed">
+            {t('footer.desc')}
           </p>
         </div>
         <div>
-          <h4 className="font-title-md text-white mb-lg">روابط سريعة</h4>
-          <ul className="space-y-sm">
-            <li><Link className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-all hover:translate-x-[-4px] inline-block" to="/about">عن الشركة</Link></li>
-            <li><Link className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-all hover:translate-x-[-4px] inline-block" to="/work">خدماتنا التقنية</Link></li>
-            <li><a className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-all hover:translate-x-[-4px] inline-block" href="#">سياسة الخصوصية</a></li>
+          <h4 className="font-title-md text-base md:text-title-md text-white mb-6">{t('footer.links')}</h4>
+          <ul className="space-y-3">
+            <li><Link className="font-body-sm text-sm text-on-surface-variant hover:text-primary transition-all hover:translate-x-[-4px] inline-block" to="/about">{t('footer.about')}</Link></li>
+            <li><Link className="font-body-sm text-sm text-on-surface-variant hover:text-primary transition-all hover:translate-x-[-4px] inline-block" to="/work">{t('footer.services')}</Link></li>
+            <li><a className="font-body-sm text-sm text-on-surface-variant hover:text-primary transition-all hover:translate-x-[-4px] inline-block" href="#">{t('footer.privacy')}</a></li>
           </ul>
         </div>
         <div>
-          <h4 className="font-title-md text-white mb-lg">الدعم الفني</h4>
-          <ul className="space-y-sm">
-            <li><a className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-all hover:translate-x-[-4px] inline-block" href="#">الأسئلة الشائعة</a></li>
-            <li><a className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-all hover:translate-x-[-4px] inline-block" href="#">فتح تذكرة دعم</a></li>
-            <li><Link className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-all hover:translate-x-[-4px] inline-block" to="/contact">تواصل مباشرة</Link></li>
+          <h4 className="font-title-md text-base md:text-title-md text-white mb-6">{t('footer.support')}</h4>
+          <ul className="space-y-3">
+            <li><a className="font-body-sm text-sm text-on-surface-variant hover:text-primary transition-all hover:translate-x-[-4px] inline-block" href="#">{t('footer.faq')}</a></li>
+            <li><a className="font-body-sm text-sm text-on-surface-variant hover:text-primary transition-all hover:translate-x-[-4px] inline-block" href="#">{t('footer.tickets')}</a></li>
+            <li><Link className="font-body-sm text-sm text-on-surface-variant hover:text-primary transition-all hover:translate-x-[-4px] inline-block" to="/contact">{t('footer.direct')}</Link></li>
           </ul>
         </div>
         <div>
-          <h4 className="font-title-md text-white mb-lg">تابعنا</h4>
-          <div className="flex gap-md">
+          <h4 className="font-title-md text-base md:text-title-md text-white mb-6">{t('footer.follow')}</h4>
+          <div className="flex gap-4">
             <a className="w-10 h-10 rounded-lg glass-panel flex items-center justify-center text-secondary hover:text-primary transition-colors duration-200" href="#">
-              <span className="material-symbols-outlined">alternate_email</span>
+              <span className="material-symbols-outlined text-xl">alternate_email</span>
             </a>
             <a className="w-10 h-10 rounded-lg glass-panel flex items-center justify-center text-secondary hover:text-primary transition-colors duration-200" href="#">
-              <span className="material-symbols-outlined">hub</span>
+              <span className="material-symbols-outlined text-xl">hub</span>
             </a>
             <a className="w-10 h-10 rounded-lg glass-panel flex items-center justify-center text-secondary hover:text-primary transition-colors duration-200" href="#">
-              <span className="material-symbols-outlined">chat</span>
+              <span className="material-symbols-outlined text-xl">chat</span>
             </a>
           </div>
         </div>
       </div>
-      <div className="max-w-container-max mx-auto mt-xl pt-lg border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-md">
-        <p className="font-body-sm text-body-sm text-on-surface-variant">© ٢٠٢٤ كود زون. جميع الحقوق محفوظة.</p>
+      <div className="max-w-container-max mx-auto mt-10 md:mt-12 pt-6 md:pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-md">
+        <p className="font-body-sm text-xs text-on-surface-variant">{t('footer.rights')}</p>
         <div className="flex gap-lg">
-          <span className="text-on-surface-variant font-code-label text-xs">LATENCY: 12ms</span>
-          <span className="text-on-surface-variant font-code-label text-xs">UPTIME: 99.9%</span>
+          <span className="text-on-surface-variant font-code-label text-[10px]">LATENCY: 12ms</span>
+          <span className="text-on-surface-variant font-code-label text-[10px]">UPTIME: 99.9%</span>
         </div>
       </div>
     </footer>

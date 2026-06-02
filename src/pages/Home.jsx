@@ -1,8 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useAppContext } from '../context/AppContext';
 
 export default function Home() {
+  const { t } = useAppContext();
+
   React.useEffect(() => {
     const handleMouseMove = (e) => {
       const glow = document.querySelector('.glow-effect');
@@ -31,21 +35,21 @@ export default function Home() {
             <div className="text-right space-y-md md:space-y-lg">
               <div className="inline-flex items-center gap-xs px-md py-xs rounded-full bg-primary/10 border border-primary/20 text-primary font-code-label text-code-label">
                 <span className="pulse-animation w-2 h-2 rounded-full bg-primary"></span>
-                مستقبل البرمجيات الآن
+                {t('hero.badge')}
               </div>
               <h1 className="font-display-lg text-[36px] md:text-[52px] cyber-gradient-text leading-tight">
-                نحول رؤيتك إلى واقع رقمي متكامل
+                {t('hero.title')}
               </h1>
               <p className="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
-                نحن في Code Zone نجمع بين الابتكار التقني والتصميم الإبداعي لنبني أنظمة برمجية ذكية تدفع عملك نحو المستقبل الرقمي بكل قوة واحترافية.
+                {t('hero.desc')}
               </p>
-              <div className="flex items-center gap-md pt-md">
-                <button className="primary-btn-gradient px-lg py-3 rounded-xl font-title-md text-white active:scale-95 duration-200">
-                  ابدأ مشروعك
-                </button>
-                <button className="secondary-btn-border px-lg py-3 rounded-xl font-title-md text-secondary active:scale-95 duration-200">
-                  شاهد أعمالنا
-                </button>
+              <div className="flex flex-row-reverse items-center justify-start gap-md pt-md">
+                <Link to="/contact" className="primary-btn-gradient px-lg py-3 rounded-xl font-title-md text-white active:scale-95 duration-200">
+                  {t('hero.startBtn')}
+                </Link>
+                <Link to="/work" className="secondary-btn-border px-lg py-3 rounded-xl font-title-md text-secondary active:scale-95 duration-200">
+                  {t('hero.workBtn')}
+                </Link>
               </div>
             </div>
             <div className="relative flex justify-center items-center">
@@ -72,7 +76,7 @@ export default function Home() {
         <section className="py-16 md:py-20 px-lg bg-surface-container-low">
           <div className="max-w-container-max mx-auto">
             <div className="text-center mb-12 md:mb-16">
-              <h2 className="font-headline-lg text-headline-lg text-on-surface mb-sm">خدماتنا الجوهرية</h2>
+              <h2 className="font-headline-lg text-headline-lg text-on-surface mb-sm">{t('services.title')}</h2>
               <div className="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
             </div>
             <div className="grid md:grid-cols-3 gap-lg">
@@ -81,14 +85,14 @@ export default function Home() {
                 <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-lg group-hover:bg-primary/20 transition-colors shadow-[0_0_15px_rgba(207,189,255,0.1)] ml-auto">
                   <span className="material-symbols-outlined text-primary text-3xl md:text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>language</span>
                 </div>
-                <h3 className="font-title-md text-title-md text-on-surface mb-md text-right">تطوير المواقع</h3>
+                <h3 className="font-title-md text-title-md text-on-surface mb-md text-right">{t('services.web.title')}</h3>
                 <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed text-right">
-                  نصمم ونطور مواقع ويب تفاعلية وسريعة الاستجابة تعزز وجودك الرقمي وتوفر تجربة مستخدم استثنائية.
+                  {t('services.web.desc')}
                 </p>
                 <div className="mt-lg border-t border-white/5 pt-md text-right">
-                  <span className="font-code-label text-code-label text-secondary flex items-center justify-end gap-xs cursor-pointer">
-                    استكشف المزيد <span className="material-symbols-outlined text-sm">arrow_back</span>
-                  </span>
+                  <Link to="/work" className="font-code-label text-code-label text-secondary flex items-center justify-end gap-xs cursor-pointer">
+                    {t('services.more')} <span className="material-symbols-outlined text-sm">arrow_back</span>
+                  </Link>
                 </div>
               </div>
               {/* Service 2 */}
@@ -96,14 +100,14 @@ export default function Home() {
                 <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-secondary/10 flex items-center justify-center mb-lg group-hover:bg-secondary/20 transition-colors shadow-[0_0_15px_rgba(70,245,224,0.1)] ml-auto">
                   <span className="material-symbols-outlined text-secondary text-3xl md:text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>settings_suggest</span>
                 </div>
-                <h3 className="font-title-md text-title-md text-on-surface mb-md text-right">تطوير الأنظمة</h3>
+                <h3 className="font-title-md text-title-md text-on-surface mb-md text-right">{t('services.systems.title')}</h3>
                 <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed text-right">
-                  بناء أنظمة برمجية متطورة لإدارة الأعمال، مصممة خصيصاً لتلبية احتياجاتك التقنية والتشغيلية المعقدة.
+                  {t('services.systems.desc')}
                 </p>
                 <div className="mt-lg border-t border-white/5 pt-md text-right">
-                  <span className="font-code-label text-code-label text-secondary flex items-center justify-end gap-xs cursor-pointer">
-                    استكشف المزيد <span className="material-symbols-outlined text-sm">arrow_back</span>
-                  </span>
+                  <Link to="/work" className="font-code-label text-code-label text-secondary flex items-center justify-end gap-xs cursor-pointer">
+                    {t('services.more')} <span className="material-symbols-outlined text-sm">arrow_back</span>
+                  </Link>
                 </div>
               </div>
               {/* Service 3 */}
@@ -111,14 +115,14 @@ export default function Home() {
                 <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-tertiary/10 flex items-center justify-center mb-lg group-hover:bg-tertiary/20 transition-colors shadow-[0_0_15px_rgba(255,177,196,0.1)] ml-auto">
                   <span className="material-symbols-outlined text-tertiary text-3xl md:text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>draw</span>
                 </div>
-                <h3 className="font-title-md text-title-md text-on-surface mb-md text-right">واجهة وتجربة المستخدم</h3>
+                <h3 className="font-title-md text-title-md text-on-surface mb-md text-right">{t('services.ux.title')}</h3>
                 <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed text-right">
-                  نركز على التفاصيل الدقيقة لنخلق تجارب مستخدم مريحة وواجهات عصرية تجمع بين الجمالية والوظيفة.
+                  {t('services.ux.desc')}
                 </p>
                 <div className="mt-lg border-t border-white/5 pt-md text-right">
-                  <span className="font-code-label text-code-label text-secondary flex items-center justify-end gap-xs cursor-pointer">
-                    استكشف المزيد <span className="material-symbols-outlined text-sm">arrow_back</span>
-                  </span>
+                  <Link to="/work" className="font-code-label text-code-label text-secondary flex items-center justify-end gap-xs cursor-pointer">
+                    {t('services.more')} <span className="material-symbols-outlined text-sm">arrow_back</span>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -128,12 +132,12 @@ export default function Home() {
         {/* Portfolio Showcase */}
         <section className="py-16 md:py-20 px-lg">
           <div className="max-w-container-max mx-auto">
-            <div className="flex justify-between items-end mb-12">
-              <div>
-                <h2 className="font-headline-lg text-headline-lg text-on-surface mb-sm text-right">أبرز أعمالنا</h2>
-                <p className="font-body-sm text-body-sm text-on-surface-variant text-right">مشاريع تقنية نفخر بتنفيذها</p>
+            <div className="flex flex-row-reverse justify-between items-end mb-12">
+              <div className="text-right">
+                <h2 className="font-headline-lg text-headline-lg text-on-surface mb-sm text-right">{t('work.title')}</h2>
+                <p className="font-body-sm text-body-sm text-on-surface-variant text-right">{t('work.subtitle')}</p>
               </div>
-              <button className="text-secondary font-code-label hover:underline">عرض الكل</button>
+              <Link to="/work" className="text-secondary font-code-label hover:underline">{t('work.viewAll')}</Link>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-lg">
               {/* Project 1 */}
@@ -146,7 +150,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-lg translate-y-4 group-hover:translate-y-0 transition-transform text-right">
                   <span className="text-secondary font-code-label text-xs uppercase tracking-widest mb-2 block">FinTech Solution</span>
-                  <h4 className="font-title-md text-title-md text-white">نظام سديم المالي</h4>
+                  <h4 className="font-title-md text-title-md text-white">{t('work.projects.sadeem')}</h4>
                 </div>
               </div>
               {/* Project 2 */}
@@ -159,7 +163,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-lg translate-y-4 group-hover:translate-y-0 transition-transform text-right">
                   <span className="text-secondary font-code-label text-xs uppercase tracking-widest mb-2 block">Logistics App</span>
-                  <h4 className="font-title-md text-title-md text-white">منصة مسار للشحن</h4>
+                  <h4 className="font-title-md text-title-md text-white">{t('work.projects.masar')}</h4>
                 </div>
               </div>
               {/* Project 3 */}
@@ -172,7 +176,7 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-lg translate-y-4 group-hover:translate-y-0 transition-transform text-right">
                   <span className="text-secondary font-code-label text-xs uppercase tracking-widest mb-2 block">E-commerce</span>
-                  <h4 className="font-title-md text-title-md text-white">متجر أفق الإلكتروني</h4>
+                  <h4 className="font-title-md text-title-md text-white">{t('work.projects.ofoq')}</h4>
                 </div>
               </div>
             </div>
@@ -180,42 +184,42 @@ export default function Home() {
         </section>
 
         {/* Testimonials */}
-        <section className="py-16 md:py-20 bg-surface-container-lowest">
+        <section className="py-16 md:py-20 bg-surface-container-lowest text-right">
           <div className="max-w-container-max mx-auto">
             <div className="text-center mb-12 md:mb-16">
-              <h2 className="font-headline-lg text-headline-lg text-on-surface mb-sm">آراء شركاء النجاح</h2>
-              <p className="font-body-lg text-body-lg text-on-surface-variant">ثقة عملائنا هي سر قوتنا</p>
+              <h2 className="font-headline-lg text-headline-lg text-on-surface mb-sm">{t('testimonials.title')}</h2>
+              <p className="font-body-lg text-body-lg text-on-surface-variant">{t('testimonials.subtitle')}</p>
             </div>
             <div className="grid md:grid-cols-2 gap-lg max-w-4xl mx-auto">
               {/* Quote 1 */}
               <div className="glass-panel p-lg md:p-xl rounded-3xl relative">
                 <span className="material-symbols-outlined text-primary/20 text-5xl md:text-6xl absolute top-4 left-4" style={{ fontVariationSettings: "'FILL' 1" }}>format_quote</span>
-                <p className="font-body-lg text-body-lg text-on-surface mb-8 md:mb-xl relative z-10 italic text-right">
-                  "الاحترافية في التنفيذ والدقة في المواعيد كانت أهم ما ميز تجربتنا مع Code Zone. النظام الذي تم بناؤه تجاوز توقعاتنا من حيث السرعة والأمان."
+                <p className="font-body-lg text-body-lg text-on-surface mb-8 md:mb-xl relative z-10 italic">
+                  "{t('testimonials.q1.text')}"
                 </p>
-                <div className="flex flex-row-reverse items-center gap-md">
+                <div className="flex flex-row-reverse items-center justify-start gap-md">
                   <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-surface-container-high border border-primary/30 flex items-center justify-center overflow-hidden">
                     <span className="material-symbols-outlined text-primary">person</span>
                   </div>
                   <div className="text-right">
-                    <div className="font-title-md text-white">م. أحمد السلمي</div>
-                    <div className="font-code-label text-xs text-secondary">الرئيس التنفيذي، شركة أوتاد التقنية</div>
+                    <div className="font-title-md text-white">{t('testimonials.q1.author')}</div>
+                    <div className="font-code-label text-xs text-secondary">{t('testimonials.q1.role')}</div>
                   </div>
                 </div>
               </div>
               {/* Quote 2 */}
               <div className="glass-panel p-lg md:p-xl rounded-3xl relative">
                 <span className="material-symbols-outlined text-secondary/20 text-5xl md:text-6xl absolute top-4 left-4" style={{ fontVariationSettings: "'FILL' 1" }}>format_quote</span>
-                <p className="font-body-lg text-body-lg text-on-surface mb-8 md:mb-xl relative z-10 italic text-right">
-                  "فريق مبدع يفهم المتطلبات التقنية المعقدة ويحولها إلى واجهات سهلة الاستخدام. ساعدونا كثيراً في تحسين رحلة عملائنا الرقمية بشكل ملحوظ."
+                <p className="font-body-lg text-body-lg text-on-surface mb-8 md:mb-xl relative z-10 italic">
+                  "{t('testimonials.q2.text')}"
                 </p>
-                <div className="flex flex-row-reverse items-center gap-md">
+                <div className="flex flex-row-reverse items-center justify-start gap-md">
                   <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-surface-container-high border border-secondary/30 flex items-center justify-center overflow-hidden">
                     <span className="material-symbols-outlined text-secondary">person</span>
                   </div>
                   <div className="text-right">
-                    <div className="font-title-md text-white">د. سارة خالد</div>
-                    <div className="font-code-label text-xs text-secondary">مديرة التطوير، منصة ريادة</div>
+                    <div className="font-title-md text-white">{t('testimonials.q2.author')}</div>
+                    <div className="font-code-label text-xs text-secondary">{t('testimonials.q2.role')}</div>
                   </div>
                 </div>
               </div>
@@ -226,13 +230,13 @@ export default function Home() {
         {/* CTA Section */}
         <section className="py-16 md:py-20 px-lg">
           <div className="max-w-4xl mx-auto glass-panel p-lg md:p-xl rounded-[2rem] text-center border-2 border-primary/20 glow-border">
-            <h2 className="font-headline-lg text-headline-lg text-white mb-md">هل أنت مستعد لإطلاق مشروعك القادم؟</h2>
+            <h2 className="font-headline-lg text-headline-lg text-white mb-4 md:mb-6">{t('cta.title')}</h2>
             <p className="font-body-lg text-body-lg text-on-surface-variant mb-10">
-              دعنا نساعدك في بناء حل برمجي مبتكر يناسب طموحاتك ويحقق أهدافك التجارية.
+              {t('cta.desc')}
             </p>
-            <button className="primary-btn-gradient px-lg py-3 rounded-xl font-title-md text-white active:scale-95 duration-200">
-              تواصل معنا اليوم
-            </button>
+            <Link to="/contact" className="primary-btn-gradient px-lg py-3 rounded-xl font-title-md text-white active:scale-95 duration-200">
+              {t('cta.btn')}
+            </Link>
           </div>
         </section>
       </main>
