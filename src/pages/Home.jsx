@@ -132,7 +132,7 @@ export default function Home() {
         {/* Portfolio Showcase */}
         <section className="py-16 md:py-20 px-lg">
           <div className="max-w-container-max mx-auto">
-            <div className="flex flex-row justify-between items-center mb-12">
+            <div className="flex flex-row justify-center items-end mb-12">
               <div className="text-center">
                 <h2 className="font-headline-lg text-headline-lg text-on-surface mb-sm">{t('work.title')}</h2>
                 <p className="font-body-sm text-body-sm text-on-surface-variant">{t('work.subtitle')}</p>
