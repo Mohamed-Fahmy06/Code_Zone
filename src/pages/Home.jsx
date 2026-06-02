@@ -135,6 +135,8 @@ export default function Home() {
             <div className="flex flex-row justify-center items-end mb-12">
               <div className="text-center">
                 <h2 className="font-headline-lg text-headline-lg text-on-surface mb-sm">{t('work.title')}</h2>
+                              <div className="w-20 h-1 bg-secondary mx-auto rounded-full mb-10"></div>
+
                 <p className="font-body-sm text-body-sm text-on-surface-variant">{t('work.subtitle')}</p>
               </div>
               <Link to="/work" className="text-secondary font-code-label hover:underline">{t('work.viewAll')}</Link>
