@@ -20,38 +20,38 @@ export default function OurWork() {
     <div className="bg-surface selection:bg-secondary/30 min-h-screen">
       <Header />
       
-      <main className="pt-32 pb-24 relative">
+      <main className="pt-24 pb-16 md:pb-24 relative">
         {/* Cyber Background Elements */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-          <div className="absolute top-[10%] right-[5%] w-96 h-96 bg-primary/10 blur-[120px] rounded-full floating"></div>
-          <div className="absolute bottom-[20%] left-[5%] w-80 h-80 bg-secondary/5 blur-[100px] rounded-full floating" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-[10%] right-[5%] w-80 h-80 bg-primary/10 blur-[120px] rounded-full floating"></div>
+          <div className="absolute bottom-[20%] left-[5%] w-64 h-64 bg-secondary/5 blur-[100px] rounded-full floating" style={{ animationDelay: '2s' }}></div>
         </div>
 
         {/* Hero Section */}
-        <section className="px-lg max-w-container-max mx-auto mb-20 relative z-10 text-right">
-          <h1 className="font-display-lg text-display-lg md:text-[64px] cyber-gradient-text leading-tight mb-6">معرض أعمالنا</h1>
+        <section className="px-lg max-w-container-max mx-auto mb-16 md:mb-20 relative z-10 text-right">
+          <h1 className="font-display-lg text-[32px] md:text-[48px] cyber-gradient-text leading-tight mb-4">معرض أعمالنا</h1>
           <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl ml-auto leading-relaxed">
             نحن نؤمن بأن كل سطر برمجي هو قطعة فنية. استكشف مجموعة من مشاريعنا التقنية التي تجمع بين الكفاءة الهندسية والتصميم العصري المبتكر.
           </p>
         </section>
 
         {/* Filter System */}
-        <section className="px-lg max-w-container-max mx-auto mb-12 relative z-10">
-          <div className="flex flex-wrap flex-row-reverse gap-4 border-b border-white/10 pb-6">
+        <section className="px-lg max-w-container-max mx-auto mb-10 md:mb-12 relative z-10">
+          <div className="flex flex-wrap flex-row-reverse gap-3 md:gap-4 border-b border-white/10 pb-6">
             <button 
-              className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${filter === 'all' ? 'bg-secondary/10 border-secondary text-secondary shadow-[0_0_15px_rgba(70,245,224,0.2)] border' : 'bg-white/5 border border-white/5 text-on-surface-variant hover:text-secondary'}`}
+              className={`px-5 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all ${filter === 'all' ? 'bg-secondary/10 border-secondary text-secondary shadow-[0_0_15px_rgba(70,245,224,0.2)] border' : 'bg-white/5 border border-white/5 text-on-surface-variant hover:text-secondary'}`}
               onClick={() => setFilter('all')}
             >الكل</button>
             <button 
-              className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${filter === 'web' ? 'bg-secondary/10 border-secondary text-secondary shadow-[0_0_15px_rgba(70,245,224,0.2)] border' : 'bg-white/5 border border-white/5 text-on-surface-variant hover:text-secondary'}`}
+              className={`px-5 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all ${filter === 'web' ? 'bg-secondary/10 border-secondary text-secondary shadow-[0_0_15px_rgba(70,245,224,0.2)] border' : 'bg-white/5 border border-white/5 text-on-surface-variant hover:text-secondary'}`}
               onClick={() => setFilter('web')}
             >تطبيقات الويب</button>
             <button 
-              className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${filter === 'ecommerce' ? 'bg-secondary/10 border-secondary text-secondary shadow-[0_0_15px_rgba(70,245,224,0.2)] border' : 'bg-white/5 border border-white/5 text-on-surface-variant hover:text-secondary'}`}
+              className={`px-5 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all ${filter === 'ecommerce' ? 'bg-secondary/10 border-secondary text-secondary shadow-[0_0_15px_rgba(70,245,224,0.2)] border' : 'bg-white/5 border border-white/5 text-on-surface-variant hover:text-secondary'}`}
               onClick={() => setFilter('ecommerce')}
             >المتاجر الإلكترونية</button>
             <button 
-              className={`px-6 py-2 rounded-full text-sm font-semibold transition-all ${filter === 'systems' ? 'bg-secondary/10 border-secondary text-secondary shadow-[0_0_15px_rgba(70,245,224,0.2)] border' : 'bg-white/5 border border-white/5 text-on-surface-variant hover:text-secondary'}`}
+              className={`px-5 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all ${filter === 'systems' ? 'bg-secondary/10 border-secondary text-secondary shadow-[0_0_15px_rgba(70,245,224,0.2)] border' : 'bg-white/5 border border-white/5 text-on-surface-variant hover:text-secondary'}`}
               onClick={() => setFilter('systems')}
             >أنظمة الإدارة</button>
           </div>
@@ -59,32 +59,32 @@ export default function OurWork() {
 
         {/* Projects Grid */}
         <section className="px-lg max-w-container-max mx-auto relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {filteredProjects.map((project) => (
               <article key={project.id} className="glass-card rounded-2xl overflow-hidden group text-right">
-                <div className="flex items-center gap-1.5 px-4 py-3 bg-white/5 border-b border-white/5">
+                <div className="flex items-center gap-1.5 px-4 py-2.5 bg-white/5 border-b border-white/5">
                   <div className="w-2 h-2 rounded-full bg-[#ff5f56]"></div>
                   <div className="w-2 h-2 rounded-full bg-[#ffbd2e]"></div>
                   <div className="w-2 h-2 rounded-full bg-[#27c93f]"></div>
                 </div>
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-56 md:h-64 overflow-hidden">
                   <img alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" src={project.img} />
                   <div className="absolute inset-0 bg-surface-container-lowest/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-6 text-center">
                     <div>
-                      <p className="text-primary font-code-label text-code-label mb-2 tracking-widest uppercase">{project.tech}</p>
+                      <p className="text-primary font-code-label text-[10px] md:text-code-label mb-2 tracking-widest uppercase">{project.tech}</p>
                       <p className="font-body-sm text-on-surface">{project.desc}</p>
                     </div>
                   </div>
                 </div>
-                <div className="p-6">
+                <div className="p-5 md:p-6">
                   <div className="flex justify-between items-center mb-4">
                     <h3 className="font-title-md text-title-md text-white">{project.title}</h3>
-                    <span className="material-symbols-outlined text-secondary">{project.icon}</span>
+                    <span className="material-symbols-outlined text-secondary text-xl md:text-2xl">{project.icon}</span>
                   </div>
                   <div className="flex flex-row-reverse gap-3">
-                    <div className="w-8 h-8 rounded bg-white/5 flex items-center justify-center"><span className="material-symbols-outlined text-sm text-primary/60">terminal</span></div>
-                    <div className="w-8 h-8 rounded bg-white/5 flex items-center justify-center"><span className="material-symbols-outlined text-sm text-primary/60">database</span></div>
-                    <div className="w-8 h-8 rounded bg-white/5 flex items-center justify-center"><span className="material-symbols-outlined text-sm text-primary/60">cloud</span></div>
+                    <div className="w-7 h-7 md:w-8 md:h-8 rounded bg-white/5 flex items-center justify-center"><span className="material-symbols-outlined text-xs md:text-sm text-primary/60">terminal</span></div>
+                    <div className="w-7 h-7 md:w-8 md:h-8 rounded bg-white/5 flex items-center justify-center"><span className="material-symbols-outlined text-xs md:text-sm text-primary/60">database</span></div>
+                    <div className="w-7 h-7 md:w-8 md:h-8 rounded bg-white/5 flex items-center justify-center"><span className="material-symbols-outlined text-xs md:text-sm text-primary/60">cloud</span></div>
                   </div>
                 </div>
               </article>
@@ -93,13 +93,13 @@ export default function OurWork() {
         </section>
 
         {/* CTA Section */}
-        <section className="mt-24 px-lg max-w-container-max mx-auto text-center relative z-10">
-          <div className="max-w-4xl mx-auto glass-card p-xl rounded-[2rem] text-center border-2 border-primary/20">
-            <h2 className="font-headline-lg text-headline-lg text-white mb-6">هل لديك فكرة لمشروعك القادم؟</h2>
-            <p className="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-2xl mx-auto">
+        <section className="mt-16 md:mt-24 px-lg max-w-container-max mx-auto text-center relative z-10">
+          <div className="max-w-4xl mx-auto glass-card p-lg md:p-xl rounded-[2rem] text-center border-2 border-primary/20">
+            <h2 className="font-headline-lg text-headline-lg text-white mb-4 md:mb-6">هل لديك فكرة لمشروعك القادم؟</h2>
+            <p className="font-body-lg text-body-lg text-on-surface-variant mb-8 md:mb-10 max-w-2xl mx-auto">
               دعنا نحول رؤيتك إلى واقع رقمي ملموس باستخدام أحدث التقنيات العالمية.
             </p>
-            <button className="primary-btn-gradient px-xl py-lg rounded-xl font-title-md text-white active:scale-95 duration-200">ابدأ مشروعك الآن</button>
+            <button className="primary-btn-gradient px-lg py-3 rounded-xl font-title-md text-white active:scale-95 duration-200">ابدأ مشروعك الآن</button>
           </div>
         </section>
       </main>

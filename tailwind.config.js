@@ -63,14 +63,14 @@ export default {
               "full": "9999px"
       },
       "spacing": {
-              "container-max": "1440px",
+              "container-max": "1280px",
               "xs": "4px",
-              "gutter": "24px",
-              "md": "16px",
+              "gutter": "20px",
+              "md": "12px",
               "unit": "4px",
-              "xl": "48px",
-              "sm": "8px",
-              "lg": "24px"
+              "xl": "40px",
+              "sm": "6px",
+              "lg": "20px"
       },
       "fontFamily": {
               "headline-lg": ["Inter", "sans-serif"],
@@ -82,13 +82,13 @@ export default {
               "title-md": ["Inter", "sans-serif"]
       },
       "fontSize": {
-              "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-              "code-label": ["13px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}],
-              "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
-              "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "700"}],
-              "body-lg": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
-              "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
-              "title-md": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}]
+              "headline-lg": ["28px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+              "code-label": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.04em", "fontWeight": "500"}],
+              "display-lg": ["42px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+              "headline-lg-mobile": ["22px", {"lineHeight": "1.2", "fontWeight": "700"}],
+              "body-lg": ["15px", {"lineHeight": "1.6", "fontWeight": "400"}],
+              "body-sm": ["13px", {"lineHeight": "1.5", "fontWeight": "400"}],
+              "title-md": ["18px", {"lineHeight": "1.4", "fontWeight": "600"}]
       }
     },
   },

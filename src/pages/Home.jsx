@@ -20,36 +20,36 @@ export default function Home() {
     <div className="bg-surface selection:bg-secondary/30 min-h-screen">
       <Header />
       
-      <main className="pt-20">
+      <main className="pt-16">
         {/* Hero Section */}
-        <section className="relative min-h-[921px] flex items-center overflow-hidden px-lg">
+        <section className="relative min-h-[70vh] md:min-h-[85vh] flex items-center overflow-hidden px-lg">
           <div className="absolute inset-0 z-0">
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 blur-[120px] rounded-full"></div>
             <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 blur-[120px] rounded-full"></div>
           </div>
-          <div className="max-w-container-max mx-auto w-full grid md:grid-cols-2 gap-xl items-center relative z-10">
-            <div className="text-right space-y-lg">
+          <div className="max-w-container-max mx-auto w-full grid md:grid-cols-2 gap-lg md:gap-xl items-center relative z-10">
+            <div className="text-right space-y-md md:space-y-lg">
               <div className="inline-flex items-center gap-xs px-md py-xs rounded-full bg-primary/10 border border-primary/20 text-primary font-code-label text-code-label">
                 <span className="pulse-animation w-2 h-2 rounded-full bg-primary"></span>
                 مستقبل البرمجيات الآن
               </div>
-              <h1 className="font-display-lg text-display-lg md:text-[64px] cyber-gradient-text leading-tight">
+              <h1 className="font-display-lg text-[36px] md:text-[52px] cyber-gradient-text leading-tight">
                 نحول رؤيتك إلى واقع رقمي متكامل
               </h1>
               <p className="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
                 نحن في Code Zone نجمع بين الابتكار التقني والتصميم الإبداعي لنبني أنظمة برمجية ذكية تدفع عملك نحو المستقبل الرقمي بكل قوة واحترافية.
               </p>
               <div className="flex items-center gap-md pt-md">
-                <button className="primary-btn-gradient px-xl py-md rounded-xl font-title-md text-white active:scale-95 duration-200">
+                <button className="primary-btn-gradient px-lg py-3 rounded-xl font-title-md text-white active:scale-95 duration-200">
                   ابدأ مشروعك
                 </button>
-                <button className="secondary-btn-border px-xl py-md rounded-xl font-title-md text-secondary active:scale-95 duration-200">
+                <button className="secondary-btn-border px-lg py-3 rounded-xl font-title-md text-secondary active:scale-95 duration-200">
                   شاهد أعمالنا
                 </button>
               </div>
             </div>
             <div className="relative flex justify-center items-center">
-              <div className="floating relative w-full aspect-square max-w-lg">
+              <div className="floating relative w-full aspect-square max-w-md">
                 <div className="absolute inset-0 glass-panel rounded-3xl rotate-6 scale-95 opacity-50"></div>
                 <div className="absolute inset-0 glass-panel rounded-3xl -rotate-3 scale-100 flex items-center justify-center p-lg overflow-hidden border border-white/5">
                   <img 
@@ -69,54 +69,54 @@ export default function Home() {
         </section>
 
         {/* Features Section */}
-        <section className="py-xl px-lg bg-surface-container-low">
+        <section className="py-16 md:py-20 px-lg bg-surface-container-low">
           <div className="max-w-container-max mx-auto">
-            <div className="text-center mb-xl">
+            <div className="text-center mb-12 md:mb-16">
               <h2 className="font-headline-lg text-headline-lg text-on-surface mb-sm">خدماتنا الجوهرية</h2>
               <div className="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
             </div>
             <div className="grid md:grid-cols-3 gap-lg">
               {/* Service 1 */}
-              <div className="glass-panel p-xl rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group">
-                <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-lg group-hover:bg-primary/20 transition-colors shadow-[0_0_15px_rgba(207,189,255,0.1)]">
-                  <span className="material-symbols-outlined text-primary text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>language</span>
+              <div className="glass-panel p-lg md:p-xl rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group">
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-lg group-hover:bg-primary/20 transition-colors shadow-[0_0_15px_rgba(207,189,255,0.1)] ml-auto">
+                  <span className="material-symbols-outlined text-primary text-3xl md:text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>language</span>
                 </div>
-                <h3 className="font-title-md text-title-md text-on-surface mb-md">تطوير المواقع</h3>
-                <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                <h3 className="font-title-md text-title-md text-on-surface mb-md text-right">تطوير المواقع</h3>
+                <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed text-right">
                   نصمم ونطور مواقع ويب تفاعلية وسريعة الاستجابة تعزز وجودك الرقمي وتوفر تجربة مستخدم استثنائية.
                 </p>
-                <div className="mt-lg border-t border-white/5 pt-md">
-                  <span className="font-code-label text-code-label text-secondary flex items-center gap-xs">
+                <div className="mt-lg border-t border-white/5 pt-md text-right">
+                  <span className="font-code-label text-code-label text-secondary flex items-center justify-end gap-xs cursor-pointer">
                     استكشف المزيد <span className="material-symbols-outlined text-sm">arrow_back</span>
                   </span>
                 </div>
               </div>
               {/* Service 2 */}
-              <div className="glass-panel p-xl rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group border-t-2 border-t-secondary/30">
-                <div className="w-16 h-16 rounded-xl bg-secondary/10 flex items-center justify-center mb-lg group-hover:bg-secondary/20 transition-colors shadow-[0_0_15px_rgba(70,245,224,0.1)]">
-                  <span className="material-symbols-outlined text-secondary text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>settings_suggest</span>
+              <div className="glass-panel p-lg md:p-xl rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group border-t-2 border-t-secondary/30">
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-secondary/10 flex items-center justify-center mb-lg group-hover:bg-secondary/20 transition-colors shadow-[0_0_15px_rgba(70,245,224,0.1)] ml-auto">
+                  <span className="material-symbols-outlined text-secondary text-3xl md:text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>settings_suggest</span>
                 </div>
-                <h3 className="font-title-md text-title-md text-on-surface mb-md">تطوير الأنظمة</h3>
-                <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                <h3 className="font-title-md text-title-md text-on-surface mb-md text-right">تطوير الأنظمة</h3>
+                <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed text-right">
                   بناء أنظمة برمجية متطورة لإدارة الأعمال، مصممة خصيصاً لتلبية احتياجاتك التقنية والتشغيلية المعقدة.
                 </p>
-                <div className="mt-lg border-t border-white/5 pt-md">
-                  <span className="font-code-label text-code-label text-secondary flex items-center gap-xs">
+                <div className="mt-lg border-t border-white/5 pt-md text-right">
+                  <span className="font-code-label text-code-label text-secondary flex items-center justify-end gap-xs cursor-pointer">
                     استكشف المزيد <span className="material-symbols-outlined text-sm">arrow_back</span>
                   </span>
                 </div>
               </div>
               {/* Service 3 */}
-              <div className="glass-panel p-xl rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group">
-                <div className="w-16 h-16 rounded-xl bg-tertiary/10 flex items-center justify-center mb-lg group-hover:bg-tertiary/20 transition-colors shadow-[0_0_15px_rgba(255,177,196,0.1)]">
-                  <span className="material-symbols-outlined text-tertiary text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>draw</span>
+              <div className="glass-panel p-lg md:p-xl rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group">
+                <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-tertiary/10 flex items-center justify-center mb-lg group-hover:bg-tertiary/20 transition-colors shadow-[0_0_15px_rgba(255,177,196,0.1)] ml-auto">
+                  <span className="material-symbols-outlined text-tertiary text-3xl md:text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>draw</span>
                 </div>
-                <h3 className="font-title-md text-title-md text-on-surface mb-md">واجهة وتجربة المستخدم</h3>
-                <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                <h3 className="font-title-md text-title-md text-on-surface mb-md text-right">واجهة وتجربة المستخدم</h3>
+                <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed text-right">
                   نركز على التفاصيل الدقيقة لنخلق تجارب مستخدم مريحة وواجهات عصرية تجمع بين الجمالية والوظيفة.
                 </p>
-                <div className="mt-lg border-t border-white/5 pt-md">
-                  <span className="font-code-label text-code-label text-secondary flex items-center gap-xs">
+                <div className="mt-lg border-t border-white/5 pt-md text-right">
+                  <span className="font-code-label text-code-label text-secondary flex items-center justify-end gap-xs cursor-pointer">
                     استكشف المزيد <span className="material-symbols-outlined text-sm">arrow_back</span>
                   </span>
                 </div>
@@ -126,9 +126,9 @@ export default function Home() {
         </section>
 
         {/* Portfolio Showcase */}
-        <section className="py-xl px-lg">
+        <section className="py-16 md:py-20 px-lg">
           <div className="max-w-container-max mx-auto">
-            <div className="flex justify-between items-end mb-xl">
+            <div className="flex justify-between items-end mb-12">
               <div>
                 <h2 className="font-headline-lg text-headline-lg text-on-surface mb-sm text-right">أبرز أعمالنا</h2>
                 <p className="font-body-sm text-body-sm text-on-surface-variant text-right">مشاريع تقنية نفخر بتنفيذها</p>
@@ -180,21 +180,21 @@ export default function Home() {
         </section>
 
         {/* Testimonials */}
-        <section className="py-xl px-lg bg-surface-container-lowest">
+        <section className="py-16 md:py-20 bg-surface-container-lowest">
           <div className="max-w-container-max mx-auto">
-            <div className="text-center mb-xl">
+            <div className="text-center mb-12 md:mb-16">
               <h2 className="font-headline-lg text-headline-lg text-on-surface mb-sm">آراء شركاء النجاح</h2>
               <p className="font-body-lg text-body-lg text-on-surface-variant">ثقة عملائنا هي سر قوتنا</p>
             </div>
             <div className="grid md:grid-cols-2 gap-lg max-w-4xl mx-auto">
               {/* Quote 1 */}
-              <div className="glass-panel p-xl rounded-3xl relative">
-                <span className="material-symbols-outlined text-primary/20 text-6xl absolute top-4 left-4" style={{ fontVariationSettings: "'FILL' 1" }}>format_quote</span>
-                <p className="font-body-lg text-body-lg text-on-surface mb-xl relative z-10 italic">
+              <div className="glass-panel p-lg md:p-xl rounded-3xl relative">
+                <span className="material-symbols-outlined text-primary/20 text-5xl md:text-6xl absolute top-4 left-4" style={{ fontVariationSettings: "'FILL' 1" }}>format_quote</span>
+                <p className="font-body-lg text-body-lg text-on-surface mb-8 md:mb-xl relative z-10 italic text-right">
                   "الاحترافية في التنفيذ والدقة في المواعيد كانت أهم ما ميز تجربتنا مع Code Zone. النظام الذي تم بناؤه تجاوز توقعاتنا من حيث السرعة والأمان."
                 </p>
-                <div className="flex items-center gap-md">
-                  <div className="w-12 h-12 rounded-full bg-surface-container-high border border-primary/30 flex items-center justify-center overflow-hidden">
+                <div className="flex flex-row-reverse items-center gap-md">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-surface-container-high border border-primary/30 flex items-center justify-center overflow-hidden">
                     <span className="material-symbols-outlined text-primary">person</span>
                   </div>
                   <div className="text-right">
@@ -204,13 +204,13 @@ export default function Home() {
                 </div>
               </div>
               {/* Quote 2 */}
-              <div className="glass-panel p-xl rounded-3xl relative">
-                <span className="material-symbols-outlined text-secondary/20 text-6xl absolute top-4 left-4" style={{ fontVariationSettings: "'FILL' 1" }}>format_quote</span>
-                <p className="font-body-lg text-body-lg text-on-surface mb-xl relative z-10 italic">
+              <div className="glass-panel p-lg md:p-xl rounded-3xl relative">
+                <span className="material-symbols-outlined text-secondary/20 text-5xl md:text-6xl absolute top-4 left-4" style={{ fontVariationSettings: "'FILL' 1" }}>format_quote</span>
+                <p className="font-body-lg text-body-lg text-on-surface mb-8 md:mb-xl relative z-10 italic text-right">
                   "فريق مبدع يفهم المتطلبات التقنية المعقدة ويحولها إلى واجهات سهلة الاستخدام. ساعدونا كثيراً في تحسين رحلة عملائنا الرقمية بشكل ملحوظ."
                 </p>
-                <div className="flex items-center gap-md">
-                  <div className="w-12 h-12 rounded-full bg-surface-container-high border border-secondary/30 flex items-center justify-center overflow-hidden">
+                <div className="flex flex-row-reverse items-center gap-md">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-surface-container-high border border-secondary/30 flex items-center justify-center overflow-hidden">
                     <span className="material-symbols-outlined text-secondary">person</span>
                   </div>
                   <div className="text-right">
@@ -224,13 +224,13 @@ export default function Home() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-xl px-lg">
-          <div className="max-w-4xl mx-auto glass-panel p-xl rounded-[2rem] text-center border-2 border-primary/20 glow-border">
+        <section className="py-16 md:py-20 px-lg">
+          <div className="max-w-4xl mx-auto glass-panel p-lg md:p-xl rounded-[2rem] text-center border-2 border-primary/20 glow-border">
             <h2 className="font-headline-lg text-headline-lg text-white mb-md">هل أنت مستعد لإطلاق مشروعك القادم؟</h2>
-            <p className="font-body-lg text-body-lg text-on-surface-variant mb-xl">
+            <p className="font-body-lg text-body-lg text-on-surface-variant mb-10">
               دعنا نساعدك في بناء حل برمجي مبتكر يناسب طموحاتك ويحقق أهدافك التجارية.
             </p>
-            <button className="primary-btn-gradient px-xl py-lg rounded-xl font-title-md text-white active:scale-95 duration-200">
+            <button className="primary-btn-gradient px-lg py-3 rounded-xl font-title-md text-white active:scale-95 duration-200">
               تواصل معنا اليوم
             </button>
           </div>
