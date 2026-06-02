@@ -22,17 +22,17 @@ export default function Footer() {
         <div>
           <h4 className="font-title-md text-base md:text-title-md text-white mb-6">{t('footer.links')}</h4>
           <ul className="space-y-3">
-            <li><Link className="font-body-sm text-sm text-on-surface-variant hover:text-primary transition-all hover:translate-x-[-4px] inline-block" to="/about">{t('footer.about')}</Link></li>
-            <li><Link className="font-body-sm text-sm text-on-surface-variant hover:text-primary transition-all hover:translate-x-[-4px] inline-block" to="/work">{t('footer.services')}</Link></li>
-            <li><a className="font-body-sm text-sm text-on-surface-variant hover:text-primary transition-all hover:translate-x-[-4px] inline-block" href="#">{t('footer.privacy')}</a></li>
+            <li><Link className="font-body-sm text-sm text-on-surface-variant hover:text-primary transition-all inline-block" to="/about">{t('footer.about')}</Link></li>
+            <li><Link className="font-body-sm text-sm text-on-surface-variant hover:text-primary transition-all inline-block" to="/work">{t('footer.services')}</Link></li>
+            <li><a className="font-body-sm text-sm text-on-surface-variant hover:text-primary transition-all inline-block" href="#">{t('footer.privacy')}</a></li>
           </ul>
         </div>
         <div>
           <h4 className="font-title-md text-base md:text-title-md text-white mb-6">{t('footer.support')}</h4>
           <ul className="space-y-3">
-            <li><a className="font-body-sm text-sm text-on-surface-variant hover:text-primary transition-all hover:translate-x-[-4px] inline-block" href="#">{t('footer.faq')}</a></li>
-            <li><a className="font-body-sm text-sm text-on-surface-variant hover:text-primary transition-all hover:translate-x-[-4px] inline-block" href="#">{t('footer.tickets')}</a></li>
-            <li><Link className="font-body-sm text-sm text-on-surface-variant hover:text-primary transition-all hover:translate-x-[-4px] inline-block" to="/contact">{t('footer.direct')}</Link></li>
+            <li><Link className="font-body-sm text-sm text-on-surface-variant hover:text-primary transition-all inline-block" to="/faq">{t('footer.faq')}</Link></li>
+            <li><Link className="font-body-sm text-sm text-on-surface-variant hover:text-primary transition-all inline-block" to="/support">{t('footer.tickets')}</Link></li>
+            <li><Link className="font-body-sm text-sm text-on-surface-variant hover:text-primary transition-all inline-block" to="/contact">{t('footer.direct')}</Link></li>
           </ul>
         </div>
         <div>

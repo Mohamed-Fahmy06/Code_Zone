@@ -100,6 +100,41 @@ export const translations = {
         other: "أخرى",
       }
     },
+    faq: {
+      title: "الأسئلة الشائعة",
+      subtitle: "كل ما تحتاج معرفته عن خدماتنا",
+      q1: {
+        q: "ما هي كود زون؟",
+        a: "نحن وكالة تقنية متخصصة في بناء الحلول البرمجية المبتكرة والتحول الرقمي للشركات."
+      },
+      q2: {
+        q: "كم يستغرق تنفيذ المشروع؟",
+        a: "يعتمد ذلك على حجم المشروع وتعقيده، ولكن عادة ما تتراوح المشاريع المتوسطة بين ٤ إلى ١٢ أسبوعاً."
+      },
+      q3: {
+        q: "هل تقدمون دعماً فنياً بعد إطلاق المشروع؟",
+        a: "نعم، نقدم خطط دعم وصيانة مستمرة لضمان استقرار وأمان مشروعك التقني."
+      },
+      q4: {
+        q: "كيف يمكنني البدء بمشروعي؟",
+        a: "يمكنك التواصل معنا عبر صفحة 'اتصل بنا' أو الضغط على زر 'ابدأ مشروعك' لتحديد موعد استشارة أولية."
+      }
+    },
+    support: {
+      title: "مركز الدعم الفني",
+      subtitle: "نحن هنا لمساعدتك في أي وقت",
+      ticketTitle: "فتح تذكرة دعم",
+      ticketDesc: "أرسل لنا تفاصيل المشكلة وسيقوم فريقنا بالرد عليك في أقرب وقت.",
+      callTitle: "اتصال مباشر",
+      chatTitle: "المحادثة الفورية",
+      status: "حالة النظام: نشط",
+      subject: "الموضوع",
+      priority: "الأولوية",
+      pLow: "منخفضة",
+      pMed: "متوسطة",
+      pHigh: "عالية",
+      submit: "إرسال التذكرة"
+    },
     testimonials: {
       title: "آراء شركاء النجاح",
       subtitle: "ثقة عملائنا هي سر قوتنا",
@@ -233,6 +268,41 @@ export const translations = {
         ai: "AI Services",
         other: "Other",
       }
+    },
+    faq: {
+      title: "Frequently Asked Questions",
+      subtitle: "Everything you need to know about our services",
+      q1: {
+        q: "What is Code Zone?",
+        a: "We are a technical agency specialized in building innovative software solutions and digital transformation for companies."
+      },
+      q2: {
+        q: "How long does a project take?",
+        a: "It depends on the project size and complexity, but average projects usually range from 4 to 12 weeks."
+      },
+      q3: {
+        q: "Do you offer post-launch support?",
+        a: "Yes, we offer ongoing support and maintenance plans to ensure the stability and security of your technical project."
+      },
+      q4: {
+        q: "How can I start my project?",
+        a: "You can contact us via the 'Contact Us' page or click the 'Start Project' button to schedule an initial consultation."
+      }
+    },
+    support: {
+      title: "Support Center",
+      subtitle: "We are here to help you anytime",
+      ticketTitle: "Open a Support Ticket",
+      ticketDesc: "Send us the problem details and our team will get back to you as soon as possible.",
+      callTitle: "Direct Call",
+      chatTitle: "Live Chat",
+      status: "System Status: Active",
+      subject: "Subject",
+      priority: "Priority",
+      pLow: "Low",
+      pMed: "Medium",
+      pHigh: "High",
+      submit: "Submit Ticket"
     },
     testimonials: {
       title: "Success Partners' Reviews",

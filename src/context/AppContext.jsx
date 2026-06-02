@@ -5,36 +5,24 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const [language, setLanguage] = useState(localStorage.getItem('language') || 'ar');
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
 
   useEffect(() => {
     localStorage.setItem('language', language);
     document.dir = language === 'ar' ? 'rtl' : 'ltr';
     document.documentElement.lang = language;
+    // Always ensure dark mode is active for the Cyber aesthetic
+    document.documentElement.classList.add('dark');
   }, [language]);
-
-  useEffect(() => {
-    localStorage.setItem('theme', theme);
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [theme]);
 
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === 'ar' ? 'en' : 'ar'));
-  };
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
 
   const t = (path) => {
     const keys = path.split('.');
     let result = translations[language];
     for (const key of keys) {
-      if (result[key]) {
+      if (result && result[key]) {
         result = result[key];
       } else {
         return path;
@@ -44,7 +32,7 @@ export const AppProvider = ({ children }) => {
   };
 
   return (
-    <AppContext.Provider value={{ language, theme, toggleLanguage, toggleTheme, t }}>
+    <AppContext.Provider value={{ language, toggleLanguage, t }}>
       {children}
     </AppContext.Provider>
   );
