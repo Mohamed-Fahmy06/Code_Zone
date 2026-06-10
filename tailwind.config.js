@@ -73,13 +73,16 @@ export default {
               "lg": "20px"
       },
       "fontFamily": {
-              "headline-lg": ["Inter", "sans-serif"],
+              "changa": ["Changa", "sans-serif"],
+              "lemonada": ["Lemonada", "cursive"],
+              "readex": ["Readex Pro", "sans-serif"],
+              "headline-lg": ["Readex Pro", "sans-serif"],
               "code-label": ["JetBrains Mono", "monospace"],
-              "display-lg": ["Inter", "sans-serif"],
-              "headline-lg-mobile": ["Inter", "sans-serif"],
-              "body-lg": ["Inter", "sans-serif"],
-              "body-sm": ["Inter", "sans-serif"],
-              "title-md": ["Inter", "sans-serif"]
+              "display-lg": ["Changa", "sans-serif"],
+              "headline-lg-mobile": ["Readex Pro", "sans-serif"],
+              "body-lg": ["Readex Pro", "sans-serif"],
+              "body-sm": ["Readex Pro", "sans-serif"],
+              "title-md": ["Readex Pro", "sans-serif"]
       },
       "fontSize": {
               "headline-lg": ["28px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],

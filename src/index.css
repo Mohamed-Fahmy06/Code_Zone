@@ -47,7 +47,7 @@
   body {
     @apply bg-surface text-on-surface transition-colors duration-300;
     scroll-behavior: smooth;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Readex Pro', sans-serif;
     overflow-x: hidden;
   }
   
