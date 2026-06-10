@@ -4,11 +4,19 @@ import './LoadingIntro.css';
 const LoadingIntro = () => {
   return (
     <div className="intro-container">
-      <div className="intro-screen">
+      {/* Background Atmosphere */}
+      <div className="cyber-grid"></div>
+      <div className="aura-glow"></div>
+      
+      {/* Portal Container */}
+      <div className="intro-screen portal-frame">
+        <div className="light-streak"></div>
         <div className="intro-content">
           <h1 className="intro-text">Code Zone</h1>
           <div className="progress-bar-container">
-            <div className="progress-bar-fill"></div>
+            <div className="progress-bar-fill">
+              <div className="comet-head"></div>
+            </div>
           </div>
         </div>
       </div>

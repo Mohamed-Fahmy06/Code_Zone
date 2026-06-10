@@ -13,15 +13,15 @@ function App() {
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
-    // Start showing main content at 4 seconds (when intro starts fading)
+    // Start showing main content as the jump transition begins
     const contentTimer = setTimeout(() => {
       setShowContent(true);
-    }, 4000);
+    }, 4200);
 
-    // Completely remove intro from DOM after fade-out finishes
+    // Completely remove intro from DOM after the jump finishes
     const introTimer = setTimeout(() => {
       setShowIntro(false);
-    }, 4700);
+    }, 5000);
 
     return () => {
       clearTimeout(contentTimer);
