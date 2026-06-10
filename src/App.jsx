@@ -13,15 +13,15 @@ function App() {
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
-    // Start showing main content as the jump transition begins
+    // Start crystallizing main content slightly before intro fully dissolves
     const contentTimer = setTimeout(() => {
       setShowContent(true);
-    }, 4200);
+    }, 4000);
 
-    // Completely remove intro from DOM after the jump finishes
+    // Completely remove intro after it finishes the 800ms dissolve (4.2s + 0.8s)
     const introTimer = setTimeout(() => {
       setShowIntro(false);
-    }, 5000);
+    }, 5200);
 
     return () => {
       clearTimeout(contentTimer);
