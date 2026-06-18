@@ -1,18 +1,18 @@
-import React, { useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import './LoadingIntro.css';
 
 const LoadingIntro = () => {
-  // Generate 20 random particles with memoization for stability
-  const particles = useMemo(() => {
-    return Array.from({ length: 20 }).map((_, i) => ({
+  // Generate 20 random particles once on initialization
+  const [particles] = useState(() => 
+    Array.from({ length: 20 }).map((_, i) => ({
       id: i,
       left: `${Math.random() * 100}%`,
       top: `${Math.random() * 100}%`,
       delay: `${Math.random() * 5}s`,
       duration: `${10 + Math.random() * 20}s`,
       size: `${1 + Math.random() * 3}px`,
-    }));
-  }, []);
+    }))
+  );
 
   return (
     <div className="intro-container">
