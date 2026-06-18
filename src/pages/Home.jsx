@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -6,222 +6,300 @@ import { useAppContext } from '../context/AppContext';
 
 export default function Home() {
   const { t, language } = useAppContext();
+  const threeContainerRef = useRef(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
+    // --- 3D Code Ring Element (Hero) ---
+    if (!threeContainerRef.current || !window.THREE) return;
+
+    const container = threeContainerRef.current;
+    const width = container.clientWidth || window.innerWidth;
+    const height = container.clientHeight || window.innerHeight;
+
+    const scene = new window.THREE.Scene();
+    const camera = new window.THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    const renderer = new window.THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    container.appendChild(renderer.domElement);
+
+    const group = new window.THREE.Group();
+    scene.add(group);
+
+    const geometry = new window.THREE.TorusGeometry(3.5, 0.02, 16, 120);
+    const material = new window.THREE.PointsMaterial({
+        color: 0x00d1ff,
+        size: 0.04,
+        transparent: true,
+        opacity: 0.9,
+        blending: window.THREE.AdditiveBlending
+    });
+
+    const points = new window.THREE.Points(geometry, material);
+    group.add(points);
+
+    const innerGeometry = new window.THREE.TorusGeometry(3.5, 0.4, 32, 200);
+    const innerMaterial = new window.THREE.PointsMaterial({
+        color: 0xF2E3D2,
+        size: 0.02,
+        transparent: true,
+        opacity: 0.4,
+        blending: window.THREE.AdditiveBlending
+    });
+    const innerPoints = new window.THREE.Points(innerGeometry, innerMaterial);
+    group.add(innerPoints);
+
+    camera.position.z = 8;
+
+    let animationFrameId;
+    function animate() {
+        animationFrameId = requestAnimationFrame(animate);
+        group.rotation.x += 0.003;
+        group.rotation.y += 0.007;
+        group.rotation.z += 0.002;
+        const scale = 1 + Math.sin(Date.now() * 0.001) * 0.05;
+        group.scale.set(scale, scale, scale);
+        renderer.render(scene, camera);
+    }
+    animate();
+
+    const handleResize = () => {
+        const newWidth = container.clientWidth || window.innerWidth;
+        const newHeight = container.clientHeight || window.innerHeight;
+        camera.aspect = newWidth / newHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(newWidth, newHeight);
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+        cancelAnimationFrame(animationFrameId);
+        window.removeEventListener('resize', handleResize);
+        if (container.contains(renderer.domElement)) {
+            container.removeChild(renderer.domElement);
+        }
+    };
+  }, []);
+
+  useEffect(() => {
+    const heroCard = document.querySelector('.hero-3d-container');
     const handleMouseMove = (e) => {
-      const glow = document.querySelector('.glow-effect');
-      if (glow) {
-        const x = e.clientX;
-        const y = e.clientY;
-        glow.style.transform = `translate(${x}px, ${y}px)`;
-      }
+        if (window.innerWidth < 768 || !heroCard) return;
+        const x = (window.innerWidth / 2 - e.pageX) / 60;
+        const y = (window.innerHeight / 2 - e.pageY) / 60;
+        heroCard.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
     };
     document.addEventListener('mousemove', handleMouseMove);
     return () => document.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   return (
-    <div className="bg-surface selection:bg-secondary/30 min-h-screen">
+    <div className="font-body-md text-body-md bg-background min-h-screen text-on-surface">
       <Header />
       
-      <main className="pt-16">
+      <main className="pt-20">
         {/* Hero Section */}
-        <section className="relative min-h-[70vh] md:min-h-[85vh] flex items-center overflow-hidden px-lg">
-          <div className="absolute inset-0 z-0">
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 blur-[120px] rounded-full"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 blur-[120px] rounded-full"></div>
-          </div>
-          <div className="max-w-container-max mx-auto w-full grid md:grid-cols-2 gap-lg md:gap-xl items-center relative z-10">
-            <div className={`space-y-md md:space-y-lg ${language === 'en' ? 'text-start' : 'text-start'}`}>
-              <div className="inline-flex items-center gap-xs px-md py-xs rounded-full bg-primary/10 border border-primary/20 text-primary font-code-label text-code-label">
-                <span className="pulse-animation w-2 h-2 rounded-full bg-primary"></span>
-                {t('hero.badge')}
+        <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden px-margin_mobile">
+          {/* 3D Element Container (Rotating Ring) */}
+          <div id="threejs-container" ref={threeContainerRef}></div>
+          
+          {/* Hero Glass Card */}
+          <div className="hero-3d-container relative z-10 w-full max-w-2xl transition-transform duration-200 ease-out">
+            <div className="glass-card p-8 md:p-12 rounded-xl text-center floating-ui relative backdrop-blur-2xl">
+              <div className="inline-flex items-center bg-surface-container-high/50 px-4 py-1 rounded-full mb-6 border border-white/10">
+                <span className="text-secondary font-label-caps text-label-caps uppercase tracking-widest flex items-center gap-2">
+                  <span className="pulse-animation w-2 h-2 rounded-full bg-secondary"></span>
+                  {t('hero.badge')}
+                </span>
+                <span className="terminal-cursor"></span>
               </div>
-              <h1 className="font-display-lg text-[36px] md:text-[52px] cyber-gradient-text leading-tight">
+              
+              <h1 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-4 leading-tight">
                 {t('hero.title')}
               </h1>
-              <p className="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+              
+              <p className="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-xl mx-auto">
                 {t('hero.desc')}
               </p>
-              <div className="flex items-center justify-start gap-md pt-md">
-                <Link to="/contact" className="primary-btn-gradient px-lg py-3 rounded-xl font-title-md text-white active:scale-95 duration-200">
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link to="/contact" className="bg-primary text-on-primary px-8 py-4 rounded-lg font-bold text-lg primary-glow hover:bg-secondary hover:text-white transition-all active:scale-95 text-center">
                   {t('hero.startBtn')}
                 </Link>
-                <Link to="/work" className="secondary-btn-border px-lg py-3 rounded-xl font-title-md text-secondary active:scale-95 duration-200">
+                <Link to="/work" className="bg-transparent border border-secondary/30 text-secondary px-8 py-4 rounded-lg font-bold text-lg hover:bg-secondary/10 transition-colors text-center">
                   {t('hero.workBtn')}
                 </Link>
               </div>
             </div>
-            <div className="relative flex justify-center items-center">
-              <div className="floating relative w-full aspect-square max-w-md">
-                <div className="absolute inset-0 glass-panel rounded-3xl rotate-6 scale-95 opacity-50"></div>
-                <div className="absolute inset-0 glass-panel rounded-3xl -rotate-3 scale-100 flex items-center justify-center p-lg overflow-hidden border border-white/5">
-                  <img 
-                    className="w-full h-full object-cover rounded-xl opacity-80 mix-blend-screen" 
-                    alt="Futuristic visualization" 
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO4XSXyoaIM_HS1GuyAQ58fztR5-NogblnSHpnfAqBNMu5TLhouvh4b1mk1JmUeMfC0lVGfPS9zrc7UfY_LejbS1hvQlrjEp4kDEmj4afUWMynOVHmiVg-7eRPsTurTD9gb8IVK3gLFtZqxl2WJlfMAdHBB-BY4ycL2SqEruujxoQfYK55ls64h0uvQHfygLCoW7nlpPgvcDi4dftOjsHDl4nZwMPf__MzX9vuOAf-XuDP7DtCLS2KNkPMIYJxGLPTmL0ig0uTFtor"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
-                  <div className="absolute bottom-md right-md text-left font-code-label text-primary/80" dir="ltr">
-                    <div className="text-xs">SYSTEM_STATUS: ACTIVE</div>
-                    <div className="text-xs">PROTOCOL: CYBER_01</div>
-                  </div>
+          </div>
+        </section>
+
+        {/* Services Bento Grid */}
+        <section className="py-stack_xl px-margin_mobile max-w-container_max_width mx-auto relative z-10">
+          <div className="flex items-end justify-between mb-stack_lg">
+            <div className="space-y-2 text-start">
+              <span className="font-label-caps text-label-caps text-secondary tracking-tighter uppercase">{t('services.title')}</span>
+              <h2 className="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">{language === 'ar' ? 'ماذا نقدم لك' : 'What We Offer'}</h2>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Service 1: Web */}
+            <div className="glass-card p-6 rounded-xl group hover:border-secondary/50 transition-all cursor-pointer text-start flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <span className="material-symbols-outlined text-secondary text-3xl">language</span>
                 </div>
+                <div className="mb-4">
+                  <h3 className="font-headline-md text-headline-md text-on-surface mb-2">{t('services.web.title')}</h3>
+                  <p className="text-on-surface-variant font-body-md text-body-md leading-relaxed">{t('services.web.desc')}</p>
+                </div>
+              </div>
+              <div className="mt-4 pt-4 border-t border-white/5">
+                <Link to="/work" className="font-label-caps text-label-caps text-secondary flex items-center gap-1">
+                  {t('services.more')} <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Service 2: Systems */}
+            <div className="glass-card p-6 rounded-xl group hover:border-secondary/50 transition-all cursor-pointer text-start flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <span className="material-symbols-outlined text-secondary text-3xl">settings_suggest</span>
+                </div>
+                <div className="mb-4">
+                  <h3 className="font-headline-md text-headline-md text-on-surface mb-2">{t('services.systems.title')}</h3>
+                  <p className="text-on-surface-variant font-body-md text-body-md leading-relaxed">{t('services.systems.desc')}</p>
+                </div>
+              </div>
+              <div className="mt-4 pt-4 border-t border-white/5">
+                <Link to="/work" className="font-label-caps text-label-caps text-secondary flex items-center gap-1">
+                  {t('services.more')} <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Service 3: UX */}
+            <div className="glass-card p-6 rounded-xl group hover:border-secondary/50 transition-all cursor-pointer text-start flex flex-col justify-between">
+              <div>
+                <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <span className="material-symbols-outlined text-secondary text-3xl">draw</span>
+                </div>
+                <div className="mb-4">
+                  <h3 className="font-headline-md text-headline-md text-on-surface mb-2">{t('services.ux.title')}</h3>
+                  <p className="text-on-surface-variant font-body-md text-body-md leading-relaxed">{t('services.ux.desc')}</p>
+                </div>
+              </div>
+              <div className="mt-4 pt-4 border-t border-white/5">
+                <Link to="/work" className="font-label-caps text-label-caps text-secondary flex items-center gap-1">
+                  {t('services.more')} <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </Link>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Features Section */}
-        <section className="py-16 md:py-20 px-lg bg-surface-container-low">
-          <div className="max-w-container-max mx-auto">
-            <div className="text-center mb-12 md:mb-16">
-              <h2 className="font-headline-lg text-headline-lg text-on-surface mb-sm">{t('services.title')}</h2>
-              <div className="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
+        {/* Portfolio Showcase Section */}
+        <section className="py-stack_xl px-margin_mobile max-w-container_max_width mx-auto relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-stack_lg gap-4">
+            <div className="space-y-2 text-start">
+              <span className="font-label-caps text-label-caps text-secondary tracking-tighter uppercase">{t('work.title')}</span>
+              <p className="font-body-md text-body-md text-on-surface-variant max-w-2xl">{t('work.subtitle')}</p>
             </div>
-            <div className="grid md:grid-cols-3 gap-lg">
-              {/* Service 1 */}
-              <div className="glass-panel p-lg md:p-xl rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group text-start">
-                <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-lg group-hover:bg-primary/20 transition-colors shadow-[0_0_15px_rgba(207,189,255,0.1)]">
-                  <span className="material-symbols-outlined text-primary text-3xl md:text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>language</span>
-                </div>
-                <h3 className="font-title-md text-title-md text-on-surface mb-md">{t('services.web.title')}</h3>
-                <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-                  {t('services.web.desc')}
-                </p>
-                <div className="mt-lg border-t border-white/5 pt-md">
-                  <Link to="/work" className="font-code-label text-code-label text-secondary flex items-center gap-xs cursor-pointer">
-                    {t('services.more')} <span className={`material-symbols-outlined text-sm ${language === 'ar' ? '' : 'rotate-180'}`}>arrow_back</span>
-                  </Link>
-                </div>
-              </div>
-              {/* Service 2 */}
-              <div className="glass-panel p-lg md:p-xl rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group border-t-2 border-t-secondary/30 text-start">
-                <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-secondary/10 flex items-center justify-center mb-lg group-hover:bg-secondary/20 transition-colors shadow-[0_0_15px_rgba(70,245,224,0.1)]">
-                  <span className="material-symbols-outlined text-secondary text-3xl md:text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>settings_suggest</span>
-                </div>
-                <h3 className="font-title-md text-title-md text-on-surface mb-md">{t('services.systems.title')}</h3>
-                <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-                  {t('services.systems.desc')}
-                </p>
-                <div className="mt-lg border-t border-white/5 pt-md">
-                  <Link to="/work" className="font-code-label text-code-label text-secondary flex items-center gap-xs cursor-pointer">
-                    {t('services.more')} <span className={`material-symbols-outlined text-sm ${language === 'ar' ? '' : 'rotate-180'}`}>arrow_back</span>
-                  </Link>
-                </div>
-              </div>
-              {/* Service 3 */}
-              <div className="glass-panel p-lg md:p-xl rounded-2xl hover:translate-y-[-8px] transition-all duration-300 group text-start">
-                <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-tertiary/10 flex items-center justify-center mb-lg group-hover:bg-tertiary/20 transition-colors shadow-[0_0_15px_rgba(255,177,196,0.1)]">
-                  <span className="material-symbols-outlined text-tertiary text-3xl md:text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>draw</span>
-                </div>
-                <h3 className="font-title-md text-title-md text-on-surface mb-md">{t('services.ux.title')}</h3>
-                <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
-                  {t('services.ux.desc')}
-                </p>
-                <div className="mt-lg border-t border-white/5 pt-md">
-                  <Link to="/work" className="font-code-label text-code-label text-secondary flex items-center gap-xs cursor-pointer">
-                    {t('services.more')} <span className={`material-symbols-outlined text-sm ${language === 'ar' ? '' : 'rotate-180'}`}>arrow_back</span>
-                  </Link>
-                </div>
-              </div>
-            </div>
+            <Link to="/work" className="text-secondary font-label-caps hover:underline shrink-0">{t('work.viewAll')}</Link>
           </div>
-        </section>
 
-        {/* Portfolio Showcase */}
-        <section className="py-16 md:py-20 px-lg">
-          <div className="max-w-container-max mx-auto">
-            <div className="flex flex-row justify-center items-end mb-12">
-              <div className="text-center">
-                <h2 className="font-headline-lg text-headline-lg text-on-surface mb-sm">{t('work.title')}</h2>
-                              <div className="w-20 h-1 bg-secondary mx-auto rounded-full mb-8"></div>
-
-                <p className="font-body-sm text-body-sm text-on-surface-variant">{t('work.subtitle')}</p>
-              </div>
-              <Link to="/work" className="text-secondary font-code-label hover:underline">{t('work.viewAll')}</Link>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-lg">
-              {/* Project 1 */}
-              <div className="group relative overflow-hidden rounded-2xl aspect-[4/3]">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Project 1 */}
+            <div className="glass-card rounded-xl overflow-hidden group hover:border-secondary/50 transition-all cursor-pointer">
+              <div className="aspect-[4/3] overflow-hidden relative">
                 <img 
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-110" 
                   alt="FinTech Solution" 
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlh6h6UiQYR6Lm5jIZx2ZMwroZ584AYNodeyetgubKeTCxNQKRaOGWzRfSLfIlSvyY9rcP0YnHHB2YsJDQfCJTYv3xjwY3UGMDdeLsL8o6_Zwkg96nsRwROixtmuwZWyJkv5p8RqsjLMRigGQcKVqVkoTFXeoNNFfgbkQwo4bc3rTF8PcoCjxk6iZJhc30Ge6cXVgMSx4UaZn6tS60Ibsx_U0GKzOISX-Eg2N4qhoOkPJBEPGjTlzKIsMmYM6GeDzhrnSXpIs79bDP"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-lg translate-y-4 group-hover:translate-y-0 transition-transform text-start">
-                  <span className="text-secondary font-code-label text-xs uppercase tracking-widest mb-2 block">FinTech Solution</span>
-                  <h4 className="font-title-md text-title-md text-white">{t('work.projects.sadeem')}</h4>
-                </div>
               </div>
-              {/* Project 2 */}
-              <div className="group relative overflow-hidden rounded-2xl aspect-[4/3]">
+              <div className="p-6 text-start">
+                <span className="text-secondary font-label-caps text-xs uppercase tracking-widest mb-1 block">FinTech Solution</span>
+                <h4 className="font-headline-md text-headline-md text-white">{t('work.projects.sadeem')}</h4>
+              </div>
+            </div>
+
+            {/* Project 2 */}
+            <div className="glass-card rounded-xl overflow-hidden group hover:border-secondary/50 transition-all cursor-pointer">
+              <div className="aspect-[4/3] overflow-hidden relative">
                 <img 
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-110" 
                   alt="Logistics App" 
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCukkHQmNJBwWrCLMrXyoZWmza_xCanFERnX3YyZ8JueT3apa6cP4vg30i-e6-rXulpaf5gGFaWN3rxGS0g9ADeRTcK_iQmstkTg0GRrvjRGQOs8zJRd_cvZJr3E2gD9b_dIHjA4e3MSgozzebvwOsG0vI9y61JCZ7h_id7j5tEU337k9WiwMxEXwrsWElL0M63HWnPrayv1YL7V5yuOVy799B31Q_8EYVJRPDqS78_lUOrInKaFYZdODIyImKee-Nna61SQ8LpWntM"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-lg translate-y-4 group-hover:translate-y-0 transition-transform text-start">
-                  <span className="text-secondary font-code-label text-xs uppercase tracking-widest mb-2 block">Logistics App</span>
-                  <h4 className="font-title-md text-title-md text-white">{t('work.projects.masar')}</h4>
-                </div>
               </div>
-              {/* Project 3 */}
-              <div className="group relative overflow-hidden rounded-2xl aspect-[4/3]">
+              <div className="p-6 text-start">
+                <span className="text-secondary font-label-caps text-xs uppercase tracking-widest mb-1 block">Logistics App</span>
+                <h4 className="font-headline-md text-headline-md text-white">{t('work.projects.masar')}</h4>
+              </div>
+            </div>
+
+            {/* Project 3 */}
+            <div className="glass-card rounded-xl overflow-hidden group hover:border-secondary/50 transition-all cursor-pointer">
+              <div className="aspect-[4/3] overflow-hidden relative">
                 <img 
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-110" 
                   alt="E-commerce" 
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuAI-XgGUIeLfK7JdT_IgZGrf1jb2i4V9_Q30pBv34rQlmVE-3XX_S05ywUudaPl9vFNpmsvdtdC7L6jtkmbhFETfjKYPseTvS0QIYlosQYbrMuSfFTof7MHTzlrApIBjtfu618EX1FxbwmrYAZeBvoEZz3XCgXe8TWTRtuJk4TsJr5sGmXVf3AbW-RqsOqK16fsdWvquYXuhAqBvN0kKXqaUvul5WlUUjBE27f-nCXfX97I1VUA3dqIeEjgulB9yVDBgxDQDWZpgr-G"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-lg translate-y-4 group-hover:translate-y-0 transition-transform text-start">
-                  <span className="text-secondary font-code-label text-xs uppercase tracking-widest mb-2 block">E-commerce</span>
-                  <h4 className="font-title-md text-title-md text-white">{t('work.projects.ofoq')}</h4>
-                </div>
+              </div>
+              <div className="p-6 text-start">
+                <span className="text-secondary font-label-caps text-xs uppercase tracking-widest mb-1 block">E-commerce</span>
+                <h4 className="font-headline-md text-headline-md text-white">{t('work.projects.ofoq')}</h4>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Testimonials */}
-        <section className="py-16 md:py-20 bg-surface-container-lowest text-start">
-          <div className="max-w-container-max mx-auto">
-            <div className="text-center mb-12 md:mb-16">
-              <h2 className="font-headline-lg text-headline-lg text-on-surface mb-sm">{t('testimonials.title')}</h2>
-              <p className="font-body-lg text-body-lg text-on-surface-variant">{t('testimonials.subtitle')}</p>
+        {/* Testimonials Section */}
+        <section className="py-stack_xl bg-surface-container-lowest/50 relative overflow-hidden text-start">
+          <div className="max-w-container_max_width mx-auto px-margin_mobile">
+            <div className="text-center mb-stack_lg">
+              <h2 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-2">{t('testimonials.title')}</h2>
+              <p className="font-body-md text-body-md text-on-surface-variant">{t('testimonials.subtitle')}</p>
             </div>
-            <div className="grid md:grid-cols-2 gap-lg max-w-4xl mx-auto">
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               {/* Quote 1 */}
-              <div className="glass-panel p-lg md:p-xl rounded-3xl relative">
-                <span className="material-symbols-outlined text-primary/20 text-5xl md:text-6xl absolute top-4 left-4" style={{ fontVariationSettings: "'FILL' 1" }}>format_quote</span>
-                <p className="font-body-lg text-body-lg text-on-surface mb-8 md:mb-xl relative z-10 italic">
+              <div className="glass-card p-6 md:p-8 rounded-xl relative">
+                <span className="material-symbols-outlined text-secondary/10 text-6xl absolute top-4 right-4 pointer-events-none">format_quote</span>
+                <p className="font-body-lg text-body-lg text-on-surface mb-6 relative z-10 italic">
                   "{t('testimonials.q1.text')}"
                 </p>
-                <div className="flex flex-row items-center justify-start gap-md">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-surface-container-high border border-primary/30 flex items-center justify-center overflow-hidden">
-                    <span className="material-symbols-outlined text-primary">person</span>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center border border-secondary/20">
+                    <span className="material-symbols-outlined text-secondary">person</span>
                   </div>
-                  <div className="text-start">
-                    <div className="font-title-md text-white">{t('testimonials.q1.author')}</div>
-                    <div className="font-code-label text-xs text-secondary">{t('testimonials.q1.role')}</div>
+                  <div>
+                    <div className="font-headline-md text-base text-white">{t('testimonials.q1.author')}</div>
+                    <div className="font-label-caps text-xs text-secondary">{t('testimonials.q1.role')}</div>
                   </div>
                 </div>
               </div>
+
               {/* Quote 2 */}
-              <div className="glass-panel p-lg md:p-xl rounded-3xl relative">
-                <span className="material-symbols-outlined text-secondary/20 text-5xl md:text-6xl absolute top-4 left-4" style={{ fontVariationSettings: "'FILL' 1" }}>format_quote</span>
-                <p className="font-body-lg text-body-lg text-on-surface mb-8 md:mb-xl relative z-10 italic">
+              <div className="glass-card p-6 md:p-8 rounded-xl relative">
+                <span className="material-symbols-outlined text-secondary/10 text-6xl absolute top-4 right-4 pointer-events-none">format_quote</span>
+                <p className="font-body-lg text-body-lg text-on-surface mb-6 relative z-10 italic">
                   "{t('testimonials.q2.text')}"
                 </p>
-                <div className="flex flex-row items-center justify-start gap-md">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-surface-container-high border border-secondary/30 flex items-center justify-center overflow-hidden">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center border border-secondary/20">
                     <span className="material-symbols-outlined text-secondary">person</span>
                   </div>
-                  <div className="text-start">
-                    <div className="font-title-md text-white">{t('testimonials.q2.author')}</div>
-                    <div className="font-code-label text-xs text-secondary">{t('testimonials.q2.role')}</div>
+                  <div>
+                    <div className="font-headline-md text-base text-white">{t('testimonials.q2.author')}</div>
+                    <div className="font-label-caps text-xs text-secondary">{t('testimonials.q2.role')}</div>
                   </div>
                 </div>
               </div>
@@ -229,16 +307,17 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-16 md:py-20 px-lg">
-          <div className="max-w-4xl mx-auto glass-panel p-lg md:p-xl rounded-[2rem] text-center border-2 border-primary/20 glow-border">
-            <h2 className="font-headline-lg text-headline-lg text-white mb-4 md:mb-6">{t('cta.title')}</h2>
-            <p className="font-body-lg text-body-lg text-on-surface-variant mb-10">
-              {t('cta.desc')}
-            </p>
-            <Link to="/contact" className="primary-btn-gradient px-lg py-3 rounded-xl font-title-md text-white active:scale-95 duration-200">
-              {t('cta.btn')}
-            </Link>
+        {/* CTA / Newsletter Section */}
+        <section className="py-stack_xl px-margin_mobile">
+          <div className="max-w-4xl mx-auto glass-card p-8 md:p-12 rounded-2xl text-center overflow-hidden relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-secondary/10 via-transparent to-primary/5 pointer-events-none"></div>
+            <h2 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-4 relative z-10">{t('cta.title')}</h2>
+            <p className="text-on-surface-variant mb-8 relative z-10 max-w-xl mx-auto">{t('cta.desc')}</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10 items-center">
+              <Link to="/contact" className="bg-secondary text-white px-10 py-4 rounded-lg font-bold primary-glow active:scale-95 transition-all text-center min-w-[200px]">
+                {t('cta.btn')}
+              </Link>
+            </div>
           </div>
         </section>
       </main>

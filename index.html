@@ -6,14 +6,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Changa:wght@200..800&family=Lemonada:wght@300..700&family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
-    <title>كود زون - Code Zone</title>
+    <title>Code Zone | Master the Flow State</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   </head>
   <body class="bg-background text-on-background selection:bg-primary-fixed-dim/30 font-body-md overflow-x-hidden">
+    <canvas id="shader-bg"></canvas>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      // --- 1. Code Stream Shader (Background) ---
+      (function initBackgroundShader() {
+          const canvas = document.getElementById('shader-bg');
+          if (!canvas) return;
+          const gl = canvas.getContext('webgl');
+          if (!gl) return;
+
+          const vertexSrc = `
+              attribute vec2 position;
+              varying vec2 v_texCoord;
+              void main() {
+                  v_texCoord = position * 0.5 + 0.5;
+                  v_texCoord.y = 1.0 - v_texCoord.y;
+                  gl_Position = vec4(position, 0.0, 1.0);
+              }
+          `;
+
+          const fragmentSrc = `
+              precision highp float;
+              uniform float u_time;
+              uniform vec2 u_resolution;
+              varying vec2 v_texCoord;
+
+              float random(vec2 st) {
+                  return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
+              }
+
+              void main() {
+                  vec2 uv = v_texCoord;
+                  vec2 grid = vec2(60.0, 30.0);
+                  vec2 st = uv * grid;
+                  vec2 ipos = floor(st);
+                  float speed = 1.5;
+                  float timeShift = floor(u_time * speed + random(vec2(ipos.y)) * 20.0);
+                  float charIndex = random(vec2(ipos.x - timeShift, ipos.y));
+                  float pct = step(0.9, charIndex);
+                  vec3 baseColor = vec3(0.0, 0.82, 1.0);
+                  vec3 secondaryColor = vec3(0.388, 0.012, 0.188);
+                  vec3 color = mix(baseColor, secondaryColor, 0.2) * pct;
+                  color *= 0.6 + 0.4 * sin(u_time * 8.0 + random(ipos) * 6.28);
+                  float edgeFade = smoothstep(0.0, 0.3, uv.x) * smoothstep(1.0, 0.7, uv.x);
+                  edgeFade *= smoothstep(0.0, 0.3, uv.y) * smoothstep(1.0, 0.7, uv.y);
+                  gl_FragColor = vec4(color * edgeFade, color.r > 0.0 ? 0.4 : 0.0);
+              }
+          `;
+
+          function createShader(gl, type, source) {
+              const shader = gl.createShader(type);
+              gl.shaderSource(shader, source);
+              gl.compileShader(shader);
+              return shader;
+          }
+
+          const program = gl.createProgram();
+          gl.attachShader(program, createShader(gl, gl.VERTEX_SHADER, vertexSrc));
+          gl.attachShader(program, createShader(gl, gl.FRAGMENT_SHADER, fragmentSrc));
+          gl.linkProgram(program);
+
+          const positionBuffer = gl.createBuffer();
+          gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+          gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+
+          const positionLocation = gl.getAttribLocation(program, "position");
+          const timeLocation = gl.getUniformLocation(program, "u_time");
+          const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
+
+          function render(time) {
+              canvas.width = window.innerWidth;
+              canvas.height = window.innerHeight;
+              gl.viewport(0, 0, canvas.width, canvas.height);
+              gl.useProgram(program);
+              gl.enableVertexAttribArray(positionLocation);
+              gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+              gl.uniform1f(timeLocation, time * 0.001);
+              gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+              gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+              requestAnimationFrame(render);
+          }
+          requestAnimationFrame(render);
+      })();
+    </script>
   </body>
 </html>
