@@ -7,6 +7,20 @@ import { useAppContext } from '../context/AppContext';
 export default function Home() {
   const { t, language } = useAppContext();
   const threeContainerRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const projects = [
+    { id: 1, title: t('work.projects.sadeem'), tech: 'FinTech Solution • React', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBlh6h6UiQYR6Lm5jIZx2ZMwroZ584AYNodeyetgubKeTCxNQKRaOGWzRfSLfIlSvyY9rcP0YnHHB2YsJDQfCJTYv3xjwY3UGMDdeLsL8o6_Zwkg96nsRwROixtmuwZWyJkv5p8RqsjLMRigGQcKVqVkoTFXeoNNFfgbkQwo4bc3rTF8PcoCjxk6iZJhc30Ge6cXVgMSx4UaZn6tS60Ibsx_U0GKzOISX-Eg2N4qhoOkPJBEPGjTlzKIsMmYM6GeDzhrnSXpIs79bDP', desc: t('services.web.desc') },
+    { id: 2, title: t('work.projects.masar'), tech: 'Logistics App • Vue 3', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCukkHQmNJBwWrCLMrXyoZWmza_xCanFERnX3YyZ8JueT3apa6cP4vg30i-e6-rXulpaf5gGFaWN3rxGS0g9ADeRTcK_iQmstkTg0GRrvjRGQOs8zJRd_cvZJr3E2gD9b_dIHjA4e3MSgozzebvwOsG0vI9y61JCZ7h_id7j5tEU337k9WiwMxEXwrsWElL0M63HWnPrayv1YL7V5yuOVy799B31Q_8EYVJRPDqS78_lUOrInKaFYZdODIyImKee-Nna61SQ8LpWntM', desc: t('services.web.desc') },
+    { id: 3, title: t('work.projects.ofoq'), tech: 'E-commerce • Python', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAI-XgGUIeLfK7JdT_IgZGrf1jb2i4V9_Q30pBv34rQlmVE-3XX_S05ywUudaPl9vFNpmsvdtdC7L6jtkmbhFETfjKYPseTvS0QIYlosQYbrMuSfFTof7MHTzlrApIBjtfu618EX1FxbwmrYAZeBvoEZz3XCgXe8TWTRtuJk4TsJr5sGmXVf3AbW-RqsOqK16fsdWvquYXuhAqBvN0kKXqaUvul5WlUUjBE27f-nCXfX97I1VUA3dqIeEjgulB9yVDBgxDQDWZpgr-G', desc: t('services.systems.desc') }
+  ];
+
+  const radius = 400;
+  const cardCount = projects.length;
+  const angleStep = 360 / Math.max(cardCount, 1);
+
+  const nextSlide = () => setCurrentIndex(prev => prev + 1);
+  const prevSlide = () => setCurrentIndex(prev => prev - 1);
 
   useEffect(() => {
     // --- 3D Code Ring Element (Hero) ---
@@ -201,7 +215,7 @@ export default function Home() {
         </section>
 
         {/* Portfolio Showcase Section */}
-        <section className="py-stack_xl px-margin_mobile max-w-container_max_width mx-auto relative z-10">
+        <section className="py-stack_xl px-margin_mobile max-w-container_max_width mx-auto relative z-10 overflow-hidden">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-stack_lg gap-4">
             <div className="space-y-2 text-start">
               <span className="font-label-caps text-label-caps text-secondary tracking-tighter uppercase">{t('work.title')}</span>
@@ -210,54 +224,75 @@ export default function Home() {
             <Link to="/work" className="text-secondary font-label-caps hover:underline shrink-0">{t('work.viewAll')}</Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Project 1 */}
-            <div className="glass-card rounded-xl overflow-hidden group hover:border-secondary/50 transition-all cursor-pointer">
-              <div className="aspect-[4/3] overflow-hidden relative">
-                <img 
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-110" 
-                  alt="FinTech Solution" 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlh6h6UiQYR6Lm5jIZx2ZMwroZ584AYNodeyetgubKeTCxNQKRaOGWzRfSLfIlSvyY9rcP0YnHHB2YsJDQfCJTYv3xjwY3UGMDdeLsL8o6_Zwkg96nsRwROixtmuwZWyJkv5p8RqsjLMRigGQcKVqVkoTFXeoNNFfgbkQwo4bc3rTF8PcoCjxk6iZJhc30Ge6cXVgMSx4UaZn6tS60Ibsx_U0GKzOISX-Eg2N4qhoOkPJBEPGjTlzKIsMmYM6GeDzhrnSXpIs79bDP"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
-              </div>
-              <div className="p-6 text-start">
-                <span className="text-secondary font-label-caps text-xs uppercase tracking-widest mb-1 block">FinTech Solution</span>
-                <h4 className="font-headline-md text-headline-md text-white">{t('work.projects.sadeem')}</h4>
-              </div>
-            </div>
+          <div className="carousel-scene">
+            <div className="carousel-container">
+              {projects.map((project, index) => {
+                const angle = (index - currentIndex) * angleStep;
+                const rad = (angle * Math.PI) / 180;
+                const x = Math.sin(rad) * radius;
+                const z = Math.cos(rad) * radius - radius;
+                const rotationY = angle;
+                
+                let opacity = 1;
+                const normalizedAngle = Math.abs(angle % 360);
+                if (normalizedAngle > 90 && normalizedAngle < 270) {
+                  opacity = 0.2;
+                }
 
-            {/* Project 2 */}
-            <div className="glass-card rounded-xl overflow-hidden group hover:border-secondary/50 transition-all cursor-pointer">
-              <div className="aspect-[4/3] overflow-hidden relative">
-                <img 
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-110" 
-                  alt="Logistics App" 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCukkHQmNJBwWrCLMrXyoZWmza_xCanFERnX3YyZ8JueT3apa6cP4vg30i-e6-rXulpaf5gGFaWN3rxGS0g9ADeRTcK_iQmstkTg0GRrvjRGQOs8zJRd_cvZJr3E2gD9b_dIHjA4e3MSgozzebvwOsG0vI9y61JCZ7h_id7j5tEU337k9WiwMxEXwrsWElL0M63HWnPrayv1YL7V5yuOVy799B31Q_8EYVJRPDqS78_lUOrInKaFYZdODIyImKee-Nna61SQ8LpWntM"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
-              </div>
-              <div className="p-6 text-start">
-                <span className="text-secondary font-label-caps text-xs uppercase tracking-widest mb-1 block">Logistics App</span>
-                <h4 className="font-headline-md text-headline-md text-white">{t('work.projects.masar')}</h4>
-              </div>
-            </div>
+                const isActive = (currentIndex % cardCount + cardCount) % cardCount === index;
+                const techs = project.tech.split(' • ');
 
-            {/* Project 3 */}
-            <div className="glass-card rounded-xl overflow-hidden group hover:border-secondary/50 transition-all cursor-pointer">
-              <div className="aspect-[4/3] overflow-hidden relative">
-                <img 
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 scale-100 group-hover:scale-110" 
-                  alt="E-commerce" 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAI-XgGUIeLfK7JdT_IgZGrf1jb2i4V9_Q30pBv34rQlmVE-3XX_S05ywUudaPl9vFNpmsvdtdC7L6jtkmbhFETfjKYPseTvS0QIYlosQYbrMuSfFTof7MHTzlrApIBjtfu618EX1FxbwmrYAZeBvoEZz3XCgXe8TWTRtuJk4TsJr5sGmXVf3AbW-RqsOqK16fsdWvquYXuhAqBvN0kKXqaUvul5WlUUjBE27f-nCXfX97I1VUA3dqIeEjgulB9yVDBgxDQDWZpgr-G"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
-              </div>
-              <div className="p-6 text-start">
-                <span className="text-secondary font-label-caps text-xs uppercase tracking-widest mb-1 block">E-commerce</span>
-                <h4 className="font-headline-md text-headline-md text-white">{t('work.projects.ofoq')}</h4>
-              </div>
+                return (
+                  <article 
+                    key={project.id} 
+                    className={`carousel-card glass-card p-6 flex flex-col gap-4 ${isActive ? 'active' : ''}`}
+                    style={{
+                      transform: `translateX(${x}px) translateZ(${z}px) rotateY(${rotationY}deg)`,
+                      opacity: opacity,
+                      zIndex: isActive ? 10 : 1
+                    }}
+                  >
+                    <h3 className="font-headline-md text-headline-md text-on-surface text-center leading-tight">
+                      {project.title}
+                    </h3>
+                    
+                    <img 
+                      alt={project.title} 
+                      className="carousel-card-img" 
+                      src={project.img} 
+                    />
+                    
+                    <p className="text-on-surface-variant font-body-md text-sm text-center line-clamp-3">
+                      {project.desc}
+                    </p>
+                    
+                    <div className="flex items-center justify-center gap-2 mt-auto">
+                      <span className="font-label-caps text-[10px] px-2 py-1 bg-surface-container rounded text-secondary uppercase">
+                        {techs[0]}
+                      </span>
+                      <span className="font-label-caps text-[10px] px-2 py-1 bg-surface-container rounded text-on-surface-variant uppercase">
+                        {techs[1] || techs[0]}
+                      </span>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
+          </div>
+
+          <div className="flex justify-center gap-6 mt-12">
+            <button 
+              onClick={prevSlide}
+              className="p-4 bg-surface-container rounded-full text-secondary hover:bg-secondary hover:text-white transition-all primary-glow active:scale-90 border border-secondary/20"
+            >
+              <span className="material-symbols-outlined">arrow_back</span>
+            </button>
+            <button 
+              onClick={nextSlide}
+              className="p-4 bg-surface-container rounded-full text-secondary hover:bg-secondary hover:text-white transition-all primary-glow active:scale-90 border border-secondary/20"
+            >
+              <span className="material-symbols-outlined">arrow_forward</span>
+            </button>
           </div>
         </section>
 
