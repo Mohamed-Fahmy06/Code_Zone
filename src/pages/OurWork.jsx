@@ -91,11 +91,11 @@ export default function OurWork() {
         {/* ── Exhibition Gallery ── */}
         <section className="exhibition-gallery">
           {/* Section header */}
-          <div className="max-w-container_max_width mx-auto px-margin_mobile text-center mb-16 relative z-10">
-            <h2 className="font-headline-lg-mobile text-headline-lg-mobile md:text-headline-lg text-on-surface">
+          <div className="max-w-container_max_width mx-auto px-margin_mobile text-center mb-6 relative z-10">
+            <h2 className="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">
               {language === 'ar' ? 'معرض المشاريع' : 'Project Exhibition'}
             </h2>
-            <div className="w-20 h-1 bg-secondary mx-auto mt-5 rounded-full opacity-50"></div>
+            <div className="w-16 h-0.5 bg-secondary mx-auto mt-3 rounded-full opacity-50"></div>
           </div>
 
           {/* Cover Flow */}
@@ -139,7 +139,7 @@ export default function OurWork() {
           </div>
 
           {/* Navigation Controls — RTL aware */}
-          <div className="flex justify-center gap-8 mt-48 relative z-30">
+          <div className="flex justify-center gap-8 mt-10 relative z-30">
             <button
               onClick={isRTL ? nextSlide : prevSlide}
               aria-label={language === 'ar' ? 'التالي' : 'Previous'}

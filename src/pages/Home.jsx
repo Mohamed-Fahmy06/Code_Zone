@@ -211,17 +211,17 @@ export default function Home() {
         {/* ── Exhibition Gallery / Portfolio Carousel ── */}
         <section className="exhibition-gallery" id="gallery">
           {/* Section Header */}
-          <div className="max-w-container_max_width mx-auto px-margin_mobile text-center mb-16 relative z-10">
-            <span className="font-label-caps text-label-caps text-secondary tracking-widest uppercase block mb-3">
+          <div className="max-w-container_max_width mx-auto px-margin_mobile text-center mb-6 relative z-10">
+            <span className="font-label-caps text-label-caps text-secondary tracking-widest uppercase block mb-2">
               {t('work.title')}
             </span>
-            <h2 className="font-headline-lg-mobile text-headline-lg-mobile md:text-headline-lg text-on-surface">
+            <h2 className="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">
               {language === 'ar' ? 'معرض أعمالنا' : 'Curated Showcase'}
             </h2>
-            <p className="font-body-md text-body-md text-on-surface-variant mt-3 max-w-xl mx-auto">
+            <p className="font-body-md text-body-md text-on-surface-variant mt-2 max-w-xl mx-auto text-sm">
               {t('work.subtitle')}
             </p>
-            <div className="w-20 h-1 bg-secondary mx-auto mt-5 rounded-full opacity-50"></div>
+            <div className="w-16 h-0.5 bg-secondary mx-auto mt-3 rounded-full opacity-50"></div>
           </div>
 
           {/* Cover Flow Scene */}
@@ -266,7 +266,7 @@ export default function Home() {
           </div>
 
           {/* Navigation Controls — RTL aware */}
-          <div className="flex justify-center gap-8 mt-48 relative z-30">
+          <div className="flex justify-center gap-8 mt-10 relative z-30">
             <button
               id="prevBtn"
               onClick={isRTL ? nextSlide : prevSlide}
@@ -290,7 +290,7 @@ export default function Home() {
           </div>
 
           {/* View all link */}
-          <div className="text-center mt-12 relative z-10">
+          <div className="text-center mt-4 relative z-10">
             <Link to="/work" className="text-secondary font-label-caps hover:underline">
               {t('work.viewAll')} →
             </Link>
