@@ -12,6 +12,7 @@ import ScrollToTop from './components/ScrollToTop';
 function App() {
   const [showIntro, setShowIntro] = useState(true);
   const [showContent, setShowContent] = useState(false);
+  const [animationFinished, setAnimationFinished] = useState(false);
 
   useEffect(() => {
     // Start crystallizing main content slightly before intro fully dissolves
@@ -24,9 +25,15 @@ function App() {
       setShowIntro(false);
     }, 5200);
 
+    // Remove animation class after it finishes to free fixed elements (4.2s + 1.5s)
+    const cleanupTimer = setTimeout(() => {
+      setAnimationFinished(true);
+    }, 5800);
+
     return () => {
       clearTimeout(contentTimer);
       clearTimeout(introTimer);
+      clearTimeout(cleanupTimer);
     };
   }, []);
 
@@ -34,7 +41,7 @@ function App() {
     <>
       {showIntro && <LoadingIntro />}
       {showContent && (
-        <div className="main-content-fade">
+        <div className={animationFinished ? "opacity-100" : "main-content-fade"}>
           <Router>
             <Routes>
               <Route path="/" element={<Home />} />
