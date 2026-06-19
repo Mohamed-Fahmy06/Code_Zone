@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useAppContext } from '../context/AppContext';
-import { Link } from 'react-router-dom';
 
 export default function OurWork() {
   const { t, language } = useAppContext();
@@ -22,7 +21,7 @@ export default function OurWork() {
   const getCardStyle = (index) => {
     const offset = index - currentIndex;
     const absOffset = Math.abs(offset);
-    let x = 0, z = 0, rotateY = 0, scale = 1, opacity = 1;
+    let x, z, rotateY, scale, opacity;
 
     if (offset === 0) {
       x = 0; z = 100; rotateY = 0; scale = 1.1; opacity = 1;

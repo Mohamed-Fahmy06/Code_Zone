@@ -44,7 +44,7 @@ export default function Home() {
   const getCardStyle = (index) => {
     const offset = index - currentIndex;
     const absOffset = Math.abs(offset);
-    let x = 0, z = 0, rotateY = 0, scale = 1, opacity = 1;
+    let x, z, rotateY, scale, opacity;
 
     if (offset === 0) {
       x = 0; z = 100; rotateY = 0; scale = 1.1; opacity = 1;
