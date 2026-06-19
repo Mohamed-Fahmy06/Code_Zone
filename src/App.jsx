@@ -7,6 +7,7 @@ import Contact from './pages/Contact';
 import FAQ from './pages/FAQ';
 import Support from './pages/Support';
 import LoadingIntro from './components/LoadingIntro';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   const [showIntro, setShowIntro] = useState(true);
@@ -44,6 +45,7 @@ function App() {
               <Route path="/support" element={<Support />} />
             </Routes>
           </Router>
+          <ScrollToTop />
         </div>
       )}
     </>

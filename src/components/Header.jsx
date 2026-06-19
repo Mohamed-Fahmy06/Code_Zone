@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 
 export default function Header() {
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const { language, toggleLanguage, t } = useAppContext();
   
   const isActive = (path) => location.pathname === path;
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className="fixed top-0 w-full z-50 bg-background/40 backdrop-blur-xl border-b border-white/5">
-      <div className="flex items-center justify-between px-margin_mobile md:px-margin_desktop max-w-container_max_width mx-auto h-20">
+    <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+      isScrolled 
+        ? 'bg-background/85 backdrop-blur-2xl border-b border-secondary/30 shadow-[0_8px_30px_rgba(0,0,0,0.8)] shadow-secondary/5 py-1' 
+        : 'bg-background/40 backdrop-blur-xl border-b border-white/5 py-3'
+    }`}>
+      <div className="flex items-center justify-between px-margin_mobile md:px-margin_desktop max-w-container_max_width mx-auto h-16">
         <div className="flex items-center gap-stack_sm">
           <Link to="/" className="flex items-center gap-stack_sm">
             <span className="material-symbols-outlined text-secondary text-headline-md" style={{ fontVariationSettings: "'FILL' 1" }}>terminal</span>
