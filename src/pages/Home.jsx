@@ -14,27 +14,67 @@ export default function Home() {
   const projects = [
     {
       id: 1,
-      title: t('work.projects.sadeem'),
-      badge: 'FinTech',
+      title: t('work.projects.supermarket.title'),
+      badge: 'Systems',
       tech: 'React',
-      img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBlh6h6UiQYR6Lm5jIZx2ZMwroZ584AYNodeyetgubKeTCxNQKRaOGWzRfSLfIlSvyY9rcP0YnHHB2YsJDQfCJTYv3xjwY3UGMDdeLsL8o6_Zwkg96nsRwROixtmuwZWyJkv5p8RqsjLMRigGQcKVqVkoTFXeoNNFfgbkQwo4bc3rTF8PcoCjxk6iZJhc30Ge6cXVgMSx4UaZn6tS60Ibsx_U0GKzOISX-Eg2N4qhoOkPJBEPGjTlzKIsMmYM6GeDzhrnSXpIs79bDP',
-      desc: t('services.web.desc')
+      img: '/projects/supermarket.png',
+      desc: t('work.projects.supermarket.desc')
     },
     {
       id: 2,
-      title: t('work.projects.masar'),
-      badge: 'Logistics',
-      tech: 'Vue 3',
-      img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCukkHQmNJBwWrCLMrXyoZWmza_xCanFERnX3YyZ8JueT3apa6cP4vg30i-e6-rXulpaf5gGFaWN3rxGS0g9ADeRTcK_iQmstkTg0GRrvjRGQOs8zJRd_cvZJr3E2gD9b_dIHjA4e3MSgozzebvwOsG0vI9y61JCZ7h_id7j5tEU337k9WiwMxEXwrsWElL0M63HWnPrayv1YL7V5yuOVy799B31Q_8EYVJRPDqS78_lUOrInKaFYZdODIyImKee-Nna61SQ8LpWntM',
-      desc: t('services.web.desc')
+      title: t('work.projects.shadow.title'),
+      badge: 'Systems',
+      tech: 'React',
+      img: '/projects/shadow.png',
+      desc: t('work.projects.shadow.desc')
     },
     {
       id: 3,
-      title: t('work.projects.ofoq'),
+      title: t('work.projects.noxe.title'),
+      badge: 'Web',
+      tech: 'React',
+      img: '/projects/noxe.png',
+      desc: t('work.projects.noxe.desc')
+    },
+    {
+      id: 4,
+      title: t('work.projects.decode1.title'),
+      badge: 'Web',
+      tech: 'React',
+      img: '/projects/decode1.png',
+      desc: t('work.projects.decode1.desc')
+    },
+    {
+      id: 5,
+      title: t('work.projects.codezone_about.title'),
+      badge: 'Web',
+      tech: 'React',
+      img: '/projects/codezone_about.png',
+      desc: t('work.projects.codezone_about.desc')
+    },
+    {
+      id: 6,
+      title: t('work.projects.decode2.title'),
       badge: 'E-Commerce',
-      tech: 'Python',
-      img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAI-XgGUIeLfK7JdT_IgZGrf1jb2i4V9_Q30pBv34rQlmVE-3XX_S05ywUudaPl9vFNpmsvdtdC7L6jtkmbhFETfjKYPseTvS0QIYlosQYbrMuSfFTof7MHTzlrApIBjtfu618EX1FxbwmrYAZeBvoEZz3XCgXe8TWTRtuJk4TsJr5sGmXVf3AbW-RqsOqK16fsdWvquYXuhAqBvN0kKXqaUvul5WlUUjBE27f-nCXfX97I1VUA3dqIeEjgulB9yVDBgxDQDWZpgr-G',
-      desc: t('services.systems.desc')
+      tech: 'React',
+      img: '/projects/decode2.png',
+      desc: t('work.projects.decode2.desc')
+    },
+    {
+      id: 7,
+      title: t('work.projects.decode3.title'),
+      badge: 'Web',
+      tech: 'React',
+      img: '/projects/decode3.png',
+      desc: t('work.projects.decode3.desc')
+    },
+    {
+      id: 8,
+      title: t('work.projects.decode4.title'),
+      badge: 'Systems',
+      tech: 'React',
+      img: '/projects/decode4.png',
+      desc: t('work.projects.decode4.desc')
     },
   ];
 
@@ -247,10 +287,10 @@ export default function Home() {
                           {project.tech}
                         </span>
                       </div>
-                      <h3 className="font-headline-md text-headline-md text-on-surface mb-2 leading-tight">
+                      <h3 className="font-headline-md text-headline-md text-on-surface mb-1 leading-tight line-clamp-1">
                         {project.title}
                       </h3>
-                      <p className="text-on-surface-variant font-body-md text-sm leading-relaxed opacity-80 line-clamp-3">
+                      <p className="text-on-surface-variant font-body-md text-sm leading-relaxed opacity-80 line-clamp-2 mt-1">
                         {project.desc}
                       </p>
                     </div>

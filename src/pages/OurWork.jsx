@@ -10,9 +10,14 @@ export default function OurWork() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const allProjects = [
-    { id: 1, title: t('work.projects.sadeem'), category: 'ecommerce', badge: 'FinTech', tech: 'React', desc: t('services.web.desc'), img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAQegCMx2g9YkgyS2cZIx6iZtXJZoAeOfL15l_toBXPnhOjmPE1ca7GuQzn22vAwtxeMq2Xw-RuIgF2foNxWG-f7lJ0oftsC0l8kLt0CcgbA4C2B45ZzkRoiKbxgeeT8OktgHWnFhF-BSFi8JoiAWIjOc7wGh2UtNKKl17BYQgP80MUJvxRN9r10CthLiAo7sZpsoCm2DJOmhi4kd8yD2wluloIeoGghmF23s0i_-kgoZKo2GVmBTsUJv_nNSO87RurVqdmS987Ddod' },
-    { id: 2, title: t('work.projects.masar'), category: 'web', badge: 'Logistics', tech: 'Vue 3', desc: t('services.web.desc'), img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAyZK7vvD55XmZrtswd1-1TgIpc5AQPfgRG2VzQ_V9yT7e3qT5Iu_dpIwKgYGCAB4EF3HeiTKbdyOKsDhQbvqE6cQKdRnaTnYKDlp4_XrpD_yI68RnNrYHq_1iWkSXUdQThm7TH6XEBriEi6G8cNfjp78GN9tfYzodjHMyWL0_qOOAGUKbDMCCaV9kKgNQipt2PUymiQNvhgXzV4erHR-Ze2_ZJ1Fl6lfYJ_bewDwjxXCqvGQvaJP_whwNG_OBjybGhBMW2X6Kv5fFi' },
-    { id: 3, title: t('work.projects.ofoq'), category: 'systems', badge: 'E-Commerce', tech: 'Python', desc: t('services.systems.desc'), img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCxRznAEo-0KCiVRFAQGRcG-oi7W1oymKjPGFfkMqyBN--IsvUvBngZN1n_wgH6dnWG4HQW3K75a55EKsx-BScQWlivOGdFhdSd7lblyUMHdigIojpINs9wVyznqjmITi3BQRYLbBbTYRNO4NHs9n4npjYZFrTKoJN7O6pv0KcoYUu1qen7Hw-80KAo0pyFgZZDZuVi6cOPrrlh8mNExs9ihh2vHvb1Md114I4L8eYTvv4RIuE9BAbP23mh6jpvIvHcv4rJTfdTJUrd' },
+    { id: 1, title: t('work.projects.supermarket.title'), category: 'systems', badge: 'Systems', tech: 'React', desc: t('work.projects.supermarket.desc'), img: '/projects/supermarket.png' },
+    { id: 2, title: t('work.projects.shadow.title'), category: 'systems', badge: 'Systems', tech: 'React', desc: t('work.projects.shadow.desc'), img: '/projects/shadow.png' },
+    { id: 3, title: t('work.projects.noxe.title'), category: 'web', badge: 'Web', tech: 'React', desc: t('work.projects.noxe.desc'), img: '/projects/noxe.png' },
+    { id: 4, title: t('work.projects.decode1.title'), category: 'web', badge: 'Web', tech: 'React', desc: t('work.projects.decode1.desc'), img: '/projects/decode1.png' },
+    { id: 5, title: t('work.projects.codezone_about.title'), category: 'web', badge: 'Web', tech: 'React', desc: t('work.projects.codezone_about.desc'), img: '/projects/codezone_about.png' },
+    { id: 6, title: t('work.projects.decode2.title'), category: 'ecommerce', badge: 'E-Commerce', tech: 'React', desc: t('work.projects.decode2.desc'), img: '/projects/decode2.png' },
+    { id: 7, title: t('work.projects.decode3.title'), category: 'web', badge: 'Web', tech: 'React', desc: t('work.projects.decode3.desc'), img: '/projects/decode3.png' },
+    { id: 8, title: t('work.projects.decode4.title'), category: 'systems', badge: 'Systems', tech: 'React', desc: t('work.projects.decode4.desc'), img: '/projects/decode4.png' },
   ];
 
   const projects = allProjects.filter(p => filter === 'all' || p.category === filter);
@@ -119,10 +124,10 @@ export default function OurWork() {
                           {project.tech}
                         </span>
                       </div>
-                      <h3 className="font-headline-md text-headline-md text-on-surface mb-2 leading-tight">
+                      <h3 className="font-headline-md text-headline-md text-on-surface mb-1 leading-tight line-clamp-1">
                         {project.title}
                       </h3>
-                      <p className="text-on-surface-variant font-body-md text-sm leading-relaxed opacity-80 line-clamp-3">
+                      <p className="text-on-surface-variant font-body-md text-sm leading-relaxed opacity-80 line-clamp-2 mt-1">
                         {project.desc}
                       </p>
                     </div>

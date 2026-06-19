@@ -35,9 +35,38 @@ export const translations = {
       subtitle: "نحن نؤمن بأن كل سطر برمجي هو قطعة فنية. استكشف مجموعة من مشاريعنا التقنية التي تجمع بين الكفاءة الهندسية والتصميم العصري المبتكر.",
       viewAll: "عرض الكل",
       projects: {
-        sadeem: "نظام سديم المالي",
-        masar: "منصة مسار للشحن",
-        ofoq: "متجر أفق الإلكتروني",
+        supermarket: {
+          title: "نظام إدارة السوبر ماركت",
+          desc: "نظام متكامل لإدارة المبيعات، المخزون، والمنتجات للسوبر ماركت بتصميم عصري يسهل العمليات اليومية.",
+        },
+        shadow: {
+          title: "نظام إدارة القاعات",
+          desc: "منصة للأكاديمية العربية لإدارة وحجز القاعات الدراسية وعرض الجداول الزمنية بفعالية وسهولة.",
+        },
+        noxe: {
+          title: "موقع أفلام Noxe",
+          desc: "واجهة سينمائية جذابة لاستكشاف أحدث الأفلام والمسلسلات مع تصميم داكن يبرز جمالية المحتوى البصري.",
+        },
+        decode2: {
+          title: "مشروع ديكود لابس ٢",
+          desc: "تطبيق ويب مبتكر يركز على تجربة المستخدم التفاعلية والواجهات العصرية للشركات الناشئة.",
+        },
+        codezone_about: {
+          title: "صفحة من نحن - كود زون",
+          desc: "صفحة تعريفية احترافية لوكالة كود زون التقنية، تستعرض خبرات الفريق وقيم الشركة بتصميم متقدم.",
+        },
+        decode1: {
+          title: "مشروع ديكود لابس ١",
+          desc: "منصة ويب متكاملة تقدم حلولاً رقمية مبتكرة مع التركيز على الأداء السريع والتصميم المتجاوب.",
+        },
+        decode4: {
+          title: "مشروع ديكود لابس ٤",
+          desc: "تطبيق متطور يوفر لوحات تحكم تحليلية وعرض بيانات دقيق لقطاع الأعمال بتصميم عصري.",
+        },
+        decode3: {
+          title: "مشروع ديكود لابس ٣",
+          desc: "مشروع ويب بتصميم فني حديث يستهدف تعزيز التواجد الرقمي وبناء هوية بصرية قوية.",
+        }
       },
       filters: {
         all: "الكل",
@@ -204,9 +233,38 @@ export const translations = {
       subtitle: "We believe that every line of code is a piece of art. Explore a range of our technical projects that combine engineering efficiency with innovative modern design.",
       viewAll: "View All",
       projects: {
-        sadeem: "Sadeem Financial System",
-        masar: "Masar Logistics Platform",
-        ofoq: "Ofoq E-commerce Store",
+        supermarket: {
+          title: "Supermarket System",
+          desc: "An integrated system for managing sales, inventory, and products with a modern design that streamlines daily operations.",
+        },
+        shadow: {
+          title: "Halls Management System",
+          desc: "A platform for the Arab Academy to effectively manage and book classrooms and display schedules.",
+        },
+        noxe: {
+          title: "Noxe Movies",
+          desc: "A captivating cinematic interface to explore the latest movies and series with a dark design.",
+        },
+        decode2: {
+          title: "DecodeLabs Project 2",
+          desc: "An innovative web application focusing on interactive user experience and modern interfaces for startups.",
+        },
+        codezone_about: {
+          title: "Code Zone About Page",
+          desc: "A professional introductory page for Code Zone technical agency, showcasing the team's expertise.",
+        },
+        decode1: {
+          title: "DecodeLabs Project 1",
+          desc: "An integrated web platform providing innovative digital solutions with a focus on fast performance.",
+        },
+        decode4: {
+          title: "DecodeLabs Project 4",
+          desc: "An advanced application providing analytical dashboards and precise data display for the business sector.",
+        },
+        decode3: {
+          title: "DecodeLabs Project 3",
+          desc: "A web project with a modern artistic design aimed at enhancing digital presence and building a strong visual identity.",
+        }
       },
       filters: {
         all: "All",
