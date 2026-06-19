@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import * as THREE from 'three';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -8,100 +9,126 @@ export default function Home() {
   const { t, language } = useAppContext();
   const threeContainerRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const isRTL = language === 'ar';
 
   const projects = [
-    { id: 1, title: t('work.projects.sadeem'), tech: 'FinTech Solution • React', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBlh6h6UiQYR6Lm5jIZx2ZMwroZ584AYNodeyetgubKeTCxNQKRaOGWzRfSLfIlSvyY9rcP0YnHHB2YsJDQfCJTYv3xjwY3UGMDdeLsL8o6_Zwkg96nsRwROixtmuwZWyJkv5p8RqsjLMRigGQcKVqVkoTFXeoNNFfgbkQwo4bc3rTF8PcoCjxk6iZJhc30Ge6cXVgMSx4UaZn6tS60Ibsx_U0GKzOISX-Eg2N4qhoOkPJBEPGjTlzKIsMmYM6GeDzhrnSXpIs79bDP', desc: t('services.web.desc') },
-    { id: 2, title: t('work.projects.masar'), tech: 'Logistics App • Vue 3', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCukkHQmNJBwWrCLMrXyoZWmza_xCanFERnX3YyZ8JueT3apa6cP4vg30i-e6-rXulpaf5gGFaWN3rxGS0g9ADeRTcK_iQmstkTg0GRrvjRGQOs8zJRd_cvZJr3E2gD9b_dIHjA4e3MSgozzebvwOsG0vI9y61JCZ7h_id7j5tEU337k9WiwMxEXwrsWElL0M63HWnPrayv1YL7V5yuOVy799B31Q_8EYVJRPDqS78_lUOrInKaFYZdODIyImKee-Nna61SQ8LpWntM', desc: t('services.web.desc') },
-    { id: 3, title: t('work.projects.ofoq'), tech: 'E-commerce • Python', img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAI-XgGUIeLfK7JdT_IgZGrf1jb2i4V9_Q30pBv34rQlmVE-3XX_S05ywUudaPl9vFNpmsvdtdC7L6jtkmbhFETfjKYPseTvS0QIYlosQYbrMuSfFTof7MHTzlrApIBjtfu618EX1FxbwmrYAZeBvoEZz3XCgXe8TWTRtuJk4TsJr5sGmXVf3AbW-RqsOqK16fsdWvquYXuhAqBvN0kKXqaUvul5WlUUjBE27f-nCXfX97I1VUA3dqIeEjgulB9yVDBgxDQDWZpgr-G', desc: t('services.systems.desc') }
+    {
+      id: 1,
+      title: t('work.projects.sadeem'),
+      badge: 'FinTech',
+      tech: 'React',
+      img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBlh6h6UiQYR6Lm5jIZx2ZMwroZ584AYNodeyetgubKeTCxNQKRaOGWzRfSLfIlSvyY9rcP0YnHHB2YsJDQfCJTYv3xjwY3UGMDdeLsL8o6_Zwkg96nsRwROixtmuwZWyJkv5p8RqsjLMRigGQcKVqVkoTFXeoNNFfgbkQwo4bc3rTF8PcoCjxk6iZJhc30Ge6cXVgMSx4UaZn6tS60Ibsx_U0GKzOISX-Eg2N4qhoOkPJBEPGjTlzKIsMmYM6GeDzhrnSXpIs79bDP',
+      desc: t('services.web.desc')
+    },
+    {
+      id: 2,
+      title: t('work.projects.masar'),
+      badge: 'Logistics',
+      tech: 'Vue 3',
+      img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCukkHQmNJBwWrCLMrXyoZWmza_xCanFERnX3YyZ8JueT3apa6cP4vg30i-e6-rXulpaf5gGFaWN3rxGS0g9ADeRTcK_iQmstkTg0GRrvjRGQOs8zJRd_cvZJr3E2gD9b_dIHjA4e3MSgozzebvwOsG0vI9y61JCZ7h_id7j5tEU337k9WiwMxEXwrsWElL0M63HWnPrayv1YL7V5yuOVy799B31Q_8EYVJRPDqS78_lUOrInKaFYZdODIyImKee-Nna61SQ8LpWntM',
+      desc: t('services.web.desc')
+    },
+    {
+      id: 3,
+      title: t('work.projects.ofoq'),
+      badge: 'E-Commerce',
+      tech: 'Python',
+      img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAI-XgGUIeLfK7JdT_IgZGrf1jb2i4V9_Q30pBv34rQlmVE-3XX_S05ywUudaPl9vFNpmsvdtdC7L6jtkmbhFETfjKYPseTvS0QIYlosQYbrMuSfFTof7MHTzlrApIBjtfu618EX1FxbwmrYAZeBvoEZz3XCgXe8TWTRtuJk4TsJr5sGmXVf3AbW-RqsOqK16fsdWvquYXuhAqBvN0kKXqaUvul5WlUUjBE27f-nCXfX97I1VUA3dqIeEjgulB9yVDBgxDQDWZpgr-G',
+      desc: t('services.systems.desc')
+    },
   ];
 
-  const radius = 400;
   const cardCount = projects.length;
-  const angleStep = 360 / Math.max(cardCount, 1);
 
-  const nextSlide = () => setCurrentIndex(prev => prev + 1);
-  const prevSlide = () => setCurrentIndex(prev => prev - 1);
+  // Cover-flow positions (matching reference design)
+  const getCardStyle = (index) => {
+    const offset = index - currentIndex;
+    const absOffset = Math.abs(offset);
+    let x = 0, z = 0, rotateY = 0, scale = 1, opacity = 1;
+
+    if (offset === 0) {
+      x = 0; z = 100; rotateY = 0; scale = 1.1; opacity = 1;
+    } else {
+      const dir = offset > 0 ? 1 : -1;
+      x = (offset * 200) + (dir * 80);
+      z = -250 - (absOffset * 100);
+      rotateY = -dir * 50;
+      scale = Math.pow(0.78, absOffset);
+      opacity = Math.max(0.15, 1 - absOffset * 0.35);
+    }
+
+    return {
+      transform: `translateX(${x}px) translateZ(${z}px) rotateY(${rotateY}deg) scale(${scale})`,
+      opacity,
+      zIndex: 100 - absOffset,
+    };
+  };
+
+  const nextSlide = () => setCurrentIndex(prev => (prev + 1) % cardCount);
+  const prevSlide = () => setCurrentIndex(prev => (prev - 1 + cardCount) % cardCount);
 
   useEffect(() => {
-    // --- 3D Code Ring Element (Hero) ---
-    if (!threeContainerRef.current || !window.THREE) return;
-
+    if (!threeContainerRef.current) return;
     const container = threeContainerRef.current;
     const width = container.clientWidth || window.innerWidth;
     const height = container.clientHeight || window.innerHeight;
 
-    const scene = new window.THREE.Scene();
-    const camera = new window.THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    const renderer = new window.THREE.WebGLRenderer({ alpha: true, antialias: true });
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    const group = new window.THREE.Group();
+    const group = new THREE.Group();
     scene.add(group);
 
-    const geometry = new window.THREE.TorusGeometry(3.5, 0.02, 16, 120);
-    const material = new window.THREE.PointsMaterial({
-        color: 0x00d1ff,
-        size: 0.04,
-        transparent: true,
-        opacity: 0.9,
-        blending: window.THREE.AdditiveBlending
-    });
+    const geo1 = new THREE.TorusGeometry(3.5, 0.02, 16, 120);
+    const mat1 = new THREE.PointsMaterial({ color: 0x00d1ff, size: 0.04, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending });
+    group.add(new THREE.Points(geo1, mat1));
 
-    const points = new window.THREE.Points(geometry, material);
-    group.add(points);
-
-    const innerGeometry = new window.THREE.TorusGeometry(3.5, 0.4, 32, 200);
-    const innerMaterial = new window.THREE.PointsMaterial({
-        color: 0xF2E3D2,
-        size: 0.02,
-        transparent: true,
-        opacity: 0.4,
-        blending: window.THREE.AdditiveBlending
-    });
-    const innerPoints = new window.THREE.Points(innerGeometry, innerMaterial);
-    group.add(innerPoints);
+    const geo2 = new THREE.TorusGeometry(3.5, 0.4, 32, 200);
+    const mat2 = new THREE.PointsMaterial({ color: 0xF2E3D2, size: 0.02, transparent: true, opacity: 0.4, blending: THREE.AdditiveBlending });
+    group.add(new THREE.Points(geo2, mat2));
 
     camera.position.z = 8;
 
     let animationFrameId;
-    function animate() {
-        animationFrameId = requestAnimationFrame(animate);
-        group.rotation.x += 0.003;
-        group.rotation.y += 0.007;
-        group.rotation.z += 0.002;
-        const scale = 1 + Math.sin(Date.now() * 0.001) * 0.05;
-        group.scale.set(scale, scale, scale);
-        renderer.render(scene, camera);
-    }
+    const animate = () => {
+      animationFrameId = requestAnimationFrame(animate);
+      group.rotation.x += 0.003;
+      group.rotation.y += 0.007;
+      group.rotation.z += 0.002;
+      const s = 1 + Math.sin(Date.now() * 0.001) * 0.05;
+      group.scale.set(s, s, s);
+      renderer.render(scene, camera);
+    };
     animate();
 
     const handleResize = () => {
-        const newWidth = container.clientWidth || window.innerWidth;
-        const newHeight = container.clientHeight || window.innerHeight;
-        camera.aspect = newWidth / newHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(newWidth, newHeight);
+      const w = container.clientWidth || window.innerWidth;
+      const h = container.clientHeight || window.innerHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
     };
     window.addEventListener('resize', handleResize);
 
     return () => {
-        cancelAnimationFrame(animationFrameId);
-        window.removeEventListener('resize', handleResize);
-        if (container.contains(renderer.domElement)) {
-            container.removeChild(renderer.domElement);
-        }
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('resize', handleResize);
+      renderer.dispose();
+      if (container.contains(renderer.domElement)) container.removeChild(renderer.domElement);
     };
   }, []);
 
   useEffect(() => {
     const heroCard = document.querySelector('.hero-3d-container');
     const handleMouseMove = (e) => {
-        if (window.innerWidth < 768 || !heroCard) return;
-        const x = (window.innerWidth / 2 - e.pageX) / 60;
-        const y = (window.innerHeight / 2 - e.pageY) / 60;
-        heroCard.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+      if (window.innerWidth < 768 || !heroCard) return;
+      const x = (window.innerWidth / 2 - e.pageX) / 60;
+      const y = (window.innerHeight / 2 - e.pageY) / 60;
+      heroCard.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
     };
     document.addEventListener('mousemove', handleMouseMove);
     return () => document.removeEventListener('mousemove', handleMouseMove);
@@ -110,14 +137,12 @@ export default function Home() {
   return (
     <div className="font-body-md text-body-md bg-background min-h-screen text-on-surface">
       <Header />
-      
+
       <main className="pt-20">
-        {/* Hero Section */}
+        {/* ── Hero Section ── */}
         <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden px-margin_mobile">
-          {/* 3D Element Container (Rotating Ring) */}
           <div id="threejs-container" ref={threeContainerRef}></div>
-          
-          {/* Hero Glass Card */}
+
           <div className="hero-3d-container relative z-10 w-full max-w-2xl transition-transform duration-200 ease-out">
             <div className="glass-card p-8 md:p-12 rounded-xl text-center floating-ui relative backdrop-blur-2xl">
               <div className="inline-flex items-center bg-surface-container-high/50 px-4 py-1 rounded-full mb-6 border border-white/10">
@@ -127,15 +152,15 @@ export default function Home() {
                 </span>
                 <span className="terminal-cursor"></span>
               </div>
-              
+
               <h1 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-4 leading-tight">
                 {t('hero.title')}
               </h1>
-              
+
               <p className="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-xl mx-auto">
                 {t('hero.desc')}
               </p>
-              
+
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/contact" className="bg-primary text-on-primary px-8 py-4 rounded-lg font-bold text-lg primary-glow hover:bg-secondary hover:text-white transition-all active:scale-95 text-center">
                   {t('hero.startBtn')}
@@ -148,7 +173,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Services Bento Grid */}
+        {/* ── Services Bento Grid ── */}
         <section className="py-stack_xl px-margin_mobile max-w-container_max_width mx-auto relative z-10">
           <div className="flex items-end justify-between mb-stack_lg">
             <div className="space-y-2 text-start">
@@ -156,193 +181,156 @@ export default function Home() {
               <h2 className="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">{language === 'ar' ? 'ماذا نقدم لك' : 'What We Offer'}</h2>
             </div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Service 1: Web */}
-            <div className="glass-card p-6 rounded-xl group hover:border-secondary/50 transition-all cursor-pointer text-start flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <span className="material-symbols-outlined text-secondary text-3xl">language</span>
+            {[
+              { icon: 'language', titleKey: 'services.web.title', descKey: 'services.web.desc' },
+              { icon: 'settings_suggest', titleKey: 'services.systems.title', descKey: 'services.systems.desc' },
+              { icon: 'draw', titleKey: 'services.ux.title', descKey: 'services.ux.desc' },
+            ].map(({ icon, titleKey, descKey }) => (
+              <div key={titleKey} className="glass-card p-6 rounded-xl group hover:border-secondary/50 transition-all cursor-pointer text-start flex flex-col justify-between">
+                <div>
+                  <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <span className="material-symbols-outlined text-secondary text-3xl">{icon}</span>
+                  </div>
+                  <div className="mb-4">
+                    <h3 className="font-headline-md text-headline-md text-on-surface mb-2">{t(titleKey)}</h3>
+                    <p className="text-on-surface-variant font-body-md text-body-md leading-relaxed">{t(descKey)}</p>
+                  </div>
                 </div>
-                <div className="mb-4">
-                  <h3 className="font-headline-md text-headline-md text-on-surface mb-2">{t('services.web.title')}</h3>
-                  <p className="text-on-surface-variant font-body-md text-body-md leading-relaxed">{t('services.web.desc')}</p>
-                </div>
-              </div>
-              <div className="mt-4 pt-4 border-t border-white/5">
-                <Link to="/work" className="font-label-caps text-label-caps text-secondary flex items-center gap-1">
-                  {t('services.more')} <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                </Link>
-              </div>
-            </div>
-
-            {/* Service 2: Systems */}
-            <div className="glass-card p-6 rounded-xl group hover:border-secondary/50 transition-all cursor-pointer text-start flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <span className="material-symbols-outlined text-secondary text-3xl">settings_suggest</span>
-                </div>
-                <div className="mb-4">
-                  <h3 className="font-headline-md text-headline-md text-on-surface mb-2">{t('services.systems.title')}</h3>
-                  <p className="text-on-surface-variant font-body-md text-body-md leading-relaxed">{t('services.systems.desc')}</p>
+                <div className="mt-4 pt-4 border-t border-white/5">
+                  <Link to="/work" className="font-label-caps text-label-caps text-secondary flex items-center gap-1">
+                    {t('services.more')} <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                  </Link>
                 </div>
               </div>
-              <div className="mt-4 pt-4 border-t border-white/5">
-                <Link to="/work" className="font-label-caps text-label-caps text-secondary flex items-center gap-1">
-                  {t('services.more')} <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                </Link>
-              </div>
-            </div>
-
-            {/* Service 3: UX */}
-            <div className="glass-card p-6 rounded-xl group hover:border-secondary/50 transition-all cursor-pointer text-start flex flex-col justify-between">
-              <div>
-                <div className="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  <span className="material-symbols-outlined text-secondary text-3xl">draw</span>
-                </div>
-                <div className="mb-4">
-                  <h3 className="font-headline-md text-headline-md text-on-surface mb-2">{t('services.ux.title')}</h3>
-                  <p className="text-on-surface-variant font-body-md text-body-md leading-relaxed">{t('services.ux.desc')}</p>
-                </div>
-              </div>
-              <div className="mt-4 pt-4 border-t border-white/5">
-                <Link to="/work" className="font-label-caps text-label-caps text-secondary flex items-center gap-1">
-                  {t('services.more')} <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                </Link>
-              </div>
-            </div>
+            ))}
           </div>
         </section>
 
-        {/* Portfolio Showcase Section */}
-        <section className="py-stack_xl px-margin_mobile max-w-container_max_width mx-auto relative z-10 overflow-hidden">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-stack_lg gap-4">
-            <div className="space-y-2 text-start">
-              <span className="font-label-caps text-label-caps text-secondary tracking-tighter uppercase">{t('work.title')}</span>
-              <p className="font-body-md text-body-md text-on-surface-variant max-w-2xl">{t('work.subtitle')}</p>
-            </div>
-            <Link to="/work" className="text-secondary font-label-caps hover:underline shrink-0">{t('work.viewAll')}</Link>
+        {/* ── Exhibition Gallery / Portfolio Carousel ── */}
+        <section className="exhibition-gallery" id="gallery">
+          {/* Section Header */}
+          <div className="max-w-container_max_width mx-auto px-margin_mobile text-center mb-16 relative z-10">
+            <span className="font-label-caps text-label-caps text-secondary tracking-widest uppercase block mb-3">
+              {t('work.title')}
+            </span>
+            <h2 className="font-headline-lg-mobile text-headline-lg-mobile md:text-headline-lg text-on-surface">
+              {language === 'ar' ? 'معرض أعمالنا' : 'Curated Showcase'}
+            </h2>
+            <p className="font-body-md text-body-md text-on-surface-variant mt-3 max-w-xl mx-auto">
+              {t('work.subtitle')}
+            </p>
+            <div className="w-20 h-1 bg-secondary mx-auto mt-5 rounded-full opacity-50"></div>
           </div>
 
+          {/* Cover Flow Scene */}
           <div className="carousel-scene">
             <div className="carousel-container">
-              {projects.map((project, index) => {
-                const angle = (index - currentIndex) * angleStep;
-                const rad = (angle * Math.PI) / 180;
-                const x = Math.sin(rad) * radius;
-                const z = Math.cos(rad) * radius - radius;
-                const rotationY = angle;
-                
-                let opacity = 1;
-                const normalizedAngle = Math.abs(angle % 360);
-                if (normalizedAngle > 90 && normalizedAngle < 270) {
-                  opacity = 0.2;
-                }
-
-                const isActive = (currentIndex % cardCount + cardCount) % cardCount === index;
-                const techs = project.tech.split(' • ');
-
-                return (
-                  <article 
-                    key={project.id} 
-                    className={`carousel-card glass-card p-6 flex flex-col gap-4 ${isActive ? 'active' : ''}`}
-                    style={{
-                      transform: `translateX(${x}px) translateZ(${z}px) rotateY(${rotationY}deg)`,
-                      opacity: opacity,
-                      zIndex: isActive ? 10 : 1
-                    }}
-                  >
-                    <h3 className="font-headline-md text-headline-md text-on-surface text-center leading-tight">
-                      {project.title}
-                    </h3>
-                    
-                    <img 
-                      alt={project.title} 
-                      className="carousel-card-img" 
-                      src={project.img} 
-                    />
-                    
-                    <p className="text-on-surface-variant font-body-md text-sm text-center line-clamp-3">
-                      {project.desc}
-                    </p>
-                    
-                    <div className="flex items-center justify-center gap-2 mt-auto">
-                      <span className="font-label-caps text-[10px] px-2 py-1 bg-surface-container rounded text-secondary uppercase">
-                        {techs[0]}
-                      </span>
-                      <span className="font-label-caps text-[10px] px-2 py-1 bg-surface-container rounded text-on-surface-variant uppercase">
-                        {techs[1] || techs[0]}
-                      </span>
+              {projects.map((project, index) => (
+                <article
+                  key={project.id}
+                  className={`carousel-card ${index === currentIndex ? 'active' : ''}`}
+                  style={getCardStyle(index)}
+                >
+                  {/* Card inner glass */}
+                  <div className="carousel-card-inner">
+                    <div className="carousel-card-img-wrapper">
+                      <img alt={project.title} className="carousel-card-img" src={project.img} />
                     </div>
-                  </article>
-                );
-              })}
+                    <div className="carousel-card-content text-start">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="font-label-caps text-[10px] px-2 py-0.5 bg-secondary/20 rounded text-secondary border border-secondary/30 uppercase">
+                          {project.badge}
+                        </span>
+                        <span className="font-label-caps text-[10px] px-2 py-0.5 bg-surface-container rounded text-on-surface-variant uppercase">
+                          {project.tech}
+                        </span>
+                      </div>
+                      <h3 className="font-headline-md text-headline-md text-on-surface mb-2 leading-tight">
+                        {project.title}
+                      </h3>
+                      <p className="text-on-surface-variant font-body-md text-sm leading-relaxed opacity-80 line-clamp-3">
+                        {project.desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Floor reflection */}
+                  <div className="card-reflection">
+                    <img alt="" className="reflection-img" src={project.img} />
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
 
-          <div className="flex justify-center gap-6 mt-12">
-            <button 
-              onClick={prevSlide}
-              className="p-4 bg-surface-container rounded-full text-secondary hover:bg-secondary hover:text-white transition-all primary-glow active:scale-90 border border-secondary/20"
+          {/* Navigation Controls — RTL aware */}
+          <div className="flex justify-center gap-8 mt-48 relative z-30">
+            <button
+              id="prevBtn"
+              onClick={isRTL ? nextSlide : prevSlide}
+              aria-label={language === 'ar' ? 'التالي' : 'Previous'}
+              className="p-5 bg-surface-container/60 backdrop-blur-md rounded-full text-secondary hover:bg-secondary hover:text-white transition-all primary-glow active:scale-90 border border-secondary/20 group"
             >
-              <span className="material-symbols-outlined">arrow_back</span>
+              <span className="material-symbols-outlined text-3xl group-hover:-translate-x-1 transition-transform">
+                {isRTL ? 'arrow_forward' : 'arrow_back'}
+              </span>
             </button>
-            <button 
-              onClick={nextSlide}
-              className="p-4 bg-surface-container rounded-full text-secondary hover:bg-secondary hover:text-white transition-all primary-glow active:scale-90 border border-secondary/20"
+            <button
+              id="nextBtn"
+              onClick={isRTL ? prevSlide : nextSlide}
+              aria-label={language === 'ar' ? 'السابق' : 'Next'}
+              className="p-5 bg-surface-container/60 backdrop-blur-md rounded-full text-secondary hover:bg-secondary hover:text-white transition-all primary-glow active:scale-90 border border-secondary/20 group"
             >
-              <span className="material-symbols-outlined">arrow_forward</span>
+              <span className="material-symbols-outlined text-3xl group-hover:translate-x-1 transition-transform">
+                {isRTL ? 'arrow_back' : 'arrow_forward'}
+              </span>
             </button>
+          </div>
+
+          {/* View all link */}
+          <div className="text-center mt-12 relative z-10">
+            <Link to="/work" className="text-secondary font-label-caps hover:underline">
+              {t('work.viewAll')} →
+            </Link>
           </div>
         </section>
 
-        {/* Testimonials Section */}
+        {/* ── Testimonials ── */}
         <section className="py-stack_xl bg-surface-container-lowest/50 relative overflow-hidden text-start">
           <div className="max-w-container_max_width mx-auto px-margin_mobile">
             <div className="text-center mb-stack_lg">
               <h2 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-2">{t('testimonials.title')}</h2>
               <p className="font-body-md text-body-md text-on-surface-variant">{t('testimonials.subtitle')}</p>
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              {/* Quote 1 */}
-              <div className="glass-card p-6 md:p-8 rounded-xl relative">
-                <span className="material-symbols-outlined text-secondary/10 text-6xl absolute top-4 right-4 pointer-events-none">format_quote</span>
-                <p className="font-body-lg text-body-lg text-on-surface mb-6 relative z-10 italic">
-                  "{t('testimonials.q1.text')}"
-                </p>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center border border-secondary/20">
-                    <span className="material-symbols-outlined text-secondary">person</span>
-                  </div>
-                  <div>
-                    <div className="font-headline-md text-base text-white">{t('testimonials.q1.author')}</div>
-                    <div className="font-label-caps text-xs text-secondary">{t('testimonials.q1.role')}</div>
-                  </div>
-                </div>
-              </div>
 
-              {/* Quote 2 */}
-              <div className="glass-card p-6 md:p-8 rounded-xl relative">
-                <span className="material-symbols-outlined text-secondary/10 text-6xl absolute top-4 right-4 pointer-events-none">format_quote</span>
-                <p className="font-body-lg text-body-lg text-on-surface mb-6 relative z-10 italic">
-                  "{t('testimonials.q2.text')}"
-                </p>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center border border-secondary/20">
-                    <span className="material-symbols-outlined text-secondary">person</span>
-                  </div>
-                  <div>
-                    <div className="font-headline-md text-base text-white">{t('testimonials.q2.author')}</div>
-                    <div className="font-label-caps text-xs text-secondary">{t('testimonials.q2.role')}</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {[
+                { textKey: 'testimonials.q1.text', authorKey: 'testimonials.q1.author', roleKey: 'testimonials.q1.role' },
+                { textKey: 'testimonials.q2.text', authorKey: 'testimonials.q2.author', roleKey: 'testimonials.q2.role' },
+              ].map(({ textKey, authorKey, roleKey }) => (
+                <div key={textKey} className="glass-card p-6 md:p-8 rounded-xl relative">
+                  <span className="material-symbols-outlined text-secondary/10 text-6xl absolute top-4 right-4 pointer-events-none">format_quote</span>
+                  <p className="font-body-lg text-body-lg text-on-surface mb-6 relative z-10 italic">
+                    &quot;{t(textKey)}&quot;
+                  </p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center border border-secondary/20">
+                      <span className="material-symbols-outlined text-secondary">person</span>
+                    </div>
+                    <div>
+                      <div className="font-headline-md text-base text-white">{t(authorKey)}</div>
+                      <div className="font-label-caps text-xs text-secondary">{t(roleKey)}</div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* CTA / Newsletter Section */}
+        {/* ── CTA ── */}
         <section className="py-stack_xl px-margin_mobile">
           <div className="max-w-4xl mx-auto glass-card p-8 md:p-12 rounded-2xl text-center overflow-hidden relative">
             <div className="absolute inset-0 bg-gradient-to-br from-secondary/10 via-transparent to-primary/5 pointer-events-none"></div>
