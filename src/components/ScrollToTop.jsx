@@ -5,19 +5,8 @@ export default function ScrollToTop() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Calculate 35% of the scrollable height
       const scrolled = window.scrollY;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      
-      // Handle the case where maxScroll is 0 (page not scrollable)
-      if (maxScroll <= 0) {
-        setIsVisible(false);
-        return;
-      }
-      
-      const scrollPercent = scrolled / maxScroll;
-      
-      if (scrollPercent > 0.35) {
+      if (scrolled > 150) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
