@@ -119,7 +119,19 @@ export default function OurWork() {
           </div>
 
           {/* Cover Flow */}
-          <div className="carousel-scene">
+          <div className="carousel-scene relative max-w-container_max_width mx-auto">
+            {/* Navigation Controls — Left side button */}
+            <button
+              id="prevBtn"
+              onClick={isRTL ? nextSlide : prevSlide}
+              aria-label={language === 'ar' ? 'التالي' : 'Previous'}
+              className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 z-30 p-3 md:p-5 bg-surface-container/60 backdrop-blur-md rounded-full text-secondary hover:bg-secondary hover:text-white transition-all primary-glow active:scale-90 border border-secondary/20 group"
+            >
+              <span className="material-symbols-outlined text-2xl md:text-3xl group-hover:-translate-x-1 transition-transform">
+                {isRTL ? 'arrow_forward' : 'arrow_back'}
+              </span>
+            </button>
+
             <div className="carousel-container">
               {projects.map((project, index) => (
                 <article
@@ -181,25 +193,15 @@ export default function OurWork() {
                 </article>
               ))}
             </div>
-          </div>
 
-          {/* Navigation Controls — RTL aware */}
-          <div className="flex justify-center gap-8 mt-10 relative z-30">
+            {/* Navigation Controls — Right side button */}
             <button
-              onClick={isRTL ? nextSlide : prevSlide}
-              aria-label={language === 'ar' ? 'التالي' : 'Previous'}
-              className="p-5 bg-surface-container/60 backdrop-blur-md rounded-full text-secondary hover:bg-secondary hover:text-white transition-all primary-glow active:scale-90 border border-secondary/20 group"
-            >
-              <span className="material-symbols-outlined text-3xl group-hover:-translate-x-1 transition-transform">
-                {isRTL ? 'arrow_forward' : 'arrow_back'}
-              </span>
-            </button>
-            <button
+              id="nextBtn"
               onClick={isRTL ? prevSlide : nextSlide}
               aria-label={language === 'ar' ? 'السابق' : 'Next'}
-              className="p-5 bg-surface-container/60 backdrop-blur-md rounded-full text-secondary hover:bg-secondary hover:text-white transition-all primary-glow active:scale-90 border border-secondary/20 group"
+              className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 z-30 p-3 md:p-5 bg-surface-container/60 backdrop-blur-md rounded-full text-secondary hover:bg-secondary hover:text-white transition-all primary-glow active:scale-90 border border-secondary/20 group"
             >
-              <span className="material-symbols-outlined text-3xl group-hover:translate-x-1 transition-transform">
+              <span className="material-symbols-outlined text-2xl md:text-3xl group-hover:translate-x-1 transition-transform">
                 {isRTL ? 'arrow_back' : 'arrow_forward'}
               </span>
             </button>
