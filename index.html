@@ -82,10 +82,17 @@
           const timeLocation = gl.getUniformLocation(program, "u_time");
           const resolutionLocation = gl.getUniformLocation(program, "u_resolution");
 
+          function resizeCanvas() {
+              if (canvas.width !== window.innerWidth || canvas.height !== window.innerHeight) {
+                  canvas.width = window.innerWidth;
+                  canvas.height = window.innerHeight;
+                  gl.viewport(0, 0, canvas.width, canvas.height);
+              }
+          }
+          window.addEventListener('resize', resizeCanvas);
+          resizeCanvas();
+
           function render(time) {
-              canvas.width = window.innerWidth;
-              canvas.height = window.innerHeight;
-              gl.viewport(0, 0, canvas.width, canvas.height);
               gl.useProgram(program);
               gl.enableVertexAttribArray(positionLocation);
               gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);

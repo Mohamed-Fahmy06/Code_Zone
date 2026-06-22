@@ -155,11 +155,11 @@ export default function Home() {
     const group = new THREE.Group();
     scene.add(group);
 
-    const geo1 = new THREE.TorusGeometry(3.5, 0.02, 16, 120);
+    const geo1 = new THREE.TorusGeometry(4.6, 0.02, 16, 120);
     const mat1 = new THREE.PointsMaterial({ color: 0x00d1ff, size: 0.04, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending });
     group.add(new THREE.Points(geo1, mat1));
 
-    const geo2 = new THREE.TorusGeometry(3.5, 0.4, 32, 200);
+    const geo2 = new THREE.TorusGeometry(4.6, 0.4, 32, 200);
     const mat2 = new THREE.PointsMaterial({ color: 0xF2E3D2, size: 0.02, transparent: true, opacity: 0.4, blending: THREE.AdditiveBlending });
     group.add(new THREE.Points(geo2, mat2));
 
@@ -216,7 +216,7 @@ export default function Home() {
           <div id="threejs-container" ref={threeContainerRef}></div>
 
           <div className="hero-3d-container relative z-10 w-full max-w-2xl transition-transform duration-200 ease-out">
-            <div className="glass-card p-8 md:p-12 rounded-xl text-center floating-ui relative backdrop-blur-2xl">
+            <div className="glass-card p-8 md:p-12 rounded-xl text-center floating-ui relative backdrop-blur-2xl" style={{ backgroundColor: 'rgba(16, 20, 21, 0.35)' }}>
               <div className="inline-flex items-center bg-surface-container-high/50 px-4 py-1 rounded-full mb-6 border border-white/10">
                 <span className="text-secondary font-label-caps text-label-caps uppercase tracking-widest flex items-center gap-2">
                   <span className="pulse-animation w-2 h-2 rounded-full bg-secondary"></span>
@@ -311,7 +311,7 @@ export default function Home() {
                       <img alt={project.title} className="carousel-card-img" src={project.img} />
                     </div>
                     <div className="carousel-card-content text-start flex-1 flex flex-col">
-                      <div className="flex items-center gap-2 mb-3">
+                      <div className="flex items-center gap-2 mb-2">
                         <span className="font-label-caps text-[10px] px-2 py-0.5 bg-secondary/20 rounded text-secondary border border-secondary/30 uppercase">
                           {project.badge}
                         </span>
@@ -319,14 +319,14 @@ export default function Home() {
                           {project.tech}
                         </span>
                       </div>
-                      <h3 className="font-headline-md text-headline-md text-on-surface mb-1 leading-tight line-clamp-1">
+                      <h3 className="font-headline-md text-lg text-on-surface mb-1 leading-tight line-clamp-1">
                         {project.title}
                       </h3>
-                      <p className="text-on-surface-variant font-body-md text-sm leading-relaxed opacity-80 line-clamp-2 mt-1 mb-4">
+                      <p className="text-on-surface-variant font-body-md text-sm leading-relaxed opacity-80 line-clamp-2 mt-1 mb-3">
                         {project.desc}
                       </p>
                       
-                      <div className="flex gap-3 mt-auto pt-4 border-t border-white/5">
+                      <div className="flex gap-3 mt-auto pt-3 border-t border-white/5">
                         <a
                           href={project.github}
                           target="_blank"

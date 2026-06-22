@@ -132,7 +132,7 @@ export default function OurWork() {
                       <img alt={project.title} className="carousel-card-img" src={project.img} />
                     </div>
                     <div className="carousel-card-content text-start flex-1 flex flex-col">
-                      <div className="flex items-center gap-2 mb-3">
+                      <div className="flex items-center gap-2 mb-2">
                         <span className="font-label-caps text-[10px] px-2 py-0.5 bg-secondary/20 rounded text-secondary border border-secondary/30 uppercase">
                           {project.badge}
                         </span>
@@ -140,14 +140,14 @@ export default function OurWork() {
                           {project.tech}
                         </span>
                       </div>
-                      <h3 className="font-headline-md text-headline-md text-on-surface mb-1 leading-tight line-clamp-1">
+                      <h3 className="font-headline-md text-lg text-on-surface mb-1 leading-tight line-clamp-1">
                         {project.title}
                       </h3>
-                      <p className="text-on-surface-variant font-body-md text-sm leading-relaxed opacity-80 line-clamp-2 mt-1 mb-4">
+                      <p className="text-on-surface-variant font-body-md text-sm leading-relaxed opacity-80 line-clamp-2 mt-1 mb-3">
                         {project.desc}
                       </p>
 
-                      <div className="flex gap-3 mt-auto pt-4 border-t border-white/5">
+                      <div className="flex gap-3 mt-auto pt-3 border-t border-white/5">
                         <a
                           href={project.github}
                           target="_blank"
