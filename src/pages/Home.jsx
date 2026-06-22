@@ -18,7 +18,9 @@ export default function Home() {
       badge: 'Systems',
       tech: 'React',
       img: '/projects/supermarket.png',
-      desc: t('work.projects.supermarket.desc')
+      desc: t('work.projects.supermarket.desc'),
+      github: 'https://github.com/Mohamed-Fahmy06/Supermarket-system',
+      demo: 'https://supermarket-system-delta.vercel.app/'
     },
     {
       id: 2,
@@ -26,7 +28,9 @@ export default function Home() {
       badge: 'Systems',
       tech: 'React',
       img: '/projects/shadow.png',
-      desc: t('work.projects.shadow.desc')
+      desc: t('work.projects.shadow.desc'),
+      github: 'https://github.com/Mohamed-Fahmy06/Shadow-stalkers',
+      demo: 'https://shadow-stalkers.vercel.app/'
     },
     {
       id: 3,
@@ -34,7 +38,9 @@ export default function Home() {
       badge: 'Web',
       tech: 'React',
       img: '/projects/noxe.png',
-      desc: t('work.projects.noxe.desc')
+      desc: t('work.projects.noxe.desc'),
+      github: 'https://github.com/Mohamed-Fahmy06/Noxe',
+      demo: 'https://noxe-dun.vercel.app/'
     },
     {
       id: 4,
@@ -42,7 +48,9 @@ export default function Home() {
       badge: 'Web',
       tech: 'React',
       img: '/projects/decode1.png',
-      desc: t('work.projects.decode1.desc')
+      desc: t('work.projects.decode1.desc'),
+      github: 'https://github.com/Mohamed-Fahmy06/Decodelabs-Project1',
+      demo: 'https://decodelabs-project1.vercel.app/'
     },
     {
       id: 5,
@@ -50,7 +58,9 @@ export default function Home() {
       badge: 'Web',
       tech: 'React',
       img: '/projects/codezone_about.png',
-      desc: t('work.projects.codezone_about.desc')
+      desc: t('work.projects.codezone_about.desc'),
+      github: 'https://github.com/Mohamed-Fahmy06/Code-zone-about-page-',
+      demo: 'https://code-zone-about-page-bqyc.vercel.app/'
     },
     {
       id: 6,
@@ -58,7 +68,9 @@ export default function Home() {
       badge: 'E-Commerce',
       tech: 'React',
       img: '/projects/decode2.png',
-      desc: t('work.projects.decode2.desc')
+      desc: t('work.projects.decode2.desc'),
+      github: 'https://github.com/Mohamed-Fahmy06/Decodelabs-Project2',
+      demo: 'https://decodelabs-project2.vercel.app/'
     },
     {
       id: 7,
@@ -66,7 +78,9 @@ export default function Home() {
       badge: 'Web',
       tech: 'React',
       img: '/projects/decode3.png',
-      desc: t('work.projects.decode3.desc')
+      desc: t('work.projects.decode3.desc'),
+      github: 'https://github.com/Mohamed-Fahmy06/Decodelabs_Project3',
+      demo: 'https://decodelabs-project3.vercel.app/'
     },
     {
       id: 8,
@@ -74,33 +88,51 @@ export default function Home() {
       badge: 'Systems',
       tech: 'React',
       img: '/projects/decode4.png',
-      desc: t('work.projects.decode4.desc')
+      desc: t('work.projects.decode4.desc'),
+      github: 'https://github.com/Mohamed-Fahmy06/Decodelabs_Project4',
+      demo: 'https://decodelabs-project4.vercel.app/'
     },
   ];
 
   const cardCount = projects.length;
 
-  // Cover-flow positions (matching reference design)
+  // Cover-flow positions (matching infinite 3D gallery reference design)
   const getCardStyle = (index) => {
-    const offset = index - currentIndex;
-    const absOffset = Math.abs(offset);
+    const total = projects.length;
+    let diff = index - currentIndex;
+    
+    // Adjust diff for infinite loop wrapping
+    if (diff > total / 2) diff -= total;
+    if (diff < -total / 2) diff += total;
+    
+    const absDiff = Math.abs(diff);
     let x, z, rotateY, scale, opacity;
 
-    if (offset === 0) {
-      x = 0; z = 100; rotateY = 0; scale = 1.1; opacity = 1;
+    const cardSpacing = 220; 
+    const rotationAngle = 60;
+    const scaleFactor = 0.7;
+    const depthSpacing = -400;
+
+    if (diff === 0) {
+      x = 0;
+      z = 150;
+      rotateY = 0;
+      scale = 1.15;
+      opacity = 1;
     } else {
-      const dir = offset > 0 ? 1 : -1;
-      x = (offset * 200) + (dir * 80);
-      z = -250 - (absOffset * 100);
-      rotateY = -dir * 50;
-      scale = Math.pow(0.78, absOffset);
-      opacity = Math.max(0.15, 1 - absOffset * 0.35);
+      const dir = diff > 0 ? 1 : -1;
+      x = (diff * cardSpacing) + (dir * 80);
+      z = depthSpacing - (absDiff * 150);
+      rotateY = -dir * rotationAngle;
+      scale = Math.pow(scaleFactor, absDiff);
+      opacity = Math.max(0, 1 - (absDiff * 0.4));
     }
 
     return {
       transform: `translateX(${x}px) translateZ(${z}px) rotateY(${rotateY}deg) scale(${scale})`,
       opacity,
-      zIndex: 100 - absOffset,
+      zIndex: Math.round(100 - absDiff),
+      pointerEvents: diff === 0 ? 'auto' : 'none',
     };
   };
 
@@ -278,7 +310,7 @@ export default function Home() {
                     <div className="carousel-card-img-wrapper">
                       <img alt={project.title} className="carousel-card-img" src={project.img} />
                     </div>
-                    <div className="carousel-card-content text-start">
+                    <div className="carousel-card-content text-start flex-1 flex flex-col">
                       <div className="flex items-center gap-2 mb-3">
                         <span className="font-label-caps text-[10px] px-2 py-0.5 bg-secondary/20 rounded text-secondary border border-secondary/30 uppercase">
                           {project.badge}
@@ -290,9 +322,30 @@ export default function Home() {
                       <h3 className="font-headline-md text-headline-md text-on-surface mb-1 leading-tight line-clamp-1">
                         {project.title}
                       </h3>
-                      <p className="text-on-surface-variant font-body-md text-sm leading-relaxed opacity-80 line-clamp-2 mt-1">
+                      <p className="text-on-surface-variant font-body-md text-sm leading-relaxed opacity-80 line-clamp-2 mt-1 mb-4">
                         {project.desc}
                       </p>
+                      
+                      <div className="flex gap-3 mt-auto pt-4 border-t border-white/5">
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs font-semibold transition-all hover:scale-[1.02] active:scale-[0.98] text-on-surface-variant hover:text-white"
+                        >
+                          <span className="material-symbols-outlined text-sm">code</span>
+                          <span>GitHub</span>
+                        </a>
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-secondary text-white rounded-lg text-xs font-semibold transition-all primary-glow hover:scale-[1.02] active:scale-[0.98]"
+                        >
+                          <span className="material-symbols-outlined text-sm">open_in_new</span>
+                          <span>Demo</span>
+                        </a>
+                      </div>
                     </div>
                   </div>
 

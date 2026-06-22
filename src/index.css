@@ -99,13 +99,13 @@
   /* === Exhibition Cover Flow Carousel === */
   .exhibition-gallery {
     position: relative;
-    padding: 24px 0 32px;
+    padding: 120px 0;
     overflow: visible;
   }
   .carousel-scene {
     width: 100%;
-    height: 420px;
-    perspective: 1500px;
+    height: 700px;
+    perspective: 2000px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -114,29 +114,30 @@
     overflow: visible;
   }
   .carousel-container {
-    width: 260px;
-    height: 380px;
+    width: 340px;
+    height: 500px;
     position: relative;
     transform-style: preserve-3d;
   }
   .carousel-card {
     position: absolute;
-    width: 260px;
-    height: 380px;
+    width: 340px;
+    height: 500px;
     left: 0;
     top: 0;
-    transition: transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.7s, filter 0.7s;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.6s ease, filter 0.6s ease;
     backface-visibility: hidden;
-    border-radius: 24px;
+    border-radius: 32px;
     overflow: visible;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    will-change: transform, opacity, filter;
   }
   .carousel-card-inner {
     width: 100%;
     height: 100%;
-    border-radius: 24px;
+    border-radius: 32px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -147,7 +148,7 @@
   }
   .carousel-card-img-wrapper {
     width: 100%;
-    height: 58%;
+    height: 60%;
     overflow: hidden;
     position: relative;
     flex-shrink: 0;
@@ -164,24 +165,25 @@
   }
   .carousel-card-content {
     flex: 1;
-    padding: 20px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    background: linear-gradient(to bottom, rgba(16, 20, 21, 0) 0%, rgba(16, 20, 21, 0.9) 50%);
   }
   /* Floor reflection */
   .card-reflection {
     position: absolute;
-    top: 388px;
+    top: 510px;
     width: 100%;
-    height: 160px;
+    height: 400px;
     transform: scaleY(-1);
-    opacity: 0.18;
+    opacity: 0.25;
     pointer-events: none;
-    border-radius: 24px;
+    border-radius: 32px;
     overflow: hidden;
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%);
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 60%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 60%);
     filter: blur(2px);
   }
   .reflection-img {
