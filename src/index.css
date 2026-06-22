@@ -99,12 +99,12 @@
   /* === Exhibition Cover Flow Carousel === */
   .exhibition-gallery {
     position: relative;
-    padding: 120px 0;
+    padding: 48px 0 60px;
     overflow: visible;
   }
   .carousel-scene {
     width: 100%;
-    height: 560px;
+    height: 580px;
     perspective: 2000px;
     display: flex;
     align-items: center;
@@ -115,40 +115,40 @@
   }
   .carousel-container {
     width: 300px;
-    height: 440px;
+    height: 480px;
     position: relative;
     transform-style: preserve-3d;
   }
   .carousel-card {
     position: absolute;
     width: 300px;
-    height: 440px;
+    height: 480px;
     left: 0;
     top: 0;
-    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.6s ease, filter 0.6s ease;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.6s ease;
     backface-visibility: hidden;
-    border-radius: 32px;
+    border-radius: 24px;
     overflow: visible;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    will-change: transform, opacity, filter;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+    will-change: transform, opacity;
   }
   .carousel-card-inner {
     width: 100%;
     height: 100%;
-    border-radius: 32px;
+    border-radius: 24px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    background: rgba(16, 20, 21, 0.85);
+    background: rgba(16, 20, 21, 0.92);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(242, 227, 210, 0.1);
+    border: 1px solid rgba(242, 227, 210, 0.12);
   }
   .carousel-card-img-wrapper {
     width: 100%;
-    height: 60%;
+    height: 46%;
     overflow: hidden;
     position: relative;
     flex-shrink: 0;
@@ -165,25 +165,38 @@
   }
   .carousel-card-content {
     flex: 1;
-    padding: 20px;
+    padding: 16px 18px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    background: linear-gradient(to bottom, rgba(16, 20, 21, 0) 0%, rgba(16, 20, 21, 0.9) 50%);
+    justify-content: space-between;
+    min-height: 0;
+    overflow: hidden;
+    background: transparent;
+  }
+  .carousel-card-content .card-info {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .carousel-card-content .card-actions {
+    flex-shrink: 0;
+    padding-top: 10px;
+    border-top: 1px solid rgba(242, 227, 210, 0.06);
+    margin-top: 8px;
   }
   /* Floor reflection */
   .card-reflection {
     position: absolute;
-    top: 450px;
+    top: 490px;
     width: 100%;
-    height: 200px;
+    height: 180px;
     transform: scaleY(-1);
-    opacity: 0.25;
+    opacity: 0.2;
     pointer-events: none;
-    border-radius: 32px;
+    border-radius: 24px;
     overflow: hidden;
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 60%);
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 60%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%);
     filter: blur(2px);
   }
   .reflection-img {

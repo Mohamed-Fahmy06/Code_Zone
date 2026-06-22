@@ -131,41 +131,45 @@ export default function OurWork() {
                     <div className="carousel-card-img-wrapper">
                       <img alt={project.title} className="carousel-card-img" src={project.img} />
                     </div>
-                    <div className="carousel-card-content text-start flex-1 flex flex-col">
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="font-label-caps text-[10px] px-2 py-0.5 bg-secondary/20 rounded text-secondary border border-secondary/30 uppercase">
-                          {project.badge}
-                        </span>
-                        <span className="font-label-caps text-[10px] px-2 py-0.5 bg-surface-container rounded text-on-surface-variant uppercase">
-                          {project.tech}
-                        </span>
+                    <div className="carousel-card-content text-start">
+                      <div className="card-info">
+                        <div className="flex items-center gap-2 mb-2 flex-wrap">
+                          <span className="font-label-caps text-[10px] px-2 py-0.5 bg-secondary/20 rounded text-secondary border border-secondary/30 uppercase">
+                            {project.badge}
+                          </span>
+                          <span className="font-label-caps text-[10px] px-2 py-0.5 bg-surface-container rounded text-on-surface-variant uppercase">
+                            {project.tech}
+                          </span>
+                        </div>
+                        <h3 className="font-semibold text-base text-on-surface mb-1 leading-tight line-clamp-1">
+                          {project.title}
+                        </h3>
+                        <p className="text-on-surface-variant text-xs leading-relaxed opacity-80 line-clamp-3">
+                          {project.desc}
+                        </p>
                       </div>
-                      <h3 className="font-headline-md text-lg text-on-surface mb-1 leading-tight line-clamp-1">
-                        {project.title}
-                      </h3>
-                      <p className="text-on-surface-variant font-body-md text-sm leading-relaxed opacity-80 line-clamp-2 mt-1 mb-3">
-                        {project.desc}
-                      </p>
 
-                      <div className="flex gap-3 mt-auto pt-3 border-t border-white/5">
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs font-semibold transition-all hover:scale-[1.02] active:scale-[0.98] text-on-surface-variant hover:text-white"
-                        >
-                          <span className="material-symbols-outlined text-sm">code</span>
-                          <span>GitHub</span>
-                        </a>
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-secondary text-white rounded-lg text-xs font-semibold transition-all primary-glow hover:scale-[1.02] active:scale-[0.98]"
-                        >
-                          <span className="material-symbols-outlined text-sm">open_in_new</span>
-                          <span>Demo</span>
-                        </a>
+                      <div className="card-actions">
+                        <div className="flex gap-2">
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 flex items-center justify-center gap-1.5 py-2 px-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-xs font-semibold transition-all hover:scale-[1.02] active:scale-[0.98] text-on-surface-variant hover:text-white"
+                          >
+                            <span className="material-symbols-outlined" style={{fontSize:'14px'}}>code</span>
+                            <span>GitHub</span>
+                          </a>
+                          <a
+                            href={project.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 flex items-center justify-center gap-1.5 py-2 px-2 bg-secondary text-white rounded-lg text-xs font-semibold transition-all primary-glow hover:scale-[1.02] active:scale-[0.98]"
+                          >
+                            <span className="material-symbols-outlined" style={{fontSize:'14px'}}>open_in_new</span>
+                            <span>Demo</span>
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
