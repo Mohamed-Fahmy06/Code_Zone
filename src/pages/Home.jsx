@@ -298,18 +298,17 @@ export default function Home() {
 
           {/* Cover Flow Scene */}
           <div className="carousel-scene relative max-w-container_max_width mx-auto">
-            {/* Navigation Controls — Right side button */}
+            {/* Navigation Controls — Left side button */}
             <button
-              id="nextBtn"
-              onClick={isRTL ? prevSlide : nextSlide}
-              aria-label={language === 'ar' ? 'السابق' : 'Next'}
-              className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 z-30 p-3 md:p-5 bg-surface-container/60 backdrop-blur-md rounded-full text-secondary hover:bg-secondary hover:text-white transition-all primary-glow active:scale-90 border border-secondary/20 group"
+              id="prevBtn"
+              onClick={isRTL ? nextSlide : prevSlide}
+              aria-label={language === 'ar' ? 'التالي' : 'Previous'}
+              className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 z-30 p-3 md:p-5 bg-surface-container/60 backdrop-blur-md rounded-full text-secondary hover:bg-secondary hover:text-white transition-all primary-glow active:scale-90 border border-secondary/20 group"
             >
-              <span className="material-symbols-outlined text-2xl md:text-3xl group-hover:translate-x-1 transition-transform">
+              <span className="material-symbols-outlined text-2xl md:text-3xl group-hover:-translate-x-1 transition-transform">
                 {isRTL ? 'arrow_back' : 'arrow_forward'}
               </span>
             </button>
-            
 
             <div className="carousel-container">
               {projects.map((project, index) => (
@@ -374,18 +373,17 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Navigation Controls — Left side button */}
+            {/* Navigation Controls — Right side button */}
             <button
-              id="prevBtn"
-              onClick={isRTL ? nextSlide : prevSlide}
-              aria-label={language === 'ar' ? 'التالي' : 'Previous'}
-              className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 z-30 p-3 md:p-5 bg-surface-container/60 backdrop-blur-md rounded-full text-secondary hover:bg-secondary hover:text-white transition-all primary-glow active:scale-90 border border-secondary/20 group"
+              id="nextBtn"
+              onClick={isRTL ? prevSlide : nextSlide}
+              aria-label={language === 'ar' ? 'السابق' : 'Next'}
+              className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 z-30 p-3 md:p-5 bg-surface-container/60 backdrop-blur-md rounded-full text-secondary hover:bg-secondary hover:text-white transition-all primary-glow active:scale-90 border border-secondary/20 group"
             >
-              <span className="material-symbols-outlined text-2xl md:text-3xl group-hover:-translate-x-1 transition-transform">
+              <span className="material-symbols-outlined text-2xl md:text-3xl group-hover:translate-x-1 transition-transform">
                 {isRTL ? 'arrow_forward' : 'arrow_back'}
               </span>
             </button>
-            
           </div>
 
           {/* View all link */}
